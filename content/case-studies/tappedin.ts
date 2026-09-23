@@ -96,7 +96,7 @@ export const tappedin: CaseStudy = {
               src: `${dir}/sign-in.webp`,
               alt: "Onboarding screens: welcome, create account, sign in, username and birthday, and a grid for selecting interests",
               width: 2000,
-              height: 432,
+              height: 394,
             },
           ],
           caption: "Onboarding ends with picking interests, so recommendations are personal from the first search.",
@@ -116,11 +116,10 @@ export const tappedin: CaseStudy = {
           kind: "images",
           images: [
             {
-              src: `${dir}/competitive-review.webp`,
+              src: `${dir}/competitive-review-on-dark.webp`,
               alt: "Competitive review table comparing Luma, RA, Poppin, and Eventbrite by description, features, value proposition, disadvantages, screenshots, and what we like",
               width: 1815,
               height: 867,
-              onLightPanel: true,
             },
           ],
           caption: "Competitive review of Luma, RA, Poppin, and Eventbrite.",
@@ -130,11 +129,10 @@ export const tappedin: CaseStudy = {
           kind: "images",
           images: [
             {
-              src: `${dir}/user-flow.webp`,
+              src: `${dir}/user-flow-on-dark.webp`,
               alt: "User flow from the landing page to profile, AI search, or recommended listings, through split-screen results and event details, to RSVP off the website",
               width: 2000,
               height: 821,
-              onLightPanel: true,
             },
           ],
           caption: "User flow: landing page to AI search, split-screen results, event details, and RSVP.",

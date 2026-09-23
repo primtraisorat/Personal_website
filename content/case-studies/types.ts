@@ -3,8 +3,6 @@ export type CaseStudyImage = {
   alt: string
   width: number
   height: number
-  /** Diagrams with dark text on a transparent background need a light panel behind them */
-  onLightPanel?: boolean
 }
 
 export type Block =

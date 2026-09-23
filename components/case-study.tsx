@@ -5,6 +5,8 @@ import { SiteNav } from "@/components/site-nav"
 import type { Block, CaseStudy as CaseStudyData, CaseStudyImage } from "@/content/case-studies/types"
 
 const captionClass = "mt-3 font-mono text-xs leading-relaxed text-foreground/60 md:text-sm"
+/** Headings and body copy share one centered reading column; images run wider */
+const textColumn = "mx-auto w-full max-w-2xl"
 
 export function CaseStudy({ study, next }: { study: CaseStudyData; next?: CaseStudyData }) {
   const metaItems = [
@@ -20,7 +22,7 @@ export function CaseStudy({ study, next }: { study: CaseStudyData; next?: CaseSt
       <SiteNav />
 
       <article className="relative z-10 mx-auto w-full max-w-7xl">
-        <header>
+        <header className={textColumn}>
           <p className="mb-8 font-mono text-xs text-foreground/60 md:mb-10 md:text-sm">
             <Link href="/work" className="underline-offset-4 transition-colors hover:text-foreground hover:underline">
               / Work
@@ -28,7 +30,7 @@ export function CaseStudy({ study, next }: { study: CaseStudyData; next?: CaseSt
             / {study.title}
           </p>
           <h1 className="sr-only">{study.title}</h1>
-          <p className="max-w-4xl text-xl font-light leading-snug text-foreground/90 md:text-2xl lg:text-[1.75rem] lg:leading-snug">
+          <p className="text-xl font-light leading-snug text-foreground/90 md:text-2xl">
             {study.intro}
           </p>
 
@@ -56,7 +58,7 @@ export function CaseStudy({ study, next }: { study: CaseStudyData; next?: CaseSt
 
         {study.sections.map((section) => (
           <section key={section.heading} className="mt-24 md:mt-32">
-            <h2 className="mb-6 font-sans text-3xl font-light tracking-tight md:mb-8 md:text-5xl">{section.heading}</h2>
+            <h2 className={`${textColumn} mb-6 font-sans text-3xl font-light tracking-tight md:mb-8 md:text-5xl`}>{section.heading}</h2>
             <div className="space-y-10 md:space-y-14">
               {section.blocks.map((block, i) => (
                 <CaseStudyBlock key={i} block={block} />
@@ -65,7 +67,7 @@ export function CaseStudy({ study, next }: { study: CaseStudyData; next?: CaseSt
           </section>
         ))}
 
-        <nav aria-label="Next project" className="mt-24 border-t border-foreground/15 pt-8 md:mt-32 md:pt-10">
+        <nav aria-label="Next project" className={`${textColumn} mt-24 border-t border-foreground/15 pt-8 md:mt-32 md:pt-10`}>
           <p className="mb-3 font-mono text-xs text-foreground/60 md:text-sm">{next ? "Next project" : "More work"}</p>
           <Link
             href={next ? `/work/${next.slug}` : "/work"}
@@ -86,7 +88,7 @@ function CaseStudyBlock({ block }: { block: Block }) {
   switch (block.kind) {
     case "prose":
       return (
-        <div className="max-w-[65ch] space-y-4 text-base leading-relaxed text-foreground/85 md:text-lg">
+        <div className={`${textColumn} space-y-4 text-base leading-relaxed text-foreground/85 md:text-lg`}>
           {block.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -101,7 +103,7 @@ function CaseStudyBlock({ block }: { block: Block }) {
               <CaseStudyFigureImage key={image.src} image={image} sizes="(max-width: 1280px) 100vw, 1280px" />
             ))}
           </div>
-          {block.caption ? <figcaption className={captionClass}>{block.caption}</figcaption> : null}
+          {block.caption ? <figcaption className={`${textColumn} ${captionClass}`}>{block.caption}</figcaption> : null}
         </figure>
       )
 
@@ -119,7 +121,7 @@ function CaseStudyBlock({ block }: { block: Block }) {
 
     case "list":
       return (
-        <ul className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+        <ul className={`${textColumn} grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8`}>
           {block.items.map((item) => (
             <li key={item.title} className="border-t border-foreground/15 pt-4">
               <p className="mb-2 font-sans text-xl font-light md:text-2xl">{item.title}</p>
@@ -131,12 +133,12 @@ function CaseStudyBlock({ block }: { block: Block }) {
 
     case "stats":
       return (
-        <dl className="grid grid-cols-3 gap-6 md:gap-8">
+        <dl className={`${textColumn} grid grid-cols-3 gap-6 md:gap-8`}>
           {block.stats.map((stat) => (
             <div key={stat.label} className="border-t border-foreground/15 pt-4">
               <dt className="sr-only">{stat.label}</dt>
               <dd>
-                <span className="block font-sans text-4xl font-light tracking-tight md:text-7xl">{stat.value}</span>
+                <span className="block font-sans text-4xl font-light tracking-tight md:text-6xl">{stat.value}</span>
                 <span className="mt-1 block font-mono text-xs text-foreground/60 md:text-sm">{stat.label}</span>
               </dd>
             </div>
@@ -147,10 +149,10 @@ function CaseStudyBlock({ block }: { block: Block }) {
     case "decision":
       return (
         <div className="space-y-6 md:space-y-8">
-          <h3 className="font-sans text-xl font-light md:text-2xl">
+          <h3 className={`${textColumn} font-sans text-xl font-light md:text-2xl`}>
             <span className="text-foreground/60">{block.number} —</span> {block.title}
           </h3>
-          <div className="max-w-[65ch] space-y-4 text-base leading-relaxed text-foreground/85 md:text-lg">
+          <div className={`${textColumn} space-y-4 text-base leading-relaxed text-foreground/85 md:text-lg`}>
             {block.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -176,12 +178,14 @@ function CaseStudyBlock({ block }: { block: Block }) {
 }
 
 function CaseStudyFigureImage({ image, sizes }: { image: CaseStudyImage; sizes: string }) {
-  const img = (
-    <Image src={image.src} alt={image.alt} width={image.width} height={image.height} sizes={sizes} className={`h-auto w-full rounded-2xl ${image.onLightPanel ? "" : "opacity-90"}`} />
+  return (
+    <Image
+      src={image.src}
+      alt={image.alt}
+      width={image.width}
+      height={image.height}
+      sizes={sizes}
+      className="h-auto w-full rounded-2xl opacity-90"
+    />
   )
-
-  if (image.onLightPanel) {
-    return <div className="overflow-hidden rounded-2xl bg-white p-3 opacity-90 md:p-6">{img}</div>
-  }
-  return img
 }
