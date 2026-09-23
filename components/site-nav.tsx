@@ -15,12 +15,18 @@ interface SiteNavProps {
 }
 
 const navItems = [
-  { label: "Home", href: "/", index: 0 },
-  { label: "Work", href: "/work", index: 1 },
-  { label: "Thinking", href: "/services", index: 2 },
-  { label: "About", href: "/about", index: 3 },
-  { label: "Contact", href: "/#contact", index: 4 },
+  { label: "Home", href: "/", index: 0, hash: "" },
+  { label: "Work", href: "/work", index: 1, hash: "work" },
+  { label: "Thinking", href: "/services", index: 2, hash: "thinking" },
+  { label: "About", href: "/about", index: 3, hash: "about" },
+  { label: "Contact", href: "/#contact", index: 4, hash: "contact" },
 ]
+
+/** Maps a home-page URL hash (e.g. "#about") to its section index, or null */
+export function sectionIndexFromHash(hash: string) {
+  const item = navItems.find((navItem) => navItem.hash && `#${navItem.hash}` === hash)
+  return item ? item.index : null
+}
 
 export function SiteNav({ isLoaded = true, currentSection = 0, scrollToSection }: SiteNavProps) {
   const pathname = usePathname()
@@ -68,9 +74,10 @@ export function SiteNav({ isLoaded = true, currentSection = 0, scrollToSection }
           }
 
           return (
+            // Off the home page, jump back to that section of the home page
             <Link
               key={item.label}
-              href={item.href}
+              href={item.hash ? `/#${item.hash}` : "/"}
               className={`group relative font-sans text-sm font-medium transition-colors ${
                 active ? "text-foreground" : "text-foreground/80 hover:text-foreground"
               }`}

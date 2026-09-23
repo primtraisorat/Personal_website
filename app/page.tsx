@@ -8,7 +8,7 @@ import { ServicesSection } from "@/components/sections/services-section"
 import { AboutSection } from "@/components/sections/about-section"
 import { ContactSection } from "@/components/sections/contact-section"
 import { MagneticButton } from "@/components/magnetic-button"
-import { SiteNav } from "@/components/site-nav"
+import { SiteNav, sectionIndexFromHash } from "@/components/site-nav"
 import { useRef, useEffect, useState } from "react"
 
 export default function Home() {
@@ -60,6 +60,20 @@ export default function Home() {
       setCurrentSection(index)
     }
   }
+
+  // Arriving from another page via /#work, /#about, etc. — jump to that section
+  useEffect(() => {
+    const jumpToHashSection = () => {
+      const index = sectionIndexFromHash(window.location.hash)
+      if (index === null || !scrollContainerRef.current) return
+      scrollContainerRef.current.scrollTo({ left: scrollContainerRef.current.offsetWidth * index, behavior: "instant" })
+      setCurrentSection(index)
+    }
+
+    jumpToHashSection()
+    window.addEventListener("hashchange", jumpToHashSection)
+    return () => window.removeEventListener("hashchange", jumpToHashSection)
+  }, [])
 
   useEffect(() => {
     const handleTouchStart = (e: TouchEvent) => {

@@ -43,13 +43,8 @@ export const workProjects: WorkProject[] = [
 
 export function WorkProjectCard({
   project,
-  compact = false,
-  sizes = "(max-width: 768px) 100vw, 50vw",
 }: {
   project: WorkProject
-  /** Stacks the meta line under the tagline, for narrow columns */
-  compact?: boolean
-  sizes?: string
 }) {
   return (
     <article className="group">
@@ -62,19 +57,11 @@ export function WorkProjectCard({
               fill
               className="object-cover"
               style={{ opacity: project.coverOpacity ?? 0.9 }}
-              sizes={sizes}
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           ) : null}
-          <div
-            className={`pointer-events-none absolute z-10 ${
-              compact ? "right-3 top-3" : "right-5 top-5 md:right-6 md:top-6"
-            }`}
-          >
-            <div
-              className={`rounded-full bg-white font-mono text-neutral-950 shadow-sm ${
-                compact ? "px-3 py-1.5 text-[11px]" : "px-4 py-2 text-xs md:px-5 md:py-2.5 md:text-sm"
-              }`}
-            >
+          <div className="pointer-events-none absolute right-5 top-5 z-10 md:right-6 md:top-6">
+            <div className="rounded-full bg-white px-4 py-2 font-mono text-xs text-neutral-950 shadow-sm md:px-5 md:py-2.5 md:text-sm">
               <span className="font-semibold">{project.pillName}</span>
               <span className="text-neutral-500">{" • "}</span>
               <span className="font-normal text-neutral-500">{project.year}</span>
@@ -83,21 +70,14 @@ export function WorkProjectCard({
         </div>
       </div>
 
-      {compact ? (
-        <div className="mt-4 space-y-2">
-          <p className="font-mono text-xs leading-relaxed text-foreground/70">{project.tagline}</p>
-          <p className="font-mono text-xs text-foreground/50">{project.meta}</p>
-        </div>
-      ) : (
-        <div className="mt-4 flex items-start justify-between gap-6 md:mt-5">
-          <p className="max-w-[min(100%,28rem)] font-mono text-xs leading-relaxed text-foreground/70 md:text-sm">
-            {project.tagline}
-          </p>
-          <p className="shrink-0 max-w-[45%] text-right font-mono text-xs leading-relaxed text-foreground/70 md:text-sm">
-            {project.meta}
-          </p>
-        </div>
-      )}
+      <div className="mt-4 flex items-start justify-between gap-6 md:mt-5">
+        <p className="max-w-[min(100%,28rem)] font-mono text-xs leading-relaxed text-foreground/70 md:text-sm">
+          {project.tagline}
+        </p>
+        <p className="shrink-0 max-w-[45%] text-right font-mono text-xs leading-relaxed text-foreground/70 md:text-sm">
+          {project.meta}
+        </p>
+      </div>
     </article>
   )
 }
