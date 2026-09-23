@@ -5,8 +5,8 @@ import { SiteNav } from "@/components/site-nav"
 import type { Block, CaseStudy as CaseStudyData, CaseStudyImage } from "@/content/case-studies/types"
 
 const captionClass = "mt-3 font-mono text-xs leading-relaxed text-foreground/60 md:text-sm"
-/** Headings and body copy share one centered reading column; images run wider */
-const textColumn = "mx-auto w-full max-w-2xl"
+/** Headings and body copy span the same width as the images */
+const textColumn = "w-full"
 
 export function CaseStudy({ study, next }: { study: CaseStudyData; next?: CaseStudyData }) {
   const metaItems = [
@@ -30,7 +30,7 @@ export function CaseStudy({ study, next }: { study: CaseStudyData; next?: CaseSt
             / {study.title}
           </p>
           <h1 className="sr-only">{study.title}</h1>
-          <p className="text-xl font-light leading-snug text-foreground/90 md:text-2xl">
+          <p className="text-xl font-light leading-snug text-foreground/90 md:text-2xl lg:text-[1.75rem] lg:leading-snug">
             {study.intro}
           </p>
 
@@ -138,7 +138,7 @@ function CaseStudyBlock({ block }: { block: Block }) {
             <div key={stat.label} className="border-t border-foreground/15 pt-4">
               <dt className="sr-only">{stat.label}</dt>
               <dd>
-                <span className="block font-sans text-4xl font-light tracking-tight md:text-6xl">{stat.value}</span>
+                <span className="block font-sans text-4xl font-light tracking-tight md:text-7xl">{stat.value}</span>
                 <span className="mt-1 block font-mono text-xs text-foreground/60 md:text-sm">{stat.label}</span>
               </dd>
             </div>
