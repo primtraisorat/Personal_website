@@ -18,8 +18,8 @@ export const workProjects: WorkProject[] = [
   {
     pillName: "TappedIn",
     year: "2026",
-    tagline: "An AI-powered event discovery platform that turns whatever you’re in the mood for into local events.",
-    meta: "TAPPEDIN • PRODUCT DESIGN LEAD • 2026",
+    tagline: "An AI-powered event discovery platform that centralizes local events into one personalized experience.",
+    meta: "TAPPEDIN • PRODUCT LEAD • 2026",
     coverImage: "/projects/tappedin.webp",
     coverAlt: "TappedIn event cards fanned out under an “Im feeling artsy” prompt, one showing a 97% match score",
     coverOpacity: 0.9,
