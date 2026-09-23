@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 export type WorkProject = {
   pillName: string
@@ -9,9 +10,21 @@ export type WorkProject = {
   coverAlt?: string
   /** 0–1, applied when `coverImage` is set; defaults to 0.9 */
   coverOpacity?: number
+  /** Case study page, once it exists */
+  href?: string
 }
 
 export const workProjects: WorkProject[] = [
+  {
+    pillName: "TappedIn",
+    year: "2026",
+    tagline: "An AI-powered event discovery platform that turns whatever you’re in the mood for into local events.",
+    meta: "TAPPEDIN • PRODUCT DESIGN LEAD • 2026",
+    coverImage: "/projects/tappedin.webp",
+    coverAlt: "TappedIn event cards fanned out under an “Im feeling artsy” prompt, one showing a 97% match score",
+    coverOpacity: 0.9,
+    href: "/work/tappedin",
+  },
   {
     pillName: "BruinPlace",
     year: "2026",
@@ -46,8 +59,8 @@ export function WorkProjectCard({
 }: {
   project: WorkProject
 }) {
-  return (
-    <article className="group">
+  const card = (
+    <>
       <div className="origin-top overflow-hidden rounded-3xl shadow-[0_16px_32px_-8px_rgba(0,0,0,0.28)] ring-1 ring-foreground/10 transition-transform duration-300 ease-out will-change-transform group-hover:scale-[1.02]">
         <div className="relative aspect-[16/10] bg-foreground/[0.05] ring-1 ring-inset ring-foreground/10">
           {project.coverImage ? (
@@ -78,6 +91,26 @@ export function WorkProjectCard({
           {project.meta}
         </p>
       </div>
+      {project.href ? (
+        <p className="mt-3 font-mono text-xs text-foreground/60 transition-colors group-hover:text-foreground md:text-sm">
+          View case study{" "}
+          <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+            →
+          </span>
+        </p>
+      ) : null}
+    </>
+  )
+
+  return (
+    <article className="group">
+      {project.href ? (
+        <Link href={project.href} className="block rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4">
+          {card}
+        </Link>
+      ) : (
+        card
+      )}
     </article>
   )
 }

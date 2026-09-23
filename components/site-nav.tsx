@@ -3,6 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
 import { Chakra_Petch } from "next/font/google"
 import { MagneticButton } from "@/components/magnetic-button"
 
@@ -17,7 +18,7 @@ interface SiteNavProps {
 const navItems = [
   { label: "Home", href: "/", index: 0, hash: "" },
   { label: "Work", href: "/work", index: 1, hash: "work" },
-  { label: "Thinking", href: "/services", index: 2, hash: "thinking" },
+  { label: "Thinking", href: "/thinking", index: 2, hash: "thinking" },
   { label: "About", href: "/about", index: 3, hash: "about" },
   { label: "Contact", href: "/#contact", index: 4, hash: "contact" },
 ]
@@ -31,18 +32,27 @@ export function sectionIndexFromHash(hash: string) {
 export function SiteNav({ isLoaded = true, currentSection = 0, scrollToSection }: SiteNavProps) {
   const pathname = usePathname()
   const isHome = pathname === "/"
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  // Inner pages scroll vertically; give the bar a backdrop so it stays legible over content
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 16)
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const getIsActive = (item: (typeof navItems)[number]) => {
     if (isHome) return currentSection === item.index
     if (item.label === "Contact") return false
-    return pathname === item.href
+    return pathname === item.href || pathname.startsWith(`${item.href}/`)
   }
 
   return (
     <nav
-      className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-6 transition-opacity duration-700 md:px-12 ${
+      className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-6 transition-[opacity,background-color,backdrop-filter] duration-700 md:px-12 ${
         isLoaded ? "opacity-100" : "opacity-0"
-      }`}
+      } ${isScrolled ? "bg-black/15 backdrop-blur-md" : ""}`}
     >
       <Link href="/" className="flex items-center gap-2 transition-transform hover:scale-105">
         <div className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-foreground/15 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-foreground/25">

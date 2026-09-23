@@ -51,7 +51,7 @@ export function ServicesSection() {
         </div>
         <div className="mt-3 md:mt-4">
           <Link
-            href="/services"
+            href="/thinking"
             className="font-mono text-xs text-foreground/70 underline-offset-4 transition-colors hover:text-foreground hover:underline md:text-sm"
           >
             See more
