@@ -5,9 +5,25 @@ export type CaseStudyImage = {
   height: number
 }
 
+export type CaseStudyVideo = {
+  src: string
+  poster: string
+  /** Describes what the recording shows, for screen readers */
+  label: string
+  width: number
+  height: number
+}
+
 export type Block =
   | { kind: "prose"; paragraphs: string[] }
-  | { kind: "images"; images: CaseStudyImage[]; caption?: string }
+  | {
+      kind: "images"
+      images: CaseStudyImage[]
+      caption?: string
+      /** Centered at a narrower width, for diagrams that would be oversized full-bleed */
+      narrow?: boolean
+    }
+  | { kind: "videos"; items: { video: CaseStudyVideo; caption: string }[] }
   | { kind: "annotated"; items: { image: CaseStudyImage; caption: string }[] }
   | { kind: "list"; items: { title: string; body: string }[] }
   | { kind: "stats"; stats: { value: string; label: string }[] }

@@ -33,6 +33,7 @@ export const workProjects: WorkProject[] = [
     coverImage: "/projects/bruinplace.png",
     coverAlt: "BruinPlace on a MacBook — listings, map, and search for student housing near UCLA",
     coverOpacity: 0.9,
+    href: "/work/bruinplace",
   },
   {
     pillName: "Comet",

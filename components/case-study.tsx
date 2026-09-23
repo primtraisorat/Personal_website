@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { CaseStudyVideo } from "@/components/case-study-video"
 import { PageBackground } from "@/components/page-background"
 import { SiteNav } from "@/components/site-nav"
 import type { Block, CaseStudy as CaseStudyData, CaseStudyImage } from "@/content/case-studies/types"
@@ -97,7 +98,7 @@ function CaseStudyBlock({ block }: { block: Block }) {
 
     case "images":
       return (
-        <figure>
+        <figure className={block.narrow ? "mx-auto w-full max-w-3xl" : undefined}>
           <div className="space-y-6">
             {block.images.map((image) => (
               <CaseStudyFigureImage key={image.src} image={image} sizes="(max-width: 1280px) 100vw, 1280px" />
@@ -113,6 +114,21 @@ function CaseStudyBlock({ block }: { block: Block }) {
           {block.items.map((item) => (
             <figure key={item.image.src} className="flex flex-col justify-end">
               <CaseStudyFigureImage image={item.image} sizes="(max-width: 768px) 100vw, 640px" />
+              <figcaption className={captionClass}>{item.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      )
+
+    case "videos":
+      return (
+        <div className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 lg:gap-x-10">
+          {block.items.map((item) => (
+            <figure key={item.video.src}>
+              {/* Same frame as the /work cards */}
+              <div className="overflow-hidden rounded-3xl opacity-90 shadow-[0_16px_32px_-8px_rgba(0,0,0,0.28)] ring-1 ring-foreground/10">
+                <CaseStudyVideo {...item.video} />
+              </div>
               <figcaption className={captionClass}>{item.caption}</figcaption>
             </figure>
           ))}
