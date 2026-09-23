@@ -8,9 +8,15 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Shaders Landing Page",
-  description: "Created with v0",
-  generator: "v0.app",
+  title: "Prim Traisorat",
+  description: "Prim Traisorat's personal website — work, services, and contact.",
+  icons: {
+    icon: [
+      { url: "/logo-mark.png", type: "image/png" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-icon.png",
+  },
 }
 
 export default function RootLayout({
