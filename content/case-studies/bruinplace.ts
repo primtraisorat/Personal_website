@@ -125,17 +125,6 @@ export const bruinplace: CaseStudy = {
       ],
     },
     {
-      heading: "My Role",
-      blocks: [
-        {
-          kind: "prose",
-          paragraphs: [
-            "I designed search: the map, the filters, and the split-screen view that holds them together. Emily Ayson mapped the browse flow. Rachel Lee designed the listing cards.",
-          ],
-        },
-      ],
-    },
-    {
       heading: "Process",
       blocks: [
         {
