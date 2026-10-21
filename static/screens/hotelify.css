@@ -1,0 +1,72 @@
+/* Hotelify shared pieces, from the Figma file (sidebar, top bar, buttons, tabs, tables, badges, pagination). */
+.ho { font-family: "Inter", system-ui, sans-serif; color: #5d6679; background: #fff; }
+.ho p { margin: 0; }
+.ho-dash { background: #eef0f2; }
+
+/* Sidebar */
+.ho-side { position: absolute; left: 0; top: 0; width: 220px; height: 100%; background: #fff; padding: 32px 12px 0; display: flex; flex-direction: column; gap: 32px; }
+.ho-logo { display: flex; align-items: center; gap: 21px; padding: 0 12px; font-weight: 500; font-size: 26px; line-height: normal; color: #2f7beb; }
+.ho-logo img { width: 30px; height: 40px; }
+.ho-nav { display: flex; flex-direction: column; gap: 16px; }
+.ho-nav a { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 8px; font-weight: 500; font-size: 14px; line-height: 1.5; color: #5d6679; text-decoration: none; }
+.ho-nav a img { width: 24px; height: 24px; }
+.ho-nav a.on { background: #e8f1fd; color: #1366d9; }
+
+/* Top bar */
+.ho-top { position: absolute; left: 220px; top: 0; width: 1060px; padding: 28px 20px; display: flex; align-items: center; justify-content: space-between; background: #fff; }
+.ho-top.clear { background: none; }
+.ho-top-search { width: 400px; height: 40px; display: flex; align-items: center; gap: 8px; padding: 0 15px; background: #f7f9fc; border: 1px solid #eef0f2; border-radius: 4px; font-size: 16px; line-height: 1.5; color: #858d9d; }
+.ho-top-right { display: flex; align-items: flex-start; gap: 24px; }
+.ho-bell { padding: 8px; }
+.ho-top img.i24, .ho-i24 { width: 24px; height: 24px; }
+.ho-avatar { width: 40px; height: 40px; border-radius: 50%; }
+
+.ho-crumb { position: absolute; left: 240px; top: 104px; font-weight: 500; font-size: 12px; line-height: 1.5; color: #858d9d; }
+
+/* Buttons, tabs, inputs */
+.ho-btn { display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 24px; border-radius: 8px; background: #1570ef; color: #fff; font-weight: 500; font-size: 14px; line-height: 1.5; white-space: nowrap; }
+.ho-btn.h36 { height: 36px; }
+.ho-btn-line { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 15px 0 7px; border: 1px solid #858d9d; border-radius: 8px; color: #667085; font-weight: 500; font-size: 14px; line-height: 1.5; white-space: nowrap; }
+.ho-btn-line.h36 { height: 36px; }
+.ho-btn-line img { width: 20px; height: 20px; }
+.ho-btn-line.next { padding: 0 7px 0 15px; }
+.ho-tab { display: inline-flex; align-items: center; height: 36px; padding: 0 15px; border: 1px solid #989fad; border-radius: 100px; font-weight: 500; font-size: 14px; line-height: 1.5; color: #5d6679; white-space: nowrap; }
+.ho-tab.on { background: #e8f1fd; border-color: #1570ef; color: #1366d9; }
+.ho-input { width: 300px; height: 40px; display: flex; align-items: center; gap: 8px; padding: 0 15px; background: #fff; border: 1px solid #d0d3d9; border-radius: 8px; font-size: 16px; line-height: 1.5; color: #5d6679; }
+
+/* Page content block: crumb + toolbar + table */
+.ho-main { position: absolute; left: 240px; top: 138px; width: 1020px; display: flex; flex-direction: column; gap: 16px; background: #fff; }
+.ho-toolbar { display: flex; align-items: flex-start; justify-content: space-between; padding-top: 16px; }
+.ho-toolbar > div { display: flex; gap: 12px; }
+
+/* Table: column-major like the Figma file (each column is a flex column) */
+.ho-table { display: flex; align-items: stretch; width: 1020px; border: 1px solid #e8f1fd; border-radius: 8px; overflow: hidden; background: #fff; }
+.ho-col { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; }
+.ho-th { height: 39px; padding: 10px 24px 0; background: #f7f9fc; border-bottom: 1px solid #e8f1fd; font-weight: 500; font-size: 12px; line-height: 1.5; color: #667085; white-space: nowrap; }
+.ho-td { height: 55px; padding: 0 24px; display: flex; align-items: center; font-size: 14px; line-height: 1.5; color: #5d6679; white-space: nowrap; }
+.ho-td + .ho-td, .ho-div { border-top: 1px solid #e8f1fd; }
+.ho-td + .ho-td { height: 56px; }
+.ho-div { height: 0; }
+.ho-td.main { font-weight: 500; color: #2b2f38; }
+.ho-td.dark { color: #2b2f38; }
+.ho-col.more { flex: none; width: 70px; }
+.ho-col.more .ho-th { height: 41px; }
+.ho-col.more .ho-td { justify-content: center; }
+.ho-col.more .ho-td img { width: 24px; height: 24px; margin: 8px; }
+
+.ho-badge { display: inline-block; padding: 2px 8px; border-radius: 16px; font-size: 12px; line-height: 1.5; background: #e8f1fd; color: #448df2; }
+.ho-badge.red { background: #feeceb; color: #f36960; }
+.ho-badge.green { background: #e7f8f0; color: #41c588; }
+.ho-badge.amber { background: #fef4e6; color: #f9a63a; }
+
+/* Pagination */
+.ho-pager { display: flex; align-items: center; justify-content: space-between; width: 1020px; padding: 11px 24px 16px; }
+.ho-pager .dim { opacity: .2; }
+.ho-pager .prev img { transform: scaleX(-1); }
+.ho-pages { display: flex; gap: 2px; }
+.ho-pages span { width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; font-weight: 500; font-size: 14px; line-height: 20px; color: #858d9d; }
+.ho-pages span.on { background: #f7f9fc; color: #1366d9; }
+
+/* Dashboard cards */
+.ho-card { position: absolute; background: #fff; border-radius: 8px; overflow: hidden; }
+.ho-card h2 { position: absolute; left: 16px; top: 20px; margin: 0; font-weight: 500; font-size: 20px; line-height: 1.5; color: #383e49; white-space: nowrap; }

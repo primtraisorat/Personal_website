@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comet · Prim Traisorat</title>
+<meta name="description" content="Concept design for a social layer within Perplexity’s Comet browser that turns everyday academic activity into a self-updating portfolio of verified work. I led creative direction and UI/UX for an inter-campus competition project, placing second.">
+<link rel="canonical" href="https://primtraisorat.com/comet.html">
+<meta property="og:title" content="Comet · Prim Traisorat">
+<meta property="og:description" content="Concept design for a social layer within Perplexity’s Comet browser that turns everyday academic activity into a self-updating portfolio of verified work. I led creative direction and UI/UX for an inter-campus competition project, placing second.">
+<meta property="og:image" content="https://primtraisorat.com/img/comet-hero.jpg">
+<meta property="og:url" content="https://primtraisorat.com/comet.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Prim Traisorat">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Comet · Prim Traisorat">
+<meta name="twitter:description" content="Concept design for a social layer within Perplexity’s Comet browser that turns everyday academic activity into a self-updating portfolio of verified work. I led creative direction and UI/UX for an inter-campus competition project, placing second.">
+<meta name="twitter:image" content="https://primtraisorat.com/img/comet-hero.jpg">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="icon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#fafaf7">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap"><div class="bar">
+  <a class="home-icon" href="index.html" aria-label="Home"><picture><source srcset="img/home-flower.webp" type="image/webp"><img decoding="async" width="1000" height="803" class="spin" src="img/home-flower.png" alt=""></picture></a>
+  <nav aria-label="Main">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-list">Menu</button>
+    <ul id="nav-list"><li><a href="index.html#work" aria-current="page">Work</a></li><li><a href="art.html">Art</a></li><li><a href="design.html">Graphic</a></li></ul>
+  </nav>
+</div></div></header>
+<main id="main">
+<nav class="toc" aria-label="On this page">
+  <ul><li><a href="#overview">Overview</a></li><li><a href="#problem">Problem</a></li><li><a href="#solution">Solution</a></li></ul>
+</nav>
+<script>
+(function (nav) {
+  var links = [].slice.call(nav.querySelectorAll('ul a'));
+  function spy() {
+    var secs = links.map(function (a) { return document.getElementById(a.hash.slice(1)); }), y = innerHeight * 0.35, cur = 0;
+    secs.forEach(function (s, i) { if (s && s.getBoundingClientRect().top <= y) cur = i; });
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) cur = secs.length - 1;
+    links.forEach(function (a, i) { if (i === cur) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
+  }
+  addEventListener('scroll', spy, { passive: true }); addEventListener('resize', spy); addEventListener('DOMContentLoaded', spy); spy();
+})(document.currentScript.previousElementSibling);
+</script>
+<div class="case" id="overview">
+  <h1 class="sr-only">Comet — Academic Social Network</h1>
+  <picture><source srcset="img/logo-perplexity.webp" type="image/webp"><img decoding="async" width="147" height="45" class="logo" src="img/logo-perplexity.jpg" alt="Perplexity"></picture>
+  <p class="lede">Concept design for a social layer within Perplexity’s Comet browser that turns everyday academic activity into a self-updating portfolio of verified work. Led creative direction and UI/UX for an inter-campus competition project that placed second overall.</p>
+  <dl class="meta">
+  <div><dt>Timeline</dt><dd>Nov 2025</dd></div>
+  <div><dt>Team</dt><dd>5 person team</dd></div>
+  <div><dt>Role</dt><dd>Product Manager</dd></div>
+</dl>
+</div>
+<div class="case-hero"><picture><source srcset="img/comet-hero.webp" type="image/webp"><img decoding="async" width="1323" height="602" src="img/comet-hero.jpg" alt="Comet network feed with Proof Card, profile, AI discovery and network insight panels" fetchpriority="high"></picture></div>
+<div class="case">
+<h2 id="problem">Problem</h2>
+<p>Students spend billions of hours researching, analyzing, building, and learning, but most of that work disappears into browser tabs, assignments, and folders once it’s finished.</p>
+<p>At the same time, students attend university largely to prepare for their careers, while employers struggle to understand what graduates can actually do.</p>
+<p>There is a gap between what students do and what recruiters see.</p>
+<figure class="wide"><ol class="gapflow"><li><picture><source srcset="img/comet-ill-1.webp" type="image/webp"><img decoding="async" width="200" height="150" src="img/comet-ill-1.jpg" alt="" loading="lazy"></picture><b>Students do the work</b><span>Research · Analyze · Build</span></li><li class="arrow" aria-hidden="true">→</li><li><picture><source srcset="img/comet-ill-2.webp" type="image/webp"><img decoding="async" width="136" height="156" src="img/comet-ill-2.jpg" alt="" loading="lazy"></picture><b>The work disappears</b><span>Tabs close · Files buried</span></li><li class="gap">The gap</li><li><picture><source srcset="img/comet-ill-3.webp" type="image/webp"><img decoding="async" width="171" height="146" src="img/comet-ill-3.jpg" alt="" loading="lazy"></picture><b>Reduced to credentials</b><span>Grades · Titles</span></li><li class="arrow" aria-hidden="true">→</li><li><picture><source srcset="img/comet-ill-4.webp" type="image/webp"><img decoding="async" width="150" height="130" src="img/comet-ill-4.jpg" alt="" loading="lazy"></picture><b>Employers see an incomplete picture</b><span>Hard to evaluate</span></li></ol></figure>
+<h2 id="solution">Solution</h2>
+<p>Instead of asking students to manually build another portfolio, we saw an opportunity in something they already use every day: the browser.</p>
+<p>Comet sits directly where research and academic work happen. That makes it uniquely positioned to capture the process—not just the final claim.</p>
+<figure class="wide"><picture><source srcset="img/comet-steps.webp" type="image/webp"><img decoding="async" width="1113" height="201" src="img/comet-steps.jpg" alt="From search, analysis and code to an auto-generated Proof Card" loading="lazy"></picture></figure>
+<figure class="wide"><div class="features"><div class="fcol"><div class="fcard red"><h3>Proof Card System</h3><picture><source srcset="img/comet-snip-proof.webp" type="image/webp"><img decoding="async" width="224" height="239" src="img/comet-snip-proof.jpg" alt="Proof card for a housing price prediction project" loading="lazy"></picture><p>Auto-captured <b>“cards”</b> showing the <b>technical details</b> of any research project you have done using the Comet browser</p></div><div class="fcard navy"><h3>Customizable User Profile</h3><picture><source srcset="img/comet-snip-profile.webp" type="image/webp"><img decoding="async" width="224" height="179" src="img/comet-snip-profile.jpg" alt="Profile editor" loading="lazy"></picture><p>Choose from an <b>automated list</b> which academic work to <b>share to your public profile</b> and gain traction</p></div></div><picture><source srcset="img/comet-screens.webp" type="image/webp"><img decoding="async" width="584" height="606" class="center" src="img/comet-screens.jpg" alt="Comet network feed and a student profile with proof cards" loading="lazy"></picture><div class="fcol"><div class="fcard rust"><h3>AI-Driven Discovery</h3><picture><source srcset="img/comet-snip-discovery.webp" type="image/webp"><img decoding="async" width="237" height="242" src="img/comet-snip-discovery.jpg" alt="AI summary of learning themes and peer recommendations" loading="lazy"></picture><p>Students, faculty, and employers <b>connect via visible, verified work</b></p></div><div class="fcard olive"><h3>Network Insights</h3><picture><source srcset="img/comet-snip-network.webp" type="image/webp"><img decoding="async" width="289" height="115" src="img/comet-snip-network.jpg" alt="Follow collaborators list" loading="lazy"></picture><p><b>Stay in sync/follow</b> your favorite builders, mentors, and scouts for <b>updates</b></p></div></div></div></figure>
+<nav class="case-foot" aria-label="More work">
+  <a class="back" href="index.html#work"><span aria-hidden="true">←</span> All work</a>
+  <a class="next" href="make.html"><small>Next project</small>MAKE — Goal-Based Finance Platform<span aria-hidden="true"> →</span></a>
+</nav>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <a class="footer-email" href="mailto:primtraisorat@gmail.com">primtraisorat@gmail.com</a>
+  <ul class="footer-links"><li><a href="https://www.linkedin.com/in/primtraisorat" rel="me">LinkedIn</a></li></ul>
+</div></footer>
+<script>
+(function () {
+  var b = document.querySelector('.menu-btn'), l = document.getElementById('nav-list');
+  b.addEventListener('click', function () { var o = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', o); document.documentElement.classList.toggle('menu-open', o); });
+  l.addEventListener('click', function (e) { if (e.target.tagName === 'A') { b.setAttribute('aria-expanded', 'false'); document.documentElement.classList.remove('menu-open'); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && b.getAttribute('aria-expanded') === 'true') { b.setAttribute('aria-expanded', 'false'); document.documentElement.classList.remove('menu-open'); b.focus(); } });
+})();
+</script>
+</body>
+</html>

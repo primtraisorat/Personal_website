@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hotelify · Prim Traisorat</title>
+<meta name="description" content="Hotelify is a SaaS platform for hotels that helps manage guest relationships and increase revenue through personalized recommendations. I led product strategy and designed UI/UX to help properties manage guest data, automate upsells, and track performance.">
+<link rel="canonical" href="https://primtraisorat.com/hotelify.html">
+<meta property="og:title" content="Hotelify · Prim Traisorat">
+<meta property="og:description" content="Hotelify is a SaaS platform for hotels that helps manage guest relationships and increase revenue through personalized recommendations. I led product strategy and designed UI/UX to help properties manage guest data, automate upsells, and track performance.">
+<meta property="og:image" content="https://primtraisorat.com/img/hotelify-hero.jpg">
+<meta property="og:url" content="https://primtraisorat.com/hotelify.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Prim Traisorat">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hotelify · Prim Traisorat">
+<meta name="twitter:description" content="Hotelify is a SaaS platform for hotels that helps manage guest relationships and increase revenue through personalized recommendations. I led product strategy and designed UI/UX to help properties manage guest data, automate upsells, and track performance.">
+<meta name="twitter:image" content="https://primtraisorat.com/img/hotelify-hero.jpg">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="icon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#fafaf7">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap"><div class="bar">
+  <a class="home-icon" href="index.html" aria-label="Home"><picture><source srcset="img/home-flower.webp" type="image/webp"><img decoding="async" width="1000" height="803" class="spin" src="img/home-flower.png" alt=""></picture></a>
+  <nav aria-label="Main">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-list">Menu</button>
+    <ul id="nav-list"><li><a href="index.html#work" aria-current="page">Work</a></li><li><a href="art.html">Art</a></li><li><a href="design.html">Graphic</a></li></ul>
+  </nav>
+</div></div></header>
+<main id="main">
+<nav class="toc" aria-label="On this page">
+  <ul><li><a href="#overview">Overview</a></li><li><a href="#final-design">Final design</a></li></ul>
+</nav>
+<script>
+(function (nav) {
+  var links = [].slice.call(nav.querySelectorAll('ul a'));
+  function spy() {
+    var secs = links.map(function (a) { return document.getElementById(a.hash.slice(1)); }), y = innerHeight * 0.35, cur = 0;
+    secs.forEach(function (s, i) { if (s && s.getBoundingClientRect().top <= y) cur = i; });
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) cur = secs.length - 1;
+    links.forEach(function (a, i) { if (i === cur) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
+  }
+  addEventListener('scroll', spy, { passive: true }); addEventListener('resize', spy); addEventListener('DOMContentLoaded', spy); spy();
+})(document.currentScript.previousElementSibling);
+</script>
+<div class="case" id="overview">
+  <h1 class="sr-only">Hotelify — Hotel Upsell Recommendation System</h1>
+  <picture><source srcset="img/logo-hotelify.webp" type="image/webp"><img decoding="async" width="141" height="47" class="logo" src="img/logo-hotelify.jpg" alt="Hotelify"></picture>
+  <p class="lede">Hotelify is a SaaS platform for hotels that helps manage guest relationships and increase revenue through personalized recommendations. I led product strategy and designed UI/UX to help properties manage guest data, automate upsells, and track performance.</p>
+  <dl class="meta">
+  <div><dt>Timeline</dt><dd>Mar–Jun 2026</dd></div>
+  <div><dt>Team</dt><dd>1 design and product lead, 1 frontend engineer, 1 backend engineer</dd></div>
+  <div><dt>Role</dt><dd>Co-Founder</dd></div>
+</dl>
+</div>
+<div class="case-hero"><picture><source srcset="img/hotelify-hero.webp" type="image/webp"><img decoding="async" width="1305" height="519" src="img/hotelify-hero.jpg" alt="Hotelify dashboard on a tablet beside guest and upsell tables" fetchpriority="high"></picture></div>
+<div class="case">
+<figure class="wide screens" id="final-design">
+  <div class="screens-tabs" role="tablist" aria-label="Hotelify screens"><button type="button" role="tab" aria-selected="true" data-src="screens/hotelify-dashboard.html">Dashboard</button><button type="button" role="tab" aria-selected="false" data-src="screens/hotelify-guests.html">Guests</button><button type="button" role="tab" aria-selected="false" data-src="screens/hotelify-room.html">Room</button><button type="button" role="tab" aria-selected="false" data-src="screens/hotelify-rate.html">Rate</button><button type="button" role="tab" aria-selected="false" data-src="screens/hotelify-front-desk.html">Front desk</button><button type="button" role="tab" aria-selected="false" data-src="screens/hotelify-deals.html">Deals</button></div>
+  <div class="screens-scroll"><div class="screens-window">
+    <iframe src="screens/hotelify-dashboard.html" title="Hotelify screen: Dashboard" loading="lazy"></iframe>
+  </div></div>
+  <figcaption>Final screens, rebuilt in HTML from the Figma file. Scroll inside the window and click through them like the prototype, or <a href="https://www.figma.com/proto/i3GE7itQ9BtGpGQqJMsNTl/Hotelify?node-id=208-983&page-id=0%3A1&starting-point-node-id=208%3A983" target="_blank" rel="noopener">open the original Figma prototype</a>.</figcaption>
+</figure>
+<script>
+(function (f) {
+  var frame = f.querySelector('iframe'), tabs = f.querySelectorAll('[role=tab]');
+  tabs.forEach(function (t) { t.addEventListener('click', function () {
+    tabs.forEach(function (o) { o.setAttribute('aria-selected', o === t); });
+    frame.src = t.dataset.src; frame.title = 'Hotelify screen: ' + t.textContent;
+  }); });
+  window.addEventListener('message', function (e) {
+    if (e.source !== frame.contentWindow || !e.data || !e.data.screen) return;
+    tabs.forEach(function (t) {
+      var on = t.dataset.src === 'screens/' + e.data.screen + '.html';
+      t.setAttribute('aria-selected', on);
+      if (on) frame.title = 'Hotelify screen: ' + t.textContent;
+    });
+  });
+})(document.currentScript.previousElementSibling);
+</script>
+<nav class="case-foot" aria-label="More work">
+  <a class="back" href="index.html#work"><span aria-hidden="true">←</span> All work</a>
+  <a class="next" href="nearu.html"><small>Next project</small>NearU — Campus Community Marketplace<span aria-hidden="true"> →</span></a>
+</nav>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <a class="footer-email" href="mailto:primtraisorat@gmail.com">primtraisorat@gmail.com</a>
+  <ul class="footer-links"><li><a href="https://www.linkedin.com/in/primtraisorat" rel="me">LinkedIn</a></li></ul>
+</div></footer>
+<script>
+(function () {
+  var b = document.querySelector('.menu-btn'), l = document.getElementById('nav-list');
+  b.addEventListener('click', function () { var o = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', o); document.documentElement.classList.toggle('menu-open', o); });
+  l.addEventListener('click', function (e) { if (e.target.tagName === 'A') { b.setAttribute('aria-expanded', 'false'); document.documentElement.classList.remove('menu-open'); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && b.getAttribute('aria-expanded') === 'true') { b.setAttribute('aria-expanded', 'false'); document.documentElement.classList.remove('menu-open'); b.focus(); } });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAKE · Prim Traisorat</title>
+<meta name="description" content="MAKE is a next-generation banking app that organizes money around life goals instead of traditional accounts. I worked on product concepts for the Work Pocket, designed to help entrepreneurs manage revenue, vendor payments, and operating expenses within their personal finances.">
+<link rel="canonical" href="https://primtraisorat.com/make.html">
+<meta property="og:title" content="MAKE · Prim Traisorat">
+<meta property="og:description" content="MAKE is a next-generation banking app that organizes money around life goals instead of traditional accounts. I worked on product concepts for the Work Pocket, designed to help entrepreneurs manage revenue, vendor payments, and operating expenses within their personal finances.">
+<meta property="og:image" content="https://primtraisorat.com/img/og-make-bcg.jpg">
+<meta property="og:url" content="https://primtraisorat.com/make.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Prim Traisorat">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MAKE · Prim Traisorat">
+<meta name="twitter:description" content="MAKE is a next-generation banking app that organizes money around life goals instead of traditional accounts. I worked on product concepts for the Work Pocket, designed to help entrepreneurs manage revenue, vendor payments, and operating expenses within their personal finances.">
+<meta name="twitter:image" content="https://primtraisorat.com/img/og-make-bcg.jpg">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="icon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#fafaf7">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap"><div class="bar">
+  <a class="home-icon" href="index.html" aria-label="Home"><picture><source srcset="img/home-flower.webp" type="image/webp"><img decoding="async" width="1000" height="803" class="spin" src="img/home-flower.png" alt=""></picture></a>
+  <nav aria-label="Main">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-list">Menu</button>
+    <ul id="nav-list"><li><a href="index.html#work" aria-current="page">Work</a></li><li><a href="art.html">Art</a></li><li><a href="design.html">Graphic</a></li></ul>
+  </nav>
+</div></div></header>
+<main id="main">
+<nav class="toc" aria-label="On this page">
+  <ul><li><a href="#overview">Overview</a></li><li><a href="#integration-into-current-user-flow">Integration into current user flow</a></li><li><a href="#msme-tailored-features-in-our-solution-embedded-in-work-pocket">MSME-tailored features in our solution, embedded in “Work” pocket</a></li></ul>
+</nav>
+<script>
+(function (nav) {
+  var links = [].slice.call(nav.querySelectorAll('ul a'));
+  function spy() {
+    var secs = links.map(function (a) { return document.getElementById(a.hash.slice(1)); }), y = innerHeight * 0.35, cur = 0;
+    secs.forEach(function (s, i) { if (s && s.getBoundingClientRect().top <= y) cur = i; });
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) cur = secs.length - 1;
+    links.forEach(function (a, i) { if (i === cur) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
+  }
+  addEventListener('scroll', spy, { passive: true }); addEventListener('resize', spy); addEventListener('DOMContentLoaded', spy); spy();
+})(document.currentScript.previousElementSibling);
+</script>
+<div class="case" id="overview">
+  <h1 class="sr-only">MAKE — Goal-Based Finance Platform</h1>
+  <picture><source srcset="img/logo-bcg.webp" type="image/webp"><img decoding="async" width="159" height="44" class="logo" src="img/logo-bcg.jpg" alt="Boston Consulting Group"></picture>
+  <p class="lede">MAKE is a next-generation banking app that organizes money around life goals instead of traditional accounts. I worked on product concepts for the Work Pocket, designed to help entrepreneurs manage revenue, vendor payments, and operating expenses within their personal finances.</p>
+  <dl class="meta">
+  <div><dt>Timeline</dt><dd>Jun–Aug 2025</dd></div>
+  <div><dt>Team</dt><dd>4 designers, 6 engineers</dd></div>
+  <div><dt>Role</dt><dd>UX Researcher</dd></div>
+</dl>
+</div>
+
+<div class="case">
+<figure class="wide"><div class="slide">
+  <p class="eyebrow">MSME Credit plays</p>
+  <h2 class="slide-title"><span>2.1 Deep-dive (MSME) |</span> “Work” pocket enables MSMEs to easily organize cashflow and automate expenses without having a separate business account</h2>
+  <div class="slide-cols">
+    <section><h3 id="integration-into-current-user-flow">Integration into current user flow</h3>
+      <div class="phones"><div><picture><source srcset="img/make-phone-pocket.webp" type="image/webp"><img decoding="async" width="248" height="480" src="img/make-phone-pocket.jpg" alt="Cloud Pocket screen with a Work Pocket" loading="lazy"></picture>
+        <p><em>“Work Pocket”</em> integrated inside current <em>Cloud Pocket user flow</em>; no need for separate account</p></div></div>
+    </section>
+    <section><h3 id="msme-tailored-features-in-our-solution-embedded-in-work-pocket">MSME-tailored features in our solution, embedded in “Work” pocket</h3>
+      <div class="phones">
+        <div><picture><source srcset="img/make-phone-insights.webp" type="image/webp"><img decoding="async" width="252" height="482" src="img/make-phone-insights.jpg" alt="Insights dashboard" loading="lazy"></picture>
+          <p><em>“Insights” Dashboard</em> enabling <em>at-a-glance</em> income tracking</p></div>
+        <div><picture><source srcset="img/make-phone-bills.webp" type="image/webp"><img decoding="async" width="256" height="481" src="img/make-phone-bills.jpg" alt="Bills and expenses list" loading="lazy"></picture>
+          <p><em>“Expenses” list</em> to track and <em>automate</em> vendor and staff payments</p></div>
+      </div>
+      <p class="note">Leverage <em>MEOWJot’s smart categorization</em> to sort business vs personal expenses</p>
+    </section>
+  </div>
+  <p class="source">Source: BCG analysis</p>
+</div></figure>
+<nav class="case-foot" aria-label="More work">
+  <a class="back" href="index.html#work"><span aria-hidden="true">←</span> All work</a>
+  <a class="next" href="hotelify.html"><small>Next project</small>Hotelify — Hotel Upsell Recommendation System<span aria-hidden="true"> →</span></a>
+</nav>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <a class="footer-email" href="mailto:primtraisorat@gmail.com">primtraisorat@gmail.com</a>
+  <ul class="footer-links"><li><a href="https://www.linkedin.com/in/primtraisorat" rel="me">LinkedIn</a></li></ul>
+</div></footer>
+<script>
+(function () {
+  var b = document.querySelector('.menu-btn'), l = document.getElementById('nav-list');
+  b.addEventListener('click', function () { var o = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', o); document.documentElement.classList.toggle('menu-open', o); });
+  l.addEventListener('click', function (e) { if (e.target.tagName === 'A') { b.setAttribute('aria-expanded', 'false'); document.documentElement.classList.remove('menu-open'); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && b.getAttribute('aria-expanded') === 'true') { b.setAttribute('aria-expanded', 'false'); document.documentElement.classList.remove('menu-open'); b.focus(); } });
+})();
+</script>
+</body>
+</html>

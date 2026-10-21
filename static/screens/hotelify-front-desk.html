@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Hotelify · Front desk</title>
+<link rel="stylesheet" href="screens.css"><link rel="stylesheet" href="hotelify.css">
+<style>
+.screen { width: 1280px; height: 960px; }
+
+.vl { position: absolute; top: 297px; width: 1px; height: 592px; background: #e8f1fd; }
+.bk { position: absolute; width: 250px; padding: 8px; border-radius: 8px; font-weight: 500; font-size: 14px; line-height: 1.5; }
+.c-amber { background: #fef4e6; color: #f9a63a; } .c-blue { background: #e8f1fd; color: #448df2; }
+.c-green { background: #e7f8f0; color: #41c588; } .c-red { background: #feeceb; color: #f36960; }
+.cal { position: absolute; left: 249px; top: 198px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.cal .row { display: flex; align-items: center; gap: 47px; font-weight: 500; font-size: 14px; line-height: 1.5; }
+.cal .row span { padding: 8px; border-radius: 8px; }
+.cal .row.d span { width: 32px; height: 37px; display: grid; place-items: center; }
+.cal .row span.on, .cal .row.d span.on { width: auto; padding: 7px 15px; border: 1px solid #1570ef; border-radius: 100px; background: #e8f1fd; color: #1366d9; }
+.cal .row.d span.wide { width: auto; }
+.cal hr { margin: 0; border: 0; height: 1px; width: 673px; background: #e8f1fd; }
+.fd-bar { position: absolute; left: 240px; top: 138px; width: 1020px; display: flex; align-items: center; justify-content: space-between; }
+.fd-bar > div { display: flex; }
+.fd-bar .st { gap: 16px; } .fd-bar .st span { padding: 8px; border-radius: 8px; font-weight: 500; font-size: 14px; line-height: 1.5; }
+.fd-bar .act { gap: 12px; }
+</style></head>
+<body><div class="screen ho " role="img" aria-label="Hotelify front desk: a booking timeline for February with colour-coded guest stays (due in, checked out, due out, checked in), month and day pickers, room search and a Create booking button">
+<i class="vl" style="left:277px"></i><i class="vl" style="left:356px"></i><i class="vl" style="left:435px"></i><i class="vl" style="left:514px"></i><i class="vl" style="left:593px"></i><i class="vl" style="left:672px"></i><i class="vl" style="left:751px"></i><i class="vl" style="left:830px"></i><i class="vl" style="left:909px"></i><i class="vl" style="left:988px"></i><i class="vl" style="left:1067px"></i><i class="vl" style="left:1144px"></i><div class="bk c-amber" style="left:357px;top:310px">Lewis</div><div class="bk c-blue" style="left:436px;top:371px">Mark</div><div class="bk c-blue" style="left:278px;top:432px">Tate</div><div class="bk c-amber" style="left:515px;top:516px">Manson</div><div class="bk c-blue" style="left:673px;top:577px">Mike</div><div class="bk c-green" style="left:831px;top:638px">Mave</div><div class="bk c-green" style="left:830px;top:842px">White</div><div class="bk c-red" style="left:831px;top:310px">Andrew</div><div class="bk c-blue" style="left:831px;top:432px">Lewis</div><div class="bk c-red" style="left:365px;top:638px">Bruce</div><div class="bk c-amber" style="left:594px;top:736px">Otis</div><div class="bk c-red" style="left:356px;top:842px">Black</div>
+<aside class="ho-side"><div class="ho-logo"><img src="assets/ho-logo.webp" alt="">Hotelify</div><nav class="ho-nav"><a class=""><img src="assets/ho-ic-dashboard.webp" alt="">Dashboard</a><a class="on"><img src="assets/ho-ic-frontdesk-on.webp" alt="">Front desk</a><a class=""><img src="assets/ho-ic-guests.webp" alt="">Guests</a><a class=""><img src="assets/ho-ic-rooms.webp" alt="">Rooms</a><a class=""><img src="assets/ho-ic-deals.webp" alt="">Deals</a><a class=""><img src="assets/ho-ic-rates.webp" alt="">Rate</a></nav></aside>
+<header class="ho-top " style=""><div class="ho-top-search"><img class="i24" src="assets/ho-search.webp" alt="">Search for rooms and offers</div><div class="ho-top-right"><span class="ho-bell"><img class="i24" src="assets/ho-bell.webp" alt=""></span><img class="ho-avatar" src="assets/ho-avatar.webp" alt=""></div></header>
+<p class="ho-crumb">Front desk</p>
+<div class="cal"><div class="row"><span class="">May</span><span class="">Jun</span><span class="">Jul</span><span class="">Aug</span><span class="">Sep</span><span class="">Oct</span><span class="">Nov</span><span class="">Dec</span><span class="">Jan</span><span class="on">Feb</span><span class="">Mar</span></div><hr><div class="row d"><span class="">1</span><span class="">2</span><span class="">3</span><span class="">4</span><span class="">5</span><span class="">6</span><span class="">7</span><span class="">8</span><span class="">9</span><span class="on">10</span><span class="wide">11</span><span class="wide">12</span></div></div>
+<div class="fd-bar"><div class="st"><span class="c-amber">Due in</span><span class="c-blue">Checked out</span><span class="c-red">Due out</span><span class="c-green">Checked in</span></div>
+  <div class="act"><div class="ho-input"><img class="ho-i24" src="assets/ho-search-w.webp" alt="">Search by room number</div><span class="ho-btn">Create booking</span></div></div>
+</div><script src="hot.js"></script>
+</body></html>

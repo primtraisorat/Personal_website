@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NearU · Prim Traisorat</title>
+<meta name="description" content="NearU is a hyper-local university platform that lets students buy and sell goods within their immediate community. I designed the experience to prioritize proximity, trust, and simplicity over traditional online marketplaces.">
+<link rel="canonical" href="https://primtraisorat.com/nearu.html">
+<meta property="og:title" content="NearU · Prim Traisorat">
+<meta property="og:description" content="NearU is a hyper-local university platform that lets students buy and sell goods within their immediate community. I designed the experience to prioritize proximity, trust, and simplicity over traditional online marketplaces.">
+<meta property="og:image" content="https://primtraisorat.com/img/nearu-screens.jpg">
+<meta property="og:url" content="https://primtraisorat.com/nearu.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Prim Traisorat">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NearU · Prim Traisorat">
+<meta name="twitter:description" content="NearU is a hyper-local university platform that lets students buy and sell goods within their immediate community. I designed the experience to prioritize proximity, trust, and simplicity over traditional online marketplaces.">
+<meta name="twitter:image" content="https://primtraisorat.com/img/nearu-screens.jpg">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="icon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#fafaf7">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap"><div class="bar">
+  <a class="home-icon" href="index.html" aria-label="Home"><picture><source srcset="img/home-flower.webp" type="image/webp"><img decoding="async" width="1000" height="803" class="spin" src="img/home-flower.png" alt=""></picture></a>
+  <nav aria-label="Main">
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-list">Menu</button>
+    <ul id="nav-list"><li><a href="index.html#work" aria-current="page">Work</a></li><li><a href="art.html">Art</a></li><li><a href="design.html">Graphic</a></li></ul>
+  </nav>
+</div></div></header>
+<main id="main">
+<div class="case" id="overview">
+  <h1 class="sr-only">NearU — Campus Community Marketplace</h1>
+  <picture><source srcset="img/logo-ucla.webp" type="image/webp"><img decoding="async" width="115" height="46" class="logo" src="img/logo-ucla.jpg" alt="UCLA"></picture>
+  <p class="lede">NearU is a hyper-local university platform that lets students buy and sell goods within their immediate community. I designed the experience to prioritize proximity, trust, and simplicity over traditional online marketplaces.</p>
+  <dl class="meta">
+  <div><dt>Timeline</dt><dd>Ongoing</dd></div>
+  <div><dt>Team</dt><dd>1 designer, 1 engineer</dd></div>
+  <div><dt>Role</dt><dd>Founding Designer</dd></div>
+</dl>
+</div>
+<div class="case-hero"><picture><source srcset="img/nearu-screens.webp" type="image/webp"><img decoding="async" width="1185" height="394" src="img/nearu-screens.jpg" alt="NearU browse, product, cart and checkout screens" fetchpriority="high"></picture></div>
+<div class="case">
+
+<nav class="case-foot" aria-label="More work">
+  <a class="back" href="index.html#work"><span aria-hidden="true">←</span> All work</a>
+  <a class="next" href="tappedin.html"><small>Next project</small>TappedIn — Agentic Event Discovery Platform<span aria-hidden="true"> →</span></a>
+</nav>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap">
+  <a class="footer-email" href="mailto:primtraisorat@gmail.com">primtraisorat@gmail.com</a>
+  <ul class="footer-links"><li><a href="https://www.linkedin.com/in/primtraisorat" rel="me">LinkedIn</a></li></ul>
+</div></footer>
+<script>
+(function () {
+  var b = document.querySelector('.menu-btn'), l = document.getElementById('nav-list');
+  b.addEventListener('click', function () { var o = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', o); document.documentElement.classList.toggle('menu-open', o); });
+  l.addEventListener('click', function (e) { if (e.target.tagName === 'A') { b.setAttribute('aria-expanded', 'false'); document.documentElement.classList.remove('menu-open'); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && b.getAttribute('aria-expanded') === 'true') { b.setAttribute('aria-expanded', 'false'); document.documentElement.classList.remove('menu-open'); b.focus(); } });
+})();
+</script>
+</body>
+</html>
