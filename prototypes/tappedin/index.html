@@ -25,6 +25,10 @@
   .pop iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: transparent; color-scheme: light; }
   .pop .clip { position: absolute; inset: 0; overflow: hidden; border-radius: var(--r, 25px); }
   .help { color: #8a8a8a; }
+  /* index.html?embed (the portfolio): just the screens, no bar */
+  .embed { --bar: 0px; }
+  .embed .bar { display: none; }
+  .embed .stage { overflow: hidden; }
   @media (max-width: 1000px) { .help { display: none; } }
   @media (max-width: 700px) { .where { display: none; } }
 </style></head>
@@ -63,6 +67,7 @@ var main = document.getElementById('main'), over = document.getElementById('over
     shade = document.getElementById('shade'), stage = document.getElementById('stage'),
     jump = document.getElementById('jump'), where = document.getElementById('where');
 var base = START, overlay = null, embedded = window.top !== window;
+if (/[?&]embed\b/.test(location.search)) document.documentElement.classList.add('embed');
 /* Load a screen into a frame. Embedded, replace instead of adding history, so the page's back button still leaves the page. */
 function load(el, url) {
   if (embedded && el.contentWindow) { el.contentWindow.location.replace(new URL(url, location.href).href); }
@@ -76,6 +81,7 @@ Object.keys(SCREENS).forEach(function (k) {
 function fit() {
   /* The frame is at most the window's height; a taller screen scrolls inside it, so its nav can stay pinned. */
   var s = SCREENS[base], w = stage.clientWidth, scale = Math.min(1, w / s[1]), h = Math.min(s[2], stage.clientHeight / scale);
+  if (s[2] - h < 3) h = s[2];  // rounding: a screen that just fits shouldn't scroll by a pixel
   main.style.width = s[1] + 'px'; main.style.height = h + 'px'; main.style.transform = 'scale(' + scale + ')';
   frame.style.width = s[1] * scale + 'px'; frame.style.height = h * scale + 'px';
   if (overlay) {
