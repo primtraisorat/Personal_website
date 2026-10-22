@@ -60,7 +60,7 @@
   document.getElementById('cat').textContent = e.cat;
   document.title = 'TappedIn · ' + e.name;
   var rest = EVENTS.map(function (x, j) { return j; }).filter(function (j) { return j !== i; });
-  rest.sort(function (a, b) { return (EVENTS[b].cat === e.cat) - (EVENTS[a].cat === e.cat) || ((a * 7 + i) % 16) - ((b * 7 + i) % 16); });
+  rest.sort(function (a, b) { return (EVENTS[b].cat === e.cat) - (EVENTS[a].cat === e.cat) || ((a * 7 + i) % EVENTS.length) - ((b * 7 + i) % EVENTS.length); });
   document.getElementById('rec').innerHTML = rest.slice(0, 3).map(function (j) { return eventCard(j); }).join('');
 })();
 </script>
