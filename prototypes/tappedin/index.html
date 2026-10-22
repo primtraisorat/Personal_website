@@ -25,7 +25,8 @@
   .pop iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: transparent; color-scheme: light; }
   .pop .clip { position: absolute; inset: 0; overflow: hidden; border-radius: var(--r, 25px); }
   .help { color: #8a8a8a; }
-  @media (max-width: 700px) { .help, .where { display: none; } }
+  @media (max-width: 1000px) { .help { display: none; } }
+  @media (max-width: 700px) { .where { display: none; } }
 </style></head>
 <body>
 <div class="bar">
@@ -61,7 +62,12 @@ var main = document.getElementById('main'), over = document.getElementById('over
     frame = document.getElementById('frame'), pop = document.getElementById('pop'),
     shade = document.getElementById('shade'), stage = document.getElementById('stage'),
     jump = document.getElementById('jump'), where = document.getElementById('where');
-var base = START, overlay = null;
+var base = START, overlay = null, embedded = window.top !== window;
+/* Load a screen into a frame. Embedded, replace instead of adding history, so the page's back button still leaves the page. */
+function load(el, url) {
+  if (embedded && el.contentWindow) { el.contentWindow.location.replace(new URL(url, location.href).href); }
+  else el.src = url;
+}
 
 Object.keys(SCREENS).forEach(function (k) {
   var o = document.createElement('option'); o.value = k; o.textContent = SCREENS[k][0]; jump.appendChild(o);
@@ -84,12 +90,12 @@ function show(target, push) {
   if (!SCREENS[name]) return;
   if (SCREENS[name][3]) { open(name, extra, push); return; }
   close(true);
-  base = name; main.src = 'screens/' + name + '.html' + extra; stage.scrollTop = 0;
+  base = name; load(main, 'screens/' + name + '.html' + extra); stage.scrollTop = 0;
   sync(push);
 }
 function open(name, extra, push) {
   if (!main.src) { main.src = 'screens/' + base + '.html'; }
-  overlay = name; over.src = 'screens/' + name + '.html' + (extra || ''); shade.classList.add('open');
+  overlay = name; load(over, 'screens/' + name + '.html' + (extra || '')); shade.classList.add('open');
   pop.style.setProperty('--r', SCREENS[name][3] + 'px'); sync(push);
 }
 function close(quiet) {
@@ -99,7 +105,8 @@ function close(quiet) {
 }
 function sync(push) {
   var key = overlay ? base + '+' + overlay : base;
-  if (push && location.hash.slice(1) !== key) history.pushState(null, '', '#' + key);
+  // Embedded in a page (the portfolio), keep the page's back button for the page: swap the hash instead of adding history.
+  if (push && location.hash.slice(1) !== key) { if (window.top === window) history.pushState(null, '', '#' + key); else history.replaceState(null, '', '#' + key); }
   jump.value = overlay || base;
   where.textContent = SCREENS[overlay || base][0];
   fit();
