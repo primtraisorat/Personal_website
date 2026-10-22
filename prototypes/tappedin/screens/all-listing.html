@@ -4,6 +4,9 @@
 <style>
 .screen { width: 1441px; height: 2012px; }
 .blob { left: -33px; top: 760px; width: 1494px; height: 1027px; opacity: .9; pointer-events: none; }
+/* In the player the page scrolls under a fixed backdrop: the gradient and orange glow sit where they do on the search page. */
+body:not(.solo) .screen { background-attachment: fixed; }
+body:not(.solo) .blob { position: fixed; left: 0; top: auto; bottom: 0; width: 1440px; height: 738px; opacity: 1; }
 .row { position: absolute; left: 65px; width: 1313px; }
 .rh { display: flex; justify-content: space-between; align-items: center; height: 30px; margin-bottom: 30px; }
 .rh h2 { font-weight: 700; font-size: 30px; color: #030303; }
