@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>TappedIn · Sign in</title>
+<link rel="stylesheet" href="tappedin.css">
+<style>
+.screen { width: 725px; height: 710px; }
+.screen { background: none; }
+</style></head>
+<body><div class="screen " aria-label="TappedIn pop-up: sign in with email or Google">
+<div class="pop">
+<form class="pop-form">
+  <p class="pop-title">Sign In</p>
+  <div class="fields"><label class="field"><span>Email Address</span><input type="email" placeholder="Enter your email..."></label><label class="field"><span>Password</span><input type="password" placeholder="Enter your password..."></label>
+    <button class="btn-black" data-go="landing" style="padding:12px;font-weight:500;font-size:16px">Sign In</button></div>
+  <div class="or">OR</div>
+  <button class="btn-black" data-go="landing" style="width:434px;height:58px;font:400 24px Inter,sans-serif"><span class="g"></span>Sign in with Google</button>
+</form></div>
+</div><script src="proto.js"></script>
+<script>document.querySelector("form").addEventListener("submit", function (e) { e.preventDefault(); this.querySelector(".btn-black").click(); });</script>
+</body></html>

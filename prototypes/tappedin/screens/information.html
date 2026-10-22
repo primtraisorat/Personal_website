@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>TappedIn · Let’s get started</title>
+<link rel="stylesheet" href="tappedin.css">
+<style>
+.screen { width: 725px; height: 710px; }
+.screen { background: none; }
+</style></head>
+<body><div class="screen " aria-label="TappedIn sign-up: username, date of birth and gender">
+<div class="pop">
+<form class="pop-form">
+  <p class="pop-title">Lets Get Started</p>
+  <div class="fields">
+    <label class="field"><span>Username</span><input placeholder="Create a Username" style="width:auto"></label>
+    <div class="field"><span>Date of Birth</span><div style="display:flex;gap:10px"><label class="field" style="width:auto"><select class="sel" aria-label="Month" style="appearance:none;-webkit-appearance:none;padding-right:28px;background:#eeeeef url(&quot;data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2716%27 height=%2716%27 fill=%27none%27 stroke=%27%23898989%27 stroke-width=%272%27%3E%3Cpath d=%27M4 6l4 4 4-4%27/%3E%3C/svg%3E&quot;) no-repeat right 8px center;color:#898989;width:auto;border:0;border-radius:30px;font-weight:500;font-size:16px"><option>Month</option></select></label><label class="field" style="width:auto"><select class="sel" aria-label="Day" style="appearance:none;-webkit-appearance:none;padding-right:28px;background:#eeeeef url(&quot;data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2716%27 height=%2716%27 fill=%27none%27 stroke=%27%23898989%27 stroke-width=%272%27%3E%3Cpath d=%27M4 6l4 4 4-4%27/%3E%3C/svg%3E&quot;) no-repeat right 8px center;color:#898989;width:auto;border:0;border-radius:30px;font-weight:500;font-size:16px"><option>Day</option></select></label><label class="field" style="width:auto"><select class="sel" aria-label="Year" style="appearance:none;-webkit-appearance:none;padding-right:28px;background:#eeeeef url(&quot;data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2716%27 height=%2716%27 fill=%27none%27 stroke=%27%23898989%27 stroke-width=%272%27%3E%3Cpath d=%27M4 6l4 4 4-4%27/%3E%3C/svg%3E&quot;) no-repeat right 8px center;color:#898989;width:auto;border:0;border-radius:30px;font-weight:500;font-size:16px"><option>Year</option></select></label></div></div>
+    <label class="field"><span>Gender</span><input placeholder="Enter your gender" style="width:auto"></label>
+  </div>
+  <button class="btn-black" data-overlay="interests" style="width:434px;height:58px;font:400 24px Inter,sans-serif">Continue</button>
+</form></div>
+</div><script src="proto.js"></script>
+<script>document.querySelector("form").addEventListener("submit", function (e) { e.preventDefault(); this.querySelector(".btn-black").click(); });</script>
+</body></html>

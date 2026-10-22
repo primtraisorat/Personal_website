@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TappedIn prototype</title>
+<style>
+  /* Dark presentation shell around the light app screens, like Figma's prototype viewer. */
+  :root { --bar: 44px; --shell: #1e1e1e; --bar-bg: #2c2c2c; --ink: #e5e5e5; --muted: #a3a3a3; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--shell); color: var(--ink); font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden; }
+  .bar { height: var(--bar); display: flex; align-items: center; gap: 12px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); background: var(--bar-bg); border-bottom: 1px solid #000; }
+  .bar b { font-weight: 600; }
+  .bar .where { color: #a3a3a3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bar .sp { flex: 1; }
+  .bar button, .bar select { font: inherit; color: inherit; background: #3a3a3a; border: 1px solid #4a4a4a; border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+  .bar button:hover, .bar select:hover { background: #454545; }
+  .stage { position: absolute; inset: var(--bar) 0 0 0; overflow: auto; }
+  .frame { position: relative; margin: 0 auto; }
+  .frame iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: transparent; }
+  .shade { position: fixed; inset: var(--bar) 0 0 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; }
+  .shade.open { display: flex; }
+  .pop { position: relative; flex: none; }
+  .pop { filter: drop-shadow(0 20px 40px rgba(0,0,0,.35)); }
+  .pop iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: transparent; }
+  .help { color: #8a8a8a; }
+  @media (max-width: 700px) { .help, .where { display: none; } }
+</style></head>
+<body>
+<div class="bar">
+  <b>TappedIn</b><span class="where" id="where"></span><span class="sp"></span>
+  <span class="help">Click anywhere to see what's clickable · Esc closes pop-ups</span>
+  <select id="jump" aria-label="Jump to screen"></select>
+  <button id="restart">Restart</button>
+</div>
+<div class="stage" id="stage"><div class="frame" id="frame"><iframe id="main" title="TappedIn screen"></iframe></div></div>
+<div class="shade" id="shade"><div class="pop" id="pop"><iframe id="over" title="TappedIn pop-up"></iframe></div></div>
+<script>
+/* Screens and how they open. Sizes are the Figma frame sizes. */
+var SCREENS = {
+  'landing':          ['Landing', 1440, 1024],
+  'split-screen':     ['Search results', 1440, 1024],
+  'no-results':       ['No results', 1440, 1024],
+  'all-listing':      ['For You', 1441, 2012],
+  'favorited':        ['Profile · Favorited events', 1441, 1824],
+  'calendar':         ['Profile · Calendar', 1441, 1694],
+  'friends':          ['Profile · Friends', 1441, 1514],
+  'friend-requests':  ['Profile · Friend requests', 1441, 1514],
+  'settings':         ['Profile · Settings', 1441, 1514],
+  'event-details':    ['Event details (pop-up)', 1180, 835, 1],
+  'filters':          ['Filters (pop-up)', 522, 704, 1],
+  'login':            ['Log in or sign up (pop-up)', 725, 710, 1],
+  'create-account':   ['Create account (pop-up)', 725, 710, 1],
+  'sign-in':          ['Sign in (pop-up)', 725, 710, 1],
+  'information':      ['Let’s get started (pop-up)', 725, 710, 1],
+  'interests':        ['Select your interests (pop-up)', 725, 710, 1]
+};
+var START = 'landing';
+var main = document.getElementById('main'), over = document.getElementById('over'),
+    frame = document.getElementById('frame'), pop = document.getElementById('pop'),
+    shade = document.getElementById('shade'), stage = document.getElementById('stage'),
+    jump = document.getElementById('jump'), where = document.getElementById('where');
+var base = START, overlay = null;
+
+Object.keys(SCREENS).forEach(function (k) {
+  var o = document.createElement('option'); o.value = k; o.textContent = SCREENS[k][0]; jump.appendChild(o);
+});
+
+function fit() {
+  var s = SCREENS[base], w = stage.clientWidth, scale = Math.min(1, w / s[1]);
+  main.style.width = s[1] + 'px'; main.style.height = s[2] + 'px'; main.style.transform = 'scale(' + scale + ')';
+  frame.style.width = s[1] * scale + 'px'; frame.style.height = s[2] * scale + 'px';
+  if (overlay) {
+    var o = SCREENS[overlay], os = Math.min(1, (shade.clientWidth - 32) / o[1], (shade.clientHeight - 32) / o[2]);
+    over.style.width = o[1] + 'px'; over.style.height = o[2] + 'px'; over.style.transform = 'scale(' + os + ')';
+    pop.style.width = o[1] * os + 'px'; pop.style.height = o[2] * os + 'px';
+  }
+}
+function show(name, push) {
+  if (!SCREENS[name]) return;
+  if (SCREENS[name][3]) { open(name, push); return; }
+  close(true);
+  if (name !== base || !main.src) { base = name; main.src = 'screens/' + name + '.html'; stage.scrollTop = 0; }
+  sync(push);
+}
+function open(name, push) {
+  if (!SCREENS[base] || !main.src) { main.src = 'screens/' + base + '.html'; }
+  overlay = name; over.src = 'screens/' + name + '.html'; shade.classList.add('open'); sync(push);
+}
+function close(quiet) {
+  if (!overlay) return;
+  overlay = null; shade.classList.remove('open'); over.removeAttribute('src');
+  if (!quiet) sync(true);
+}
+function sync(push) {
+  var key = overlay ? base + '+' + overlay : base;
+  if (push && location.hash.slice(1) !== key) history.pushState(null, '', '#' + key);
+  jump.value = overlay || base;
+  where.textContent = SCREENS[overlay || base][0];
+  fit();
+}
+function fromHash() {
+  var h = location.hash.slice(1).split('+');
+  base = SCREENS[h[0]] && !SCREENS[h[0]][3] ? h[0] : START;
+  main.src = 'screens/' + base + '.html';
+  if (h[1] && SCREENS[h[1]]) open(h[1], false); else { close(true); sync(false); }
+}
+
+addEventListener('message', function (e) {
+  var m = e.data; if (!m || !m.tappedin) return;
+  if (m.size) {  // a screen can grow (Settings opens its fields), so take its real size
+    var s = SCREENS[m.from]; if (s && (s[1] !== m.size[0] || s[2] !== m.size[1])) { s[1] = m.size[0]; s[2] = m.size[1]; fit(); }
+    return;
+  }
+  if (m.go) show(m.go, true);
+  else if (m.overlay) show(m.overlay, true);
+  else if (m.close) close();
+});
+shade.addEventListener('click', function (e) { if (e.target === shade) close(); });
+addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+addEventListener('popstate', fromHash);
+addEventListener('resize', fit);
+jump.addEventListener('change', function () { show(jump.value, true); });
+document.getElementById('restart').addEventListener('click', function () { show(START, true); });
+fromHash();
+</script>
+</body></html>

@@ -1,0 +1,84 @@
+/* TappedIn prototype screens, rebuilt from the hi-fi Figma frames. Each screen is laid out at its Figma frame size;
+   the player (../index.html) scales it to fit the window. */
+@font-face { font-family: "Geist"; src: url("fonts/Geist-Variable.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("fonts/Inter-Variable.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Quicksand"; src: url("fonts/Quicksand-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+html { background: transparent; }
+body { font-family: "Geist", system-ui, sans-serif; color: #000; -webkit-font-smoothing: antialiased; }
+p, h1, h2 { margin: 0; }
+button, input { font: inherit; color: inherit; }
+button { border: 0; padding: 0; background: none; cursor: pointer; text-align: inherit; }
+img { display: block; }
+.abs { position: absolute; }
+.screen { position: relative; overflow: hidden; }
+/* Opened on its own (outside the player), a screen sits centered on a soft backdrop. */
+body.solo { background: #ecebe7; min-height: 100vh; display: grid; place-items: center; padding: 40px; }
+body.solo .screen { box-shadow: 0 10px 40px rgba(0,0,0,.12); }
+
+/* Anything that leads somewhere. Clicking a dead spot flashes these, like Figma's hotspot hints. */
+[data-go], [data-overlay], [data-close], [data-toggle] { cursor: pointer; }
+.hint [data-go], .hint [data-overlay], .hint [data-close] { outline: 3px solid rgba(37, 99, 235, .55); outline-offset: 2px; }
+:focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; }
+
+/* Shared pieces: background, nav, chips, search, event card */
+.ti-bg { background: linear-gradient(170.95deg, #fff 9.15%, #fff4eb 88.61%, #ffd79b 108.47%), #fff; }
+.ti-bg-plain { background: linear-gradient(170.95deg, #fff 9.15%, #fff4eb 88.61%), #fff; }
+.ti-nav { position: absolute; left: 0; top: 0; width: 1440px; height: 95px; padding: 20px 65px; display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,.45); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); z-index: 5; }
+.ti-brand { display: flex; align-items: center; gap: 10px; font: 700 21px/22px "Inter", sans-serif; }
+.ti-brand img { width: 44px; height: 37px; }
+.ti-nav-right { display: flex; align-items: center; gap: 21px; }
+.ti-pill-black { height: 43px; width: 121px; border-radius: 70px; background: #000; color: #fff; font-weight: 500; font-size: 20px; display: grid; place-items: center; }
+.ti-avatar { width: 55px; height: 55px; border-radius: 50%; }
+.ti-chip { height: 34px; padding: 0 20px; border-radius: 46px; background: #fff; box-shadow: 0 4px 15px -10px rgba(46,36,7,.25); font-weight: 500; font-size: 16px; display: inline-flex; align-items: center; white-space: nowrap; }
+.ti-chip:hover { background: #fce6bd; }
+.ti-card { position: relative; display: block; width: 304px; height: 307px; border-radius: 20px; background: linear-gradient(to bottom, rgba(255,255,255,.7), #fff); box-shadow: 1px 1px 5px rgba(46,36,7,.11); flex: none; transition: transform .15s, box-shadow .15s; }
+.ti-card:hover { transform: translateY(-3px); box-shadow: 2px 6px 16px rgba(46,36,7,.16); }
+.ti-card > img { position: absolute; left: 12px; top: 12px; width: 280px; height: 197px; border-radius: 15px; object-fit: cover; }
+.ti-card-body { position: absolute; left: 12px; top: 218px; width: 280px; }
+.ti-card-title { display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 21px; }
+.ti-match { width: 38px; height: 38px; border-radius: 50%; background: #ff5656; color: #fff; font-weight: 700; font-size: 14px; display: grid; place-items: center; }
+.ti-card-meta { margin-top: 1px; color: #5c5d6b; font-size: 15px; line-height: 1.2; display: grid; gap: 4px; }
+.ti-heart { position: absolute; left: 256px; top: 22px; width: 28px; height: 28px; z-index: 1; }
+.ti-heart svg { width: 28px; height: 28px; fill: none; stroke: #fff; stroke-width: 2; }
+.ti-heart[aria-pressed="true"] svg { fill: #ff5656; stroke: #ff5656; }
+
+/* Profile pages share a header, tab row and left column */
+.pf-hero { left: 64px; top: 152px; width: 1313px; height: 323px; border-radius: 30px; background: rgba(251,192,129,.15); box-shadow: inset 0 0 90px rgba(234,119,128,.2); }
+.pf-who { left: 176px; top: 221px; display: flex; gap: 36px; align-items: center; }
+.pf-who h1 { font: 700 45px "Inter", sans-serif; }
+.pf-stats { margin-top: 10px; display: flex; gap: 30px; font: 400 20px "Inter", sans-serif; }
+.pf-add { margin-top: 30px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 15px; border-radius: 39px; background: #000; color: #fff; font: 400 16px/19.6px "Inter", sans-serif; }
+.pf-tabs { left: 64px; top: 524px; display: flex; gap: 10px; font: 400 13.7px/19.6px "Inter", sans-serif; }
+.pf-tabs button { padding: 5px 15px; border-radius: 30px; }
+.pf-tabs button:hover { background: #f8e6e8; }
+.pf-tabs .on, .pf-tabs .on:hover { background: #f4d6d9; color: #ea7780; cursor: default; }
+.pf-rule { left: 64px; top: 579px; width: 1311px; height: 1px; background: #e0ccab; }
+.pf-vrule { left: 352.8px; top: 580px; width: 1px; height: 872px; background: #e0ccab; }
+.pf-side { left: 80px; top: 637px; width: 216px; display: grid; gap: 36px; font-family: "Inter", sans-serif; }
+.pf-side b { display: block; font-size: 20px; line-height: 31px; }
+.pf-side span { font-size: 14px; }
+.pf-side button.on b { color: #ea7780; }
+.pf-person { display: flex; align-items: center; justify-content: space-between; width: 862px; font-family: "Inter", sans-serif; }
+.pf-person > span { display: flex; align-items: center; gap: 30px; font-size: 16px; }
+.pf-person i { width: 63px; height: 63px; border-radius: 50%; background: #d9d9d9; }
+.pf-btn { padding: 10px 15px; border-radius: 39px; background: #000; color: #fff; font: 400 16px/19.6px "Inter", sans-serif; }
+.pf-btn.ghost { background: none; color: #000; }
+
+/* Sign-up and sign-in pop-ups */
+.pop { width: 725px; height: 710px; border-radius: 25px; background: linear-gradient(167.63deg, #fff 9.15%, #fff4eb 88.61%), #fff; }
+.pop-form { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 40px; }
+.pop-title { font-weight: 700; font-size: 40px; white-space: nowrap; }
+.fields { width: 434px; display: flex; flex-direction: column; gap: 16px; }
+.field { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.field > span { color: #303030; font-weight: 500; font-size: 20px; }
+.field input, .field .sel { width: 100%; border: 0; border-radius: 30px; background: #eeeeef; padding: 8px; font-weight: 500; font-size: 16px; color: #303030; }
+.field input::placeholder { color: #898989; }
+.field input:focus { outline: 2px solid #ff5656; }
+.btn-black { width: 100%; border-radius: 30px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 9px rgba(0,0,0,.25); }
+.btn-black:hover { background: #222; }
+.or { width: 609px; display: flex; align-items: center; justify-content: center; gap: 32.76px; padding: 11px 82px; color: #7e7e7e; font-weight: 500; font-size: 20px; }
+.or::before, .or::after { content: ""; width: 260px; height: 1px; background: #d9d9d9; }
+.g { width: 30px; height: 30px; border-radius: 50%; background: #eeeeef; }

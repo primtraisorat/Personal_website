@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>TappedIn · Select your interests</title>
+<link rel="stylesheet" href="tappedin.css">
+<style>
+.screen { width: 725px; height: 710px; }
+
+.screen { border-radius: 25px; background: linear-gradient(167.63deg, #fff 9.15%, #fff4eb 88.61%), #fff; }
+.title { left: 0; right: 0; top: 44px; text-align: center; font-weight: 700; font-size: 40px; }
+.grid { left: 126px; top: 113px; display: grid; grid-template-columns: repeat(3, 151px); gap: 10px; }
+.tile { position: relative; height: 151px; border-radius: 16px; background: #f8f4f0; }
+.tile[aria-pressed="true"] { box-shadow: inset 0 0 20px #ff5656; }
+.tile img { position: absolute; left: 30px; }
+.tile span { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; font-weight: 500; font-size: 20px; line-height: 1.2; }
+.tile:nth-child(2) span { bottom: 6px; }
+.go { left: 126px; top: 616px; width: 473px; height: 58px; border-radius: 30px; background: #000; color: #fff; display: grid; place-items: center; font: 400 24px "Inter", sans-serif; box-shadow: 0 4px 9px rgba(0,0,0,.25); }
+.tile { cursor: pointer; }
+.tile:hover { background: #f3ece4; }
+</style></head>
+<body><div class="screen " aria-label="TappedIn onboarding: pick interests so recommendations are personal from the first search">
+<p class="abs title">Select your Interests</p>
+<div class="abs grid"><div class="tile" data-toggle aria-pressed="true"><img src="assets/ti-int-0.webp" alt="" width="91" height="90" style="top:14px"><span>Culture</span></div><div class="tile" data-toggle aria-pressed="false"><img src="assets/ti-int-1.webp" alt="" width="91" height="90" style="top:4px"><span>Food &amp;<br>Drink</span></div><div class="tile" data-toggle aria-pressed="false"><img src="assets/ti-int-2.webp" alt="" width="91" height="90" style="top:14px"><span>Wellness</span></div><div class="tile" data-toggle aria-pressed="false"><img src="assets/ti-int-3.webp" alt="" width="91" height="90" style="top:14px"><span>Sports</span></div><div class="tile" data-toggle aria-pressed="false"><img src="assets/ti-int-4.webp" alt="" width="91" height="90" style="top:14px"><span>Nightlife</span></div><div class="tile" data-toggle aria-pressed="false"><img src="assets/ti-int-5.webp" alt="" width="91" height="90" style="top:14px"><span>Networking</span></div><div class="tile" data-toggle aria-pressed="false"><img src="assets/ti-int-6.webp" alt="" width="91" height="90" style="top:14px"><span>Music</span></div><div class="tile" data-toggle aria-pressed="false"><img src="assets/ti-int-7.webp" alt="" width="91" height="90" style="top:14px"><span>Dates</span></div><div class="tile" data-toggle aria-pressed="false"><img src="assets/ti-int-8.webp" alt="" width="91" height="90" style="top:14px"><span>Crafts</span></div></div>
+<button class="abs go" data-go="landing">Continue</button>
+</div><script src="proto.js"></script>
+</body></html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>TappedIn · Profile · Friends</title>
+<link rel="stylesheet" href="tappedin.css">
+<style>
+.screen { width: 1441px; height: 1514px; }
+.screen { background: linear-gradient(166.76deg, #fff 9.15%, #fff4eb 88.61%), #fff; }
+.ti-nav { left: 1px; }
+.pf-add[aria-pressed="true"] { background: #ea7780; }
+
+.search { left: 311px; top: 475px; width: 862px; height: 55px; border-radius: 100px; background: #fff; box-shadow: 0 0 15px -9px rgba(46,36,7,.5);
+  display: flex; align-items: center; justify-content: space-between; padding: 10px 15px 10px 10px; }
+.search .q { flex: 1; display: flex; align-items: center; gap: 10px; color: #9596a0; font-weight: 500; font-size: 16px; }
+.search .q img { width: 34px; height: 34px; }
+.search input { flex: 1; border: 0; outline: 0; background: none; font-weight: 500; font-size: 16px; color: #000; }
+.search input::placeholder { color: #9596a0; }
+.now { display: flex; align-items: center; gap: 8px; padding: 10px 15px; border-radius: 43px; background: #f3f4f8; font-size: 14px; }
+.dot { width: 15px; height: 15px; border-radius: 50%; background: #ea7780; display: grid; place-items: center; }
+.dot::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #f24654; }
+
+.fsearch { left: 413px; top: 625px; box-shadow: 1px 1px 5px rgba(46,36,7,.11); }
+.people { left: 413px; top: 719px; display: grid; gap: 30px; }
+.pf-btn.add::after { content: "Add Friend"; }
+.pf-btn.add[aria-pressed="true"] { background: #f4d6d9; color: #ea7780; }
+.pf-btn.add[aria-pressed="true"]::after { content: "Requested"; }
+</style></head>
+<body><div class="screen " aria-label="TappedIn profile: friends list with search and add friend">
+<header class="ti-nav" style="left:1px"><a class="ti-brand" href="#" data-go="landing" style="color:inherit;text-decoration:none"><img src="assets/ti-logo.webp" alt="">TappedIn</a><div class="ti-nav-right"><a class="ti-pill-black" href="#" data-go="split-screen" style="text-decoration:none">Chat</a><a href="#" data-go="favorited" aria-label="Your profile"><img class="ti-avatar" src="assets/ti-avatar.webp" alt=""></a></div></header>
+<div class="abs pf-hero"></div>
+<div class="abs pf-who"><img src="assets/ti-avatar-lg.webp" alt="" width="189" height="185"><div><h1>Username</h1>
+  <div class="pf-stats"><span>Friends</span><span>Upcoming</span><span>xx favorites</span><span>xx attended</span></div>
+  <button class="pf-add" data-toggle aria-pressed="false"><img src="assets/ti-friends.webp" alt="" width="22" height="22">Add Friend</button></div></div>
+<nav class="abs pf-tabs" aria-label="Profile sections"><button data-go="favorited">Favorited Events</button><button data-go="calendar">Calendar</button><button class="on" aria-current="page">Friends</button><button data-go="settings">Settings</button></nav>
+<div class="abs pf-rule"></div>
+<div class="abs pf-vrule"></div>
+<div class="abs pf-side"><button class=on><b>Friends</b><span>20 Connections</span></button><button data-go=friend-requests><b>Friend Request</b><span>1 Request</span></button></div>
+<form class="abs search fsearch" data-search="split-screen"><div class="q"><button type="button" data-overlay="filters" aria-label="Filters"><img src="assets/ti-filter.webp" alt=""></button><input type="search" aria-label="Describe your vibe" placeholder="I want something relaxing for next weekend..."></div><button type="submit" class="now" data-go="split-screen"><span class="dot"></span>Happening Now</button></form>
+<div class="abs people"><div class="pf-person"><span><i></i>Username</span><button class="pf-btn add" data-toggle aria-pressed="false"></button></div><div class="pf-person"><span><i></i>Username</span><button class="pf-btn add" data-toggle aria-pressed="false"></button></div><div class="pf-person"><span><i></i>Username</span><button class="pf-btn add" data-toggle aria-pressed="false"></button></div><div class="pf-person"><span><i></i>Username</span><button class="pf-btn add" data-toggle aria-pressed="false"></button></div><div class="pf-person"><span><i></i>Username</span><button class="pf-btn add" data-toggle aria-pressed="false"></button></div><div class="pf-person"><span><i></i>Username</span><button class="pf-btn add" data-toggle aria-pressed="false"></button></div><div class="pf-person"><span><i></i>Username</span><button class="pf-btn add" data-toggle aria-pressed="false"></button></div><div class="pf-person"><span><i></i>Username</span><button class="pf-btn add" data-toggle aria-pressed="false"></button></div></div>
+</div><script src="proto.js"></script>
+</body></html>

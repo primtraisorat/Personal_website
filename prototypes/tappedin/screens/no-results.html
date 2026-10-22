@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>TappedIn · No results</title>
+<link rel="stylesheet" href="tappedin.css">
+<style>
+.screen { width: 1440px; height: 1024px; }
+.chat { left: 65px; top: 151px; width: 640px; height: 97px; }
+.bubble { position: absolute; padding: 7px 20px; background: #fce6bd; font-weight: 500; font-size: 16px; white-space: nowrap; }
+.b1 { right: 0; top: 0; border-radius: 50px 0 30px 50px; }
+.b2 { left: 0; top: 62px; border-radius: 0 50px 50px 30px; }
+.fade { left: 64px; top: 908px; width: 640px; height: 116px; background: linear-gradient(177.7deg, #fff 9.15%, #fff4eb 88.61%); }
+.sbar { left: 64px; top: 908px; width: 640px; height: 54px; border-radius: 30px; background: #fff; filter: drop-shadow(1px 1px 2.5px rgba(46,36,7,.11));
+  display: flex; align-items: center; justify-content: space-between; padding: 10px 15px 10px 10px; }
+.sbar .q { flex: 1; display: flex; align-items: center; gap: 10px; }
+.sbar .q img { width: 34px; height: 34px; }
+.sbar input { flex: 1; border: 0; outline: 0; background: none; font: 400 16px "Inter", sans-serif; }
+.sbar input::placeholder { color: #747474; }
+.map { left: 736px; top: 151px; width: 640px; height: 811px; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 5px rgba(0,0,0,.25); }
+
+.chat { height: 255px; }
+.b2 { background: none; padding-left: 0; font-size: 20px; }
+.b3 { left: 0; top: 112px; border-radius: 0 50px 50px 30px; }
+.b4 { left: 0; top: 157px; border-radius: 0 50px 50px 30px; }
+.foryou { position: absolute; left: 0; top: 202px; text-decoration: none; }
+.map { left: 736px; }
+</style></head>
+<body><div class="screen ti-bg-plain" aria-label="TappedIn no results: suggestions to change filters or see picks For You">
+<header class="ti-nav"><a class="ti-brand" href="#" data-go="landing" style="color:inherit;text-decoration:none"><img src="assets/ti-logo.webp" alt="">TappedIn</a><div class="ti-nav-right"><a class="ti-pill-black" href="#" data-go="all-listing" style="text-decoration:none">For You</a><a href="#" data-go="favorited" aria-label="Your profile"><img class="ti-avatar" src="assets/ti-avatar.webp" alt=""></a></div></header>
+<div class="abs chat"><span class="bubble b1">I want something chill and fun</span><span class="bubble b2">There are no exact matches for your search</span>
+  <button class="bubble b3" data-overlay="filters">Try changing or removing some of your filters</button>
+  <span class="bubble b4">Or check out what we picked out just For You</span>
+  <a class="ti-pill-black foryou" href="#" data-go="all-listing">For You</a></div>
+<form class="abs sbar" data-search="split-screen" style="left:80px;top:900px"><div class="q"><button type="button" data-overlay="filters" aria-label="Filters"><img src="assets/ti-filter.webp" alt=""></button><input type="search" aria-label="Describe your vibe" placeholder="I want something relaxing for next weekend..."></div><button type="submit" data-go="split-screen" aria-label="Search"><img src="assets/ti-search.webp" alt="" width="24" height="24"></button></form>
+<div class="abs map"><img src="assets/ti-map-campus.webp" alt="Map of the UCLA campus" width="640" height="811"></div>
+</div><script src="proto.js"></script>
+</body></html>
