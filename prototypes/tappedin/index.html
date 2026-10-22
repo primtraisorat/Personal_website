@@ -68,9 +68,10 @@ Object.keys(SCREENS).forEach(function (k) {
 });
 
 function fit() {
-  var s = SCREENS[base], w = stage.clientWidth, scale = Math.min(1, w / s[1]);
-  main.style.width = s[1] + 'px'; main.style.height = s[2] + 'px'; main.style.transform = 'scale(' + scale + ')';
-  frame.style.width = s[1] * scale + 'px'; frame.style.height = s[2] * scale + 'px';
+  /* The frame is at most the window's height; a taller screen scrolls inside it, so its nav can stay pinned. */
+  var s = SCREENS[base], w = stage.clientWidth, scale = Math.min(1, w / s[1]), h = Math.min(s[2], stage.clientHeight / scale);
+  main.style.width = s[1] + 'px'; main.style.height = h + 'px'; main.style.transform = 'scale(' + scale + ')';
+  frame.style.width = s[1] * scale + 'px'; frame.style.height = h * scale + 'px';
   if (overlay) {
     var o = SCREENS[overlay], os = Math.min(1, (shade.clientWidth - 32) / o[1], (shade.clientHeight - 32) / o[2]);
     over.style.width = o[1] + 'px'; over.style.height = o[2] + 'px'; over.style.transform = 'scale(' + os + ')';

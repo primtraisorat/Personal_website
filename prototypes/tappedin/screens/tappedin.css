@@ -56,7 +56,9 @@ body.solo .screen { box-shadow: 0 10px 40px rgba(0,0,0,.12); }
 .pf-hero { left: 64px; top: 152px; width: 1313px; height: 323px; border-radius: 30px; background: rgba(251,192,129,.15); box-shadow: inset 0 0 90px rgba(234,119,128,.2); }
 .pf-who { left: 176px; top: 221px; display: flex; gap: 36px; align-items: center; }
 .pf-who h1 { font: 700 45px "Inter", sans-serif; }
+.pf-handle { margin-top: 6px; color: #5c5d6b; font: 400 16px "Inter", sans-serif; }
 .pf-stats { margin-top: 10px; display: flex; gap: 30px; font: 400 20px "Inter", sans-serif; }
+.pf-stats b { font-weight: 700; }
 .pf-add { margin-top: 30px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 15px; border-radius: 39px; background: #000; color: #fff; font: 400 16px/19.6px "Inter", sans-serif; }
 /* Tab button component: plain, hover #d9d9d9, pressed #aaa; the current tab stays pink like the Figma screens */
 .pf-tabs { left: 64px; top: 524px; display: flex; gap: 10px; font: 500 16px "Geist", sans-serif; }
@@ -72,7 +74,7 @@ body.solo .screen { box-shadow: 0 10px 40px rgba(0,0,0,.12); }
 .pf-side button.on b { color: #ea7780; }
 .pf-person { display: flex; align-items: center; justify-content: space-between; width: 862px; font-family: "Inter", sans-serif; }
 .pf-person > span { display: flex; align-items: center; gap: 30px; font-size: 16px; }
-.pf-person i { width: 63px; height: 63px; border-radius: 50%; background: #d9d9d9; }
+.pf-person i { width: 63px; height: 63px; border-radius: 50%; background: #f4d6d9; color: #ea7780; font: normal 600 20px "Inter", sans-serif; display: grid; place-items: center; }
 .pf-btn { padding: 10px 15px; border-radius: 39px; background: #000; color: #fff; font: 400 16px/19.6px "Inter", sans-serif; }
 .pf-btn.ghost { background: none; color: #000; }
 
@@ -91,3 +93,11 @@ body.solo .screen { box-shadow: 0 10px 40px rgba(0,0,0,.12); }
 .or { width: 609px; display: flex; align-items: center; justify-content: center; gap: 32.76px; padding: 11px 82px; color: #7e7e7e; font-weight: 500; font-size: 20px; }
 .or::before, .or::after { content: ""; width: 260px; height: 1px; background: #d9d9d9; }
 .g { width: 30px; height: 30px; border-radius: 50%; background: #eeeeef; }
+
+/* Sticky header. In the player each screen scrolls inside its own frame, so these stay put while the page scrolls:
+   the nav on every page, and on profile pages the profile box and tab row under it (over a cover that hides what scrolls beneath). */
+body:not(.solo) .ti-nav { position: fixed; }
+.pf-cover { display: none; }
+body:not(.solo) .pf-cover { display: block; position: fixed; left: 0; top: 0; width: 1441px; height: 580px; z-index: 3;
+  background: linear-gradient(180deg, #fff 0%, #fffaf5 100%); }
+body:not(.solo) .pf-hero, body:not(.solo) .pf-who, body:not(.solo) .pf-tabs, body:not(.solo) .pf-rule { position: fixed; z-index: 4; }
