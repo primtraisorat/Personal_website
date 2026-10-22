@@ -19,12 +19,42 @@
 .hero p { margin-top: 15px; color: #9596a0; font-weight: 500; font-size: 20px; }
 .chips { left: 0; right: 0; top: 573px; display: grid; justify-items: center; gap: 20px; }
 .chips div { display: flex; gap: 10px; }
+/* Picked moods sit in the search bar, 10px apart like the rows below */
+.search .q { min-width: 0; }
+.picked { display: flex; gap: 10px; flex: none; max-width: 560px; overflow-x: auto; scrollbar-width: none; }
+.picked:empty { display: none; }
+.picked .ti-chip { height: 34px; background: #f4d6d9; box-shadow: none; gap: 8px; padding: 0 12px 0 20px; }
+.picked .ti-chip::after { content: "\00d7"; font-size: 18px; line-height: 1; color: #ea7780; }
+.picked .ti-chip:hover { background: #efc4c8; }
+.search input { min-width: 120px; }
 </style></head>
 <body><div class="screen ti-bg" aria-label="TappedIn landing page: an AI search bar with mood prompts">
 <img class="abs blob" src="assets/ti-blob.webp" alt="">
 <header class="ti-nav"><a class="ti-brand" href="#" data-go="landing" style="color:inherit;text-decoration:none"><img src="assets/ti-logo.webp" alt="">TappedIn</a><div class="ti-nav-right"><a class="ti-pill-black" href="#" data-go="all-listing" style="text-decoration:none">For You</a><a href="#" data-overlay="login" aria-label="Your profile"><img class="ti-avatar" src="assets/ti-avatar.webp" alt=""></a></div></header>
 <div class="abs hero"><h1>Search for events based your vibe</h1><p>Type your vibe to discover events tailored just for you.</p></div>
 <form class="abs search" data-search="split-screen"><div class="q"><button type="button" data-overlay="filters" aria-label="Filters"><img src="assets/ti-filter.webp" alt=""></button><input type="search" aria-label="Describe your vibe" placeholder="I want something relaxing for next weekend..."></div><button type="submit" class="now" data-go="split-screen"><span class="dot"></span>Happening Now</button></form>
-<div class="abs chips"><div><button class="ti-chip" data-go="split-screen">Happening Now</button><button class="ti-chip" data-go="split-screen">Chill</button><button class="ti-chip" data-go="split-screen">Hype</button><button class="ti-chip" data-go="split-screen">Adventurous</button><button class="ti-chip" data-go="split-screen">Nightlife</button><button class="ti-chip" data-go="split-screen">Comedy</button></div><div><button class="ti-chip" data-go="split-screen">With Friends</button><button class="ti-chip" data-go="split-screen">Creative</button><button class="ti-chip" data-go="split-screen">Foodie</button><button class="ti-chip" data-go="split-screen">Cozy</button><button class="ti-chip" data-go="split-screen">Date Night</button><button class="ti-chip" data-go="split-screen">Music</button></div></div>
-</div><script src="proto.js"></script>
+<div class="abs chips"><div><button class="ti-chip mood" aria-pressed="false">Happening Now</button><button class="ti-chip mood" aria-pressed="false">Chill</button><button class="ti-chip mood" aria-pressed="false">Hype</button><button class="ti-chip mood" aria-pressed="false">Adventurous</button><button class="ti-chip mood" aria-pressed="false">Nightlife</button><button class="ti-chip mood" aria-pressed="false">Comedy</button></div><div><button class="ti-chip mood" aria-pressed="false">With Friends</button><button class="ti-chip mood" aria-pressed="false">Creative</button><button class="ti-chip mood" aria-pressed="false">Foodie</button><button class="ti-chip mood" aria-pressed="false">Cozy</button><button class="ti-chip mood" aria-pressed="false">Date Night</button><button class="ti-chip mood" aria-pressed="false">Music</button></div></div>
+<script>
+/* Mood pills: clicking one adds it to the search bar (click again, or its x, to take it out). Searching carries the moods to the results. */
+(function () {
+  var form = document.querySelector('form.search'), input = form.querySelector('input'), q = form.querySelector('.q');
+  var picked = document.createElement('div'); picked.className = 'picked'; q.insertBefore(picked, input);
+  function sync() {
+    var on = [].filter.call(document.querySelectorAll('.mood'), function (b) { return b.getAttribute('aria-pressed') === 'true'; });
+    picked.innerHTML = on.map(function (b) { return '<button type="button" class="ti-chip" data-mood="' + b.textContent + '" aria-label="Remove ' + b.textContent + '">' + b.textContent + '</button>'; }).join('');
+    input.placeholder = on.length ? 'Add more about your vibe...' : 'I want something relaxing for next weekend...';
+  }
+  document.addEventListener('click', function (e) {
+    var m = e.target.closest('.mood'), x = e.target.closest('[data-mood]'), go = e.target.closest('form.search [data-go]');
+    if (m) { m.setAttribute('aria-pressed', m.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); sync(); input.focus(); }
+    if (x) { [].forEach.call(document.querySelectorAll('.mood'), function (b) { if (b.textContent === x.getAttribute('data-mood')) b.setAttribute('aria-pressed', 'false'); }); sync(); }
+    if (go) {
+      var words = [].map.call(picked.children, function (b) { return b.textContent.toLowerCase(); });
+      var text = input.value.trim() || (words.length ? 'I want something ' + words.join(', ') : '');
+      go.setAttribute('data-go', 'split-screen' + (text ? '#' + encodeURIComponent(text) : ''));
+    }
+  }, true);
+})();
+</script>
+</div><script src="events.js"></script><script src="proto.js"></script>
 </body></html>

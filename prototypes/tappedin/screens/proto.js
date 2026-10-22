@@ -41,7 +41,8 @@
       else if (ov) send({ overlay: ov });
       else send({ close: true });
     } else if (go || ov) {
-      location.href = (go || ov) + '.html';
+      var t = (go || ov), n = t.split('#')[0];
+      location.href = n + '.html' + t.slice(n.length);
     } else {
       history.back();
     }

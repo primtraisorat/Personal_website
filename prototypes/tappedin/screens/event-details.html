@@ -2,16 +2,18 @@
 <html lang="en"><head><meta charset="utf-8"><title>TappedIn · Event details</title>
 <link rel="stylesheet" href="tappedin.css">
 <style>
-.screen { width: 1180px; height: 835px; }
-
-.screen { border-radius: 16px; }
-.close { right: 20px; top: 20px; }
-.title { left: 83px; top: 77px; width: 585px; display: flex; justify-content: space-between; font-weight: 700; font-size: 30px; }
+.screen { width: 1180px; height: 835px; border-radius: 16px; }
+/* The pop-up keeps the Figma frame size; its content scrolls inside it. */
+.scroll { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #e0ccab transparent; }
+.content { position: relative; height: 1040px; }
+.close { position: absolute; right: 20px; top: 20px; z-index: 3; }
+.title { left: 83px; top: 77px; width: 585px; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-weight: 700; font-size: 30px; }
 .info { left: 83px; top: 135px; display: flex; gap: 23px; }
-.info > div { width: 239px; display: flex; gap: 12px; align-items: center; }
+.info > div { width: 260px; display: flex; gap: 12px; align-items: center; }
 .info b { display: block; font-weight: 500; font-size: 20px; }
 .info span { color: #4f4f4f; font-weight: 500; font-size: 16px; }
 .label { color: #707070; font-weight: 500; font-size: 16px; }
+.chip { display: inline-block; margin-left: 10px; padding: 2px 10px; border-radius: 30px; background: #f4d6d9; color: #ea7780; font-size: 13px; vertical-align: 2px; }
 .about { left: 83px; top: 206px; width: 585px; }
 .about p:last-child { margin-top: 10px; font-weight: 500; font-size: 20px; line-height: 1.3; letter-spacing: -.25px; }
 .org { left: 83px; top: 439px; }
@@ -20,39 +22,48 @@
 .price { left: 704px; top: 437px; font-weight: 500; }
 .price b { display: block; margin-top: 5px; font-weight: 500; font-size: 20px; }
 .tickets { left: 899px; top: 437px; width: 199px; height: 52px; border-radius: 40px; background: #000; color: #fff; font-weight: 700; font-size: 24px; display: grid; place-items: center; box-shadow: 0 4px 9px rgba(0,0,0,.25); }
-.going { left: 704px; top: 504px; width: 394px; display: flex; align-items: center; justify-content: space-between; font-weight: 500; font-size: 20px; }
-.addcal { left: 963px; top: 574px; color: #707070; font-weight: 500; font-size: 16px; }
-.rec { left: 83px; top: 601px; font-weight: 500; font-size: 24px; }
-.recrow { left: 83px; top: 652px; width: 1016px; display: flex; gap: 16px; overflow: hidden; }
-.next { left: 1024px; top: 776px; }
-.fav[aria-pressed="false"] img { filter: grayscale(1) opacity(.35); }
-.tickets[aria-pressed="true"]::after { content: " ✓"; }
-.addcal { text-decoration: none; }
+.tickets[aria-pressed="true"] { background: #ea7780; }
+.tickets[aria-pressed="true"]::after { content: "GOING \2713"; }
+.tickets[aria-pressed="true"] span { display: none; }
+.going { left: 704px; top: 504px; width: 394px; display: flex; align-items: center; justify-content: space-between; font-weight: 500; font-size: 20px; color: inherit; text-decoration: none; }
+.addcal { left: 963px; top: 574px; color: #707070; font-weight: 500; font-size: 16px; text-decoration: none; }
 .addcal:hover { color: #ff5656; }
-.screen { background-clip: padding-box; }
+.fav[aria-pressed="false"] img { filter: grayscale(1) opacity(.35); }
+.rec { left: 83px; top: 615px; font-weight: 500; font-size: 24px; }
+.recrow { left: 83px; top: 666px; display: flex; gap: 32px; }
 </style></head>
 <body><div class="screen ti-bg" aria-label="TappedIn event details: date, location, description, map, tickets, friends going, and recommended events">
-<button class="abs close" data-close aria-label="Close"><img src="assets/ti-close.webp" alt="" width="40" height="40"></button>
-<div class="abs title">Super Fun Event<button data-toggle aria-pressed="true" aria-label="Saved" class="fav"><img src="assets/ti-heart-filled.webp" alt="" width="40" height="40"></button></div>
-<div class="abs info"><div><img src="assets/ti-cal.webp" alt="" width="42" height="50"><p><b>Tuesday, April 21</b><span>6:00pm - 8:00pm</span></p></div>
-  <div><img src="assets/ti-pin.webp" alt="" width="42" height="50"><p><b>123 California Dr</b><span>Westwood, California</span></p></div></div>
-<div class="abs about"><p class="label">About Event</p><p>Description of event... Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu.</p></div>
-<div class="abs org"><p class="label">Organized By</p><div>TappedIn Team<img src="assets/ti-share.webp" alt="" width="164" height="48"></div></div>
-<img class="abs mapimg" src="assets/ti-map-sm.webp" alt="" width="394" height="340">
-<div class="abs price"><p class="label">Price</p><b>From 10.50$</b></div>
-<button class="abs tickets" data-toggle aria-pressed="false">GET TICKETS</button>
-<a class="abs going" href="#" data-go="friends" style="color:inherit;text-decoration:none">See who’s going...<img src="assets/ti-going.webp" alt="" width="222" height="55"></a>
-<a class="abs addcal" href="#" data-go="calendar">+ Add to Calendar</a>
-<p class="abs rec">Recommended Events:</p>
-<div class="abs recrow"><div class="ti-card"><img src="assets/ti-event.webp" alt=""><div class="ti-card-body">
-  <div class="ti-card-title">Event Name<span class="ti-match">97%</span></div>
-  <div class="ti-card-meta"><span>xx:xx-xx:xx | xx/xx/xxxx | $$$</span><span>Westwood, Los Angeles</span></div></div></div><div class="ti-card"><img src="assets/ti-event.webp" alt=""><div class="ti-card-body">
-  <div class="ti-card-title">Event Name<span class="ti-match">97%</span></div>
-  <div class="ti-card-meta"><span>xx:xx-xx:xx | xx/xx/xxxx | $$$</span><span>Westwood, Los Angeles</span></div></div></div><div class="ti-card"><img src="assets/ti-event.webp" alt=""><div class="ti-card-body">
-  <div class="ti-card-title">Event Name<span class="ti-match">97%</span></div>
-  <div class="ti-card-meta"><span>xx:xx-xx:xx | xx/xx/xxxx | $$$</span><span>Westwood, Los Angeles</span></div></div></div><div class="ti-card"><img src="assets/ti-event.webp" alt=""><div class="ti-card-body">
-  <div class="ti-card-title">Event Name<span class="ti-match">97%</span></div>
-  <div class="ti-card-meta"><span>xx:xx-xx:xx | xx/xx/xxxx | $$$</span><span>Westwood, Los Angeles</span></div></div></div></div>
-<img class="abs next" src="assets/ti-next.webp" alt="" width="59" height="59">
-</div><script src="proto.js"></script>
+<button class="close" data-close aria-label="Close"><img src="assets/ti-close.webp" alt="" width="40" height="40"></button>
+<div class="scroll"><div class="content">
+  <div class="abs title"><span id="name">Event</span><button data-toggle aria-pressed="true" aria-label="Saved" class="fav"><img src="assets/ti-heart-filled.webp" alt="" width="40" height="40"></button></div>
+  <div class="abs info"><div><img src="assets/ti-cal.webp" alt="" width="42" height="50"><p><b id="date"></b><span id="time"></span></p></div>
+    <div><img src="assets/ti-pin.webp" alt="" width="42" height="50"><p><b id="addr"></b><span id="area"></span></p></div></div>
+  <div class="abs about"><p class="label">About Event<span class="chip" id="cat"></span></p><p id="about"></p></div>
+  <div class="abs org"><p class="label">Organized By</p><div><span id="org"></span><img src="assets/ti-share.webp" alt="" width="164" height="48"></div></div>
+  <img class="abs mapimg" src="assets/ti-map-sm.webp" alt="" width="394" height="340">
+  <div class="abs price"><p class="label">Price</p><b id="price"></b></div>
+  <button class="abs tickets" data-toggle aria-pressed="false"><span>GET TICKETS</span></button>
+  <a class="abs going" href="#" data-go="friends">See who’s going...<img src="assets/ti-going.webp" alt="" width="222" height="55"></a>
+  <a class="abs addcal" href="#" data-go="calendar">+ Add to Calendar</a>
+  <p class="abs rec">Recommended Events:</p>
+  <div class="abs recrow" id="rec"></div>
+</div></div>
+</div>
+<script src="events.js"></script>
+<script>
+/* Which event: the number after # (event-details.html#3). Recommended: same category first, never the event itself. */
+(function () {
+  var i = parseInt(location.hash.slice(1), 10); if (!(i >= 0 && i < EVENTS.length)) i = 0;
+  var e = EVENTS[i];
+  ['name', 'date', 'time', 'addr', 'area', 'about', 'org', 'price'].forEach(function (k) { document.getElementById(k).textContent = e[k]; });
+  document.getElementById('price').textContent = e.price === 'Free' ? 'Free' : 'From ' + e.price;
+  document.getElementById('cat').textContent = e.cat;
+  document.title = 'TappedIn · ' + e.name;
+  var rest = EVENTS.map(function (x, j) { return j; }).filter(function (j) { return j !== i; });
+  rest.sort(function (a, b) { return (EVENTS[b].cat === e.cat) - (EVENTS[a].cat === e.cat) || ((a * 7 + i) % 16) - ((b * 7 + i) % 16); });
+  document.getElementById('rec').innerHTML = rest.slice(0, 3).map(function (j) { return eventCard(j); }).join('');
+})();
+</script>
+<script>addEventListener('hashchange', function () { location.reload(); });</script>
+<script src="proto.js"></script>
 </body></html>

@@ -33,17 +33,24 @@ body.solo .screen { box-shadow: 0 10px 40px rgba(0,0,0,.12); }
 .ti-pill-black { height: 43px; width: 121px; border-radius: 70px; background: #000; color: #fff; font-weight: 500; font-size: 20px; display: grid; place-items: center; }
 .ti-avatar { width: 55px; height: 55px; border-radius: 50%; }
 .ti-chip { height: 34px; padding: 0 20px; border-radius: 46px; background: #fff; box-shadow: 0 4px 15px -10px rgba(46,36,7,.25); font-weight: 500; font-size: 16px; display: inline-flex; align-items: center; white-space: nowrap; }
-.ti-chip:hover { background: #fce6bd; }
+/* Mood pill component (Figma "Button 1 / Chill"): default white, hover pink, picked red */
+.ti-chip { cursor: pointer; transition: background .12s, color .12s; }
+.ti-chip:hover { background: #f4d6d9; }
+.ti-chip[aria-pressed="true"] { background: #ea7780; color: #fff; }
 .ti-card { position: relative; display: block; width: 304px; height: 307px; border-radius: 20px; background: linear-gradient(to bottom, rgba(255,255,255,.7), #fff); box-shadow: 1px 1px 5px rgba(46,36,7,.11); flex: none; transition: transform .15s, box-shadow .15s; }
 .ti-card:hover { transform: translateY(-3px); box-shadow: 2px 6px 16px rgba(46,36,7,.16); }
 .ti-card > img { position: absolute; left: 12px; top: 12px; width: 280px; height: 197px; border-radius: 15px; object-fit: cover; }
 .ti-card-body { position: absolute; left: 12px; top: 218px; width: 280px; }
-.ti-card-title { display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 21px; }
+.ti-card-title { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 38px; font-weight: 700; font-size: 21px; }
+.ti-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ti-match { flex: none; }
 .ti-match { width: 38px; height: 38px; border-radius: 50%; background: #ff5656; color: #fff; font-weight: 700; font-size: 14px; display: grid; place-items: center; }
 .ti-card-meta { margin-top: 1px; color: #5c5d6b; font-size: 15px; line-height: 1.2; display: grid; gap: 4px; }
 .ti-heart { position: absolute; left: 256px; top: 22px; width: 28px; height: 28px; z-index: 1; }
-.ti-heart svg { width: 28px; height: 28px; fill: none; stroke: #fff; stroke-width: 2; }
-.ti-heart[aria-pressed="true"] svg { fill: #ff5656; stroke: #ff5656; }
+/* Heart component: white outline, fills white when saved */
+.ti-heart svg { width: 28px; height: 28px; fill: none; stroke: #fff; stroke-width: 2; filter: drop-shadow(0 1px 2px rgba(0,0,0,.35)); transition: transform .12s; }
+.ti-heart:hover svg { transform: scale(1.1); }
+.ti-heart[aria-pressed="true"] svg { fill: #fff; }
 
 /* Profile pages share a header, tab row and left column */
 .pf-hero { left: 64px; top: 152px; width: 1313px; height: 323px; border-radius: 30px; background: rgba(251,192,129,.15); box-shadow: inset 0 0 90px rgba(234,119,128,.2); }
@@ -51,9 +58,11 @@ body.solo .screen { box-shadow: 0 10px 40px rgba(0,0,0,.12); }
 .pf-who h1 { font: 700 45px "Inter", sans-serif; }
 .pf-stats { margin-top: 10px; display: flex; gap: 30px; font: 400 20px "Inter", sans-serif; }
 .pf-add { margin-top: 30px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 15px; border-radius: 39px; background: #000; color: #fff; font: 400 16px/19.6px "Inter", sans-serif; }
-.pf-tabs { left: 64px; top: 524px; display: flex; gap: 10px; font: 400 13.7px/19.6px "Inter", sans-serif; }
+/* Tab button component: plain, hover #d9d9d9, pressed #aaa; the current tab stays pink like the Figma screens */
+.pf-tabs { left: 64px; top: 524px; display: flex; gap: 10px; font: 500 16px "Geist", sans-serif; }
 .pf-tabs button { padding: 5px 15px; border-radius: 30px; }
-.pf-tabs button:hover { background: #f8e6e8; }
+.pf-tabs button:hover { background: #d9d9d9; }
+.pf-tabs button:active { background: #aaa; }
 .pf-tabs .on, .pf-tabs .on:hover { background: #f4d6d9; color: #ea7780; cursor: default; }
 .pf-rule { left: 64px; top: 579px; width: 1311px; height: 1px; background: #e0ccab; }
 .pf-vrule { left: 352.8px; top: 580px; width: 1px; height: 872px; background: #e0ccab; }

@@ -26,8 +26,10 @@
 .box:focus-within { outline: 2px solid #ff5656; }
 .save { margin-top: 20px; padding: 10px 30px; border-radius: 100px; background: #000; color: #fff; }
 .ints { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
-.int { height: 34px; padding: 5px 20px; border-radius: 46px; background: #efefef; color: #747474; }
-.int[aria-pressed="true"] { background: #f4d6d9; color: #ea7780; }
+/* Interest chip component (Figma "Button 1 / Cozy"): #efefef, hover #9f9f9f, picked #707070 */
+.int { height: 34px; padding: 5px 20px; border-radius: 46px; background: #efefef; color: #000; font-family: "Inter", sans-serif; transition: background .12s; }
+.int:hover { background: #9f9f9f; }
+.int[aria-pressed="true"] { background: #707070; color: #fff; }
 </style></head>
 <body><div class="screen " aria-label="TappedIn profile: personal information settings with editable fields">
 <header class="ti-nav" style="left:1px"><a class="ti-brand" href="#" data-go="landing" style="color:inherit;text-decoration:none"><img src="assets/ti-logo.webp" alt="">TappedIn</a><div class="ti-nav-right"><a class="ti-pill-black" href="#" data-go="split-screen" style="text-decoration:none">Chat</a><a href="#" data-go="favorited" aria-label="Your profile"><img class="ti-avatar" src="assets/ti-avatar.webp" alt=""></a></div></header>
@@ -40,7 +42,7 @@
 <div class="abs pf-vrule"></div>
 <div class="abs pf-side"><button class="on"><b>Personal Information</b></button></div>
 <div class="abs sets"><div class="set"><div class="sh"><b>Legal name</b><button class="edit" data-edit>Edit</button></div><p class="val">users name</p><div class="form"><div class="boxes"><label class="box"><span>First name</span><input value="Joe" aria-label="First name"></label><label class="box"><span>Last name</span><input value="Bruin" aria-label="Last name"></label></div><button class="save" data-save>Save</button></div></div><div class="set"><div class="sh"><b>Email address</b><button class="edit" data-edit>Edit</button></div><p class="val">users email</p><div class="form"><div class="boxes"><label class="box"><span>Email address</span><input value="" aria-label="Email address"></label></div><button class="save" data-save>Save</button></div></div><div class="set"><div class="sh"><b>Date of birth</b><button class="edit" data-edit>Edit</button></div><p class="val">users dob</p><div class="form"><div class="boxes"><label class="box"><span>Date of birth</span><input value="" aria-label="Date of birth"></label></div><button class="save" data-save>Save</button></div></div><div class="set"><div class="sh"><b>Pronouns</b><button class="edit" data-edit>Edit</button></div><p class="val">users pronouns</p><div class="form"><div class="boxes"><label class="box"><span>Pronouns</span><input value="" aria-label="Pronouns"></label></div><button class="save" data-save>Save</button></div></div><div class="set"><div class="sh"><b>Location</b><button class="edit" data-edit>Edit</button></div><p class="val">users neighborhood</p><div class="form"><div class="boxes"><label class="box"><span>Neighborhood</span><input value="" aria-label="Neighborhood"></label></div><button class="save" data-save>Save</button></div></div><div class="set"><div class="sh"><b>Occupation</b><button class="edit" data-edit>Edit</button></div><p class="val">users occupation</p><div class="form"><div class="boxes"><label class="box"><span>Occupation</span><input value="" aria-label="Occupation"></label></div><button class="save" data-save>Save</button></div></div>
-  <div class="set last"><div class="sh"><b>Interests</b><button class="edit" data-edit>Add</button></div>
+  <div class="set last"><div class="sh"><b>Interests</b><span class="edit">Add</span></div>
   <div class="ints"><button class="int" data-toggle aria-pressed="true">Chill</button><button class="int" data-toggle aria-pressed="true">Hype</button><button class="int" data-toggle aria-pressed="true">Adventurous</button><button class="int" data-toggle aria-pressed="false">Nightlife</button><button class="int" data-toggle aria-pressed="false">Comedy</button><button class="int" data-toggle aria-pressed="false">Music</button><button class="int" data-toggle aria-pressed="false">Date Night</button></div></div></div>
 <script>
 /* Edit opens a field's inputs (Figma's second Settings frame), Save or Cancel closes it. */
@@ -57,5 +59,5 @@ document.addEventListener('click', function (e) {
   if (open && set.querySelector('input')) set.querySelector('input').focus();
 }, true);
 </script>
-</div><script src="proto.js"></script>
+</div><script src="events.js"></script><script src="proto.js"></script>
 </body></html>

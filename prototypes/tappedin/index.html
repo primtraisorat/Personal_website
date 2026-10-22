@@ -16,12 +16,14 @@
   .bar button:hover, .bar select:hover { background: #454545; }
   .stage { position: absolute; inset: var(--bar) 0 0 0; overflow: auto; }
   .frame { position: relative; margin: 0 auto; }
-  .frame iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: transparent; }
+  /* color-scheme must match the screens (light), or browsers paint an opaque box behind the iframe and the rounded corners disappear */
+  .frame iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: transparent; color-scheme: light; }
   .shade { position: fixed; inset: var(--bar) 0 0 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; }
   .shade.open { display: flex; }
   .pop { position: relative; flex: none; }
   .pop { filter: drop-shadow(0 20px 40px rgba(0,0,0,.35)); }
-  .pop iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: transparent; }
+  .pop iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: transparent; color-scheme: light; }
+  .pop .clip { position: absolute; inset: 0; overflow: hidden; border-radius: var(--r, 25px); }
   .help { color: #8a8a8a; }
   @media (max-width: 700px) { .help, .where { display: none; } }
 </style></head>
@@ -33,7 +35,7 @@
   <button id="restart">Restart</button>
 </div>
 <div class="stage" id="stage"><div class="frame" id="frame"><iframe id="main" title="TappedIn screen"></iframe></div></div>
-<div class="shade" id="shade"><div class="pop" id="pop"><iframe id="over" title="TappedIn pop-up"></iframe></div></div>
+<div class="shade" id="shade"><div class="pop" id="pop"><div class="clip"><iframe id="over" title="TappedIn pop-up"></iframe></div></div></div>
 <script>
 /* Screens and how they open. Sizes are the Figma frame sizes. */
 var SCREENS = {
@@ -46,13 +48,13 @@ var SCREENS = {
   'friends':          ['Profile · Friends', 1441, 1514],
   'friend-requests':  ['Profile · Friend requests', 1441, 1514],
   'settings':         ['Profile · Settings', 1441, 1514],
-  'event-details':    ['Event details (pop-up)', 1180, 835, 1],
-  'filters':          ['Filters (pop-up)', 522, 704, 1],
-  'login':            ['Log in or sign up (pop-up)', 725, 710, 1],
-  'create-account':   ['Create account (pop-up)', 725, 710, 1],
-  'sign-in':          ['Sign in (pop-up)', 725, 710, 1],
-  'information':      ['Let’s get started (pop-up)', 725, 710, 1],
-  'interests':        ['Select your interests (pop-up)', 725, 710, 1]
+  'event-details':    ['Event details (pop-up)', 1180, 835, 16],
+  'filters':          ['Filters (pop-up)', 522, 704, 30],
+  'login':            ['Log in or sign up (pop-up)', 725, 710, 25],
+  'create-account':   ['Create account (pop-up)', 725, 710, 25],
+  'sign-in':          ['Sign in (pop-up)', 725, 710, 25],
+  'information':      ['Let’s get started (pop-up)', 725, 710, 25],
+  'interests':        ['Select your interests (pop-up)', 725, 710, 25]
 };
 var START = 'landing';
 var main = document.getElementById('main'), over = document.getElementById('over'),
@@ -75,16 +77,19 @@ function fit() {
     pop.style.width = o[1] * os + 'px'; pop.style.height = o[2] * os + 'px';
   }
 }
-function show(name, push) {
+/* A target can carry data after #, e.g. "event-details#3" (which event) or "split-screen#chill" (the search). */
+function show(target, push) {
+  var name = target.split('#')[0], extra = target.slice(name.length);
   if (!SCREENS[name]) return;
-  if (SCREENS[name][3]) { open(name, push); return; }
+  if (SCREENS[name][3]) { open(name, extra, push); return; }
   close(true);
-  if (name !== base || !main.src) { base = name; main.src = 'screens/' + name + '.html'; stage.scrollTop = 0; }
+  base = name; main.src = 'screens/' + name + '.html' + extra; stage.scrollTop = 0;
   sync(push);
 }
-function open(name, push) {
-  if (!SCREENS[base] || !main.src) { main.src = 'screens/' + base + '.html'; }
-  overlay = name; over.src = 'screens/' + name + '.html'; shade.classList.add('open'); sync(push);
+function open(name, extra, push) {
+  if (!main.src) { main.src = 'screens/' + base + '.html'; }
+  overlay = name; over.src = 'screens/' + name + '.html' + (extra || ''); shade.classList.add('open');
+  pop.style.setProperty('--r', SCREENS[name][3] + 'px'); sync(push);
 }
 function close(quiet) {
   if (!overlay) return;
@@ -102,7 +107,7 @@ function fromHash() {
   var h = location.hash.slice(1).split('+');
   base = SCREENS[h[0]] && !SCREENS[h[0]][3] ? h[0] : START;
   main.src = 'screens/' + base + '.html';
-  if (h[1] && SCREENS[h[1]]) open(h[1], false); else { close(true); sync(false); }
+  if (h[1] && SCREENS[h[1]]) open(h[1], '', false); else { close(true); sync(false); }
 }
 
 addEventListener('message', function (e) {
