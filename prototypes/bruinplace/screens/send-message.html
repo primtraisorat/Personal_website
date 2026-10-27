@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>BruinPlace · Send a message</title>
+<link rel="stylesheet" href="bp.css">
+<style>
+.screen { width: 677px; height: 635px; }
+.screen { border-radius: 25px; background: #fff; }
+.sm { position: relative; padding: 36px 35px; }
+.sm h1 { font: 700 26px/34px "Inter"; margin-bottom: 18px; }
+.sm h1 span { color: var(--gray); }
+.sm-form { display: grid; gap: 18px; }
+.sm-form .field input { height: 39px; }
+.sm-form .wide-btn { margin-top: 12px; }</style></head>
+<body><div class="screen " aria-label="Send a message pop-up">
+<div class="sm"><h1>Send a message to <span>Joe Bruin</span></h1><a class="x" style="top:36px;right:30px" href="#" data-close aria-label="Close"><img src="assets/icons/x.svg" alt=""></a><form class="sm-form"><label class="field">Name<input placeholder="Joe Bruin" autocomplete="off"></label><label class="field">Email<input type="email" placeholder="joebruin33@ucla.edu" autocomplete="off"></label><label class="field">Phone Number<input type="tel" placeholder="(123) 456-789" autocomplete="off"></label><label class="field">Message<textarea rows="4" placeholder="Write your message here..."></textarea></label><a class="wide-btn" href="#" id="send" data-overlay="message-sent">Send message</a></form></div>
+</div><script>
+(function () {
+  var f = document.querySelector('.sm-form'), b = document.getElementById('send'), t = f.querySelector('textarea');
+  f.addEventListener('input', function () { b.classList.toggle('ready', t.value.trim().length > 0); });
+})();
+</script><script src="bp.js"></script><script src="proto.js"></script>
+</body></html>

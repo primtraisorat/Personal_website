@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>BruinPlace · Filters</title>
+<link rel="stylesheet" href="bp.css">
+<style>
+.screen { width: 522px; height: 650px; border-radius: 58px; display: flex; flex-direction: column; }
+.top { height: 76px; flex: none; display: grid; place-items: center; box-shadow: 0 4px 4px rgba(0,0,0,.25); z-index: 1; font: 600 20px/28px "Inter"; letter-spacing: -.1px; }
+.body { flex: 1; overflow-y: auto; padding: 9px 52px 30px; display: grid; gap: 4px; align-content: start; scrollbar-width: thin; }
+.grp { display: grid; gap: 9px; padding: 9px; }
+.grp h2 { font: 600 18px/28px "Inter"; letter-spacing: -.1px; }
+.chips { display: flex; gap: 7.6px; padding: 0 7.6px; }
+.chip { width: 111px; height: 36px; border-radius: 16.7px; background: var(--lighter); border: 3px solid var(--dark); color: #828282; font: 500 12px/20px "Inter"; text-align: center; transition: background .12s, color .12s; }
+.chip:hover { background: var(--light); }
+.chip[aria-pressed="true"] { background: var(--dark); border-width: 1px; color: #fff; }
+.lbl { font: 400 16px/28px "Inter"; }
+/* Two-thumb range: two native sliders stacked on one track */
+.range { position: relative; height: 22px; width: 368px; margin: 2px 0 4px; }
+.range .track { position: absolute; left: 0; right: 0; top: 8px; height: 6px; border-radius: 6px; background: var(--lighter); }
+.range .fill { position: absolute; top: 8px; height: 6px; border-radius: 6px; background: var(--dark); }
+.range input { position: absolute; inset: 0; width: 100%; margin: 0; background: none; pointer-events: none; -webkit-appearance: none; appearance: none; }
+.range input::-webkit-slider-thumb { -webkit-appearance: none; pointer-events: auto; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 3px solid var(--dark); cursor: grab; }
+.range input::-moz-range-thumb { pointer-events: auto; width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 3px solid var(--dark); cursor: grab; }
+.ends { display: flex; justify-content: space-between; width: 374px; }
+.ends div { display: grid; justify-items: center; gap: 7.6px; font: 500 14px/14px "Inter"; }
+.ends output { min-width: 66px; padding: 5px 12px; border-radius: 16.7px; background: var(--lighter); border: 3px solid var(--dark); color: #828282; font: 500 12px/20px "Inter"; text-align: center; }
+.step { display: flex; align-items: center; justify-content: space-between; width: 367px; font: 400 16px/28px "Inter"; }
+.step span { display: flex; align-items: center; gap: 12px; }
+.step button { width: 31px; height: 31px; border-radius: 50%; background: var(--dark); color: #fff; font: 500 20px/1 "Inter"; display: grid; place-items: center; }
+.step button:hover { background: #2894ee; }
+.step output { width: 47px; height: 31px; border-radius: 22.8px; background: var(--lighter); border: 3px solid var(--dark); color: #828282; font: 400 14px/25px "Inter"; text-align: center; }
+.drop { position: relative; width: 147px; }
+.drop > button { width: 147px; height: 34px; border-radius: 16px; border: 3px solid var(--dark); background: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 8px 0 10px; font: 400 16px/28px "Inter"; }
+.drop > button img { width: 19px; height: 19px; transition: transform .15s; }
+.drop.open > button { border-radius: 16px 16px 0 0; }
+.drop.open > button img { transform: rotate(180deg); }
+.drop ul { display: none; list-style: none; border: 3px solid var(--dark); border-top: 0; border-radius: 0 0 16px 16px; background: var(--lighter); overflow: hidden; }
+.drop.open ul { display: block; }
+.drop li { padding: 0 10px; font: 400 16px/28px "Inter"; cursor: pointer; }
+.drop li:hover { background: var(--light); }
+.save { height: 119px; flex: none; display: grid; place-items: center; box-shadow: 0 -3px 4px rgba(0,0,0,.25); z-index: 1; }
+.save a { padding: 11px 40px; border-radius: 15px; background: var(--dark); color: #fff; font: 600 20px/28px "Inter"; letter-spacing: -.1px; }
+.save a:hover { background: #2894ee; }
+</style></head>
+<body><div class="screen" aria-label="Filters pop-up">
+<div class="top">Filters</div>
+<div class="body">
+  <section class="grp"><h2>Availability</h2><div class="chips"><button class="chip" data-toggle aria-pressed="true">Lease</button><button class="chip" data-toggle aria-pressed="false">Sublet</button><button class="chip" data-toggle aria-pressed="false">For sale</button></div></section>
+  <section class="grp"><h2>Room type</h2><div class="chips"><button class="chip" data-toggle aria-pressed="true">Apartment</button><button class="chip" data-toggle aria-pressed="false">House</button><button class="chip" data-toggle aria-pressed="false">Townhouse</button></div></section>
+  <section class="grp"><h2>Rent range</h2><p class="lbl">Price $</p>
+    <div class="range" data-unit="$"><div class="track"></div><div class="fill"></div><input type="range" min="0" max="5000" step="50" value="800" aria-label="Minimum rent"><input type="range" min="0" max="5000" step="50" value="2800" aria-label="Maximum rent"></div>
+    <div class="ends"><div>min<output></output></div><div>max<output></output></div></div></section>
+  <section class="grp"><h2>Bed and Bath</h2>
+    <div class="step">Bedrooms<span><button type="button" data-step="-1" aria-label="Fewer bedrooms">&minus;</button><output>2</output><button type="button" data-step="1" aria-label="More bedrooms">+</button></span></div>
+    <div class="step">Bathrooms<span><button type="button" data-step="-1" aria-label="Fewer bathrooms">&minus;</button><output>1</output><button type="button" data-step="1" aria-label="More bathrooms">+</button></span></div></section>
+  <section class="grp"><h2>Distance</h2>
+    <div class="drop"><button type="button" aria-haspopup="listbox"><span>Walking</span><img src="assets/icons/chevron-down.svg" alt=""></button><ul role="listbox"><li role="option">Walking</li><li role="option">Driving</li><li role="option">Scooter/Bike</li><li role="option">Public Transport</li></ul></div>
+    <div class="range" data-unit=" min"><div class="track"></div><div class="fill"></div><input type="range" min="0" max="60" value="5" aria-label="Shortest trip to campus"><input type="range" min="0" max="60" value="20" aria-label="Longest trip to campus"></div>
+    <div class="ends"><div>min<output></output></div><div>max<output></output></div></div></section>
+</div>
+<div class="save"><a href="#" data-close>Save</a></div>
+<script>
+/* Sliders keep their two thumbs apart and show their values; steppers count 0–6; the distance menu opens and picks. */
+document.querySelectorAll('.range').forEach(function (r) {
+  var a = r.querySelectorAll('input'), fill = r.querySelector('.fill'), out = r.nextElementSibling.querySelectorAll('output'), u = r.dataset.unit;
+  function fmt(v) { return u === '$' ? '$' + Number(v).toLocaleString() : v + u; }
+  function sync(e) {
+    var lo = +a[0].value, hi = +a[1].value, max = +a[0].max;
+    if (lo > hi) { if (e && e.target === a[0]) a[0].value = hi; else a[1].value = lo; }
+    lo = +a[0].value; hi = +a[1].value;
+    fill.style.left = lo / max * 100 + '%'; fill.style.width = (hi - lo) / max * 100 + '%';
+    out[0].textContent = fmt(lo); out[1].textContent = fmt(hi);
+  }
+  a.forEach(function (i) { i.addEventListener('input', sync); }); sync();
+});
+document.querySelectorAll('[data-step]').forEach(function (b) {
+  b.addEventListener('click', function () { var o = b.parentNode.querySelector('output'); o.textContent = Math.max(0, Math.min(6, +o.textContent + +b.dataset.step)); });
+});
+var drop = document.querySelector('.drop');
+drop.querySelector('button').addEventListener('click', function () { drop.classList.toggle('open'); });
+drop.querySelectorAll('li').forEach(function (li) { li.addEventListener('click', function () { drop.querySelector('span').textContent = li.textContent; drop.classList.remove('open'); }); });
+</script>
+</div><script src="proto.js"></script>
+</body></html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>BruinPlace · Change profile picture</title>
+<link rel="stylesheet" href="bp.css">
+<style>
+.screen { width: 386px; height: 404px; border-radius: 25px; }
+.cp { height: 100%; display: grid; justify-items: center; align-content: center; gap: 18px; padding: 20px; }
+.cp h1 { font: 600 18px/25px "Inter"; }
+.ring i { width: 166px; height: 166px; border-radius: 50%; background: var(--blue); color: #fff; font: normal 300 64px/1 "Inter"; display: grid; place-items: center; overflow: hidden; }
+.ring img { width: 100%; height: 100%; object-fit: cover; transition: transform .1s; }
+.zoom { display: flex; align-items: center; gap: 10px; font: 500 14px/20px "Inter"; }
+.zoom[hidden], .bp-btn[hidden] { display: none; }
+.zoom input { width: 160px; accent-color: var(--dark); }
+.acts { display: flex; gap: 40px; font: 400 15px/22px "Inter"; }
+.acts label, .acts button { display: flex; align-items: center; gap: 6px; text-decoration: underline; cursor: pointer; }
+.acts img { width: 20px; height: 20px; }</style></head>
+<body><div class="screen" aria-label="Change profile picture pop-up">
+<a class="x" href="#" data-close aria-label="Close" style="top:16px;right:18px"><img src="assets/icons/x.svg" alt=""></a>
+<div class="cp"><h1 id="t">Change profile picture</h1><div class="ring"><i id="pic">JB</i></div>
+  <div class="zoom" hidden><input type="range" min="100" max="250" value="145" aria-label="Zoom"><span id="pct">45%</span></div>
+  <div class="acts"><label><input type="file" accept="image/*" hidden id="file"><img src="assets/icons/upload.svg" alt="">Upload</label><button type="button" id="rm"><img src="assets/icons/trash-2.svg" alt="">Remove</button></div>
+  <a class="bp-btn" href="#" id="save" hidden>Save</a></div>
+</div><script>
+(function () {
+  var pic = document.getElementById('pic'), zoom = document.querySelector('.zoom'), range = zoom.querySelector('input'), save = document.getElementById('save'), data = null;
+  try { var cur = sessionStorage.getItem('bp-photo'); if (cur) pic.innerHTML = '<img src="' + cur + '" alt="">'; } catch (e) {}
+  document.getElementById('file').addEventListener('change', function (e) {
+    var f = e.target.files[0]; if (!f) return;
+    var r = new FileReader(); r.onload = function () { data = r.result; pic.innerHTML = '<img src="' + data + '" alt="">'; zoom.hidden = false; save.hidden = false; document.getElementById('t').textContent = 'Edit photo'; range.dispatchEvent(new Event('input')); }; r.readAsDataURL(f);
+  });
+  range.addEventListener('input', function () { var img = pic.querySelector('img'); if (img) img.style.transform = 'scale(' + range.value / 100 + ')'; document.getElementById('pct').textContent = (range.value - 100) + '%'; });
+  document.getElementById('rm').addEventListener('click', function () { pic.textContent = 'JB'; data = ''; zoom.hidden = true; save.hidden = false; });
+  // Save keeps the photo for the rest of the visit (this tab only) and closes the pop-up.
+  save.addEventListener('click', function () { try { if (data) sessionStorage.setItem('bp-photo', data); else sessionStorage.removeItem('bp-photo'); } catch (e) {} }, true);
+  save.setAttribute('data-close', '');
+})();
+</script><script src="proto.js"></script>
+</body></html>

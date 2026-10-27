@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>BruinPlace · Landing</title>
+<link rel="stylesheet" href="bp.css">
+<style>
+.screen { height: 2056px; }
+.band { left: 0; top: 74px; width: 1441px; height: 374px; background: #dff1ff; }
+.art { opacity: .95; object-fit: cover; }
+.brick { width: 42.6px; height: 15.5px; border-radius: 2.88px; background: rgba(113,196,255,.5); border: 3px solid var(--dark); }
+.hero { left: 0; right: 0; top: 153.5px; text-align: center; }
+.hero h1 { width: 586px; margin: 0 auto; font: 800 43.2px/43.2px "Inter"; letter-spacing: -.52px; }
+.hero p { margin-top: 20.8px; font: 600 18px/28px "Inter"; color: #757575; }
+.find { left: 443px; top: 323px; width: 555px; height: 57px; border-radius: 90px; background: #fff; display: flex; align-items: center; padding: 0 9px 0 30px; gap: 10px; }
+.find input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font: 400 20px/28px "Inter"; }
+.find input::placeholder { color: var(--gray); }
+.find button { width: 44px; height: 44px; border-radius: 50%; background: var(--dark); display: grid; place-items: center; transition: background .12s; }
+.find button:hover { background: #2894ee; }
+.find button img { width: 27px; height: 27px; }
+.lists { left: 76px; top: 480px; width: 1290px; display: grid; gap: 37px; }
+.lists hr { margin: 0; border: 0; border-top: 1.4px solid #d9d9d9; }
+.sec { height: 347px; display: grid; grid-template-rows: auto 1fr; gap: 13px; }
+.sec .top { display: flex; align-items: center; justify-content: space-between; height: 41px; }
+.sec h2 { font: 600 18px/28px "Inter"; }
+.sec .row { display: flex; gap: 27.2px; padding-top: 0; }
+.screen > .bp-foot { position: absolute; left: 0; top: 1767px; width: 1441px; }
+</style></head>
+<body><div class="screen" aria-label="BruinPlace landing page: search and recommended listings">
+<header data-render="header"></header>
+<div class="abs band"></div>
+<img class="abs art" src="assets/img/7c6e036d.webp" alt="" style="left:1197px;top:82px;width:316px;height:202px">
+<img class="abs art" src="assets/img/50f79a5b.webp" alt="" style="left:112px;top:203px;width:276px;height:233px">
+<img class="abs art" src="assets/img/3a17716e.webp" alt="" style="left:21px;top:83px;width:182px;height:123px;object-position:50% 100%">
+<img class="abs art" src="assets/img/cd2e29d0.webp" alt="" style="left:1070px;top:295px;width:169px;height:153px;object-position:50% 0">
+<div class="abs brick" style="left:243.4px;top:132.8px"></div><div class="abs brick" style="left:259.8px;top:147.9px"></div>
+<div class="abs brick" style="left:1118.8px;top:203.8px"></div><div class="abs brick" style="left:1102.4px;top:218.9px"></div>
+<div class="abs brick" style="left:1331.6px;top:346.8px"></div><div class="abs brick" style="left:1311.6px;top:361.9px"></div><div class="abs brick" style="left:1354px;top:362px"></div>
+<div class="abs brick" style="left:-23px;top:380px"></div><div class="abs brick" style="left:-43px;top:395.1px"></div><div class="abs brick" style="left:-.6px;top:395.2px"></div>
+<div class="abs hero"><h1>Off-campus housing, built around you.</h1><p>Built by Bruins, for every Bruin looking for their next place.</p></div>
+<form class="abs find"><input type="search" placeholder="Search by address, neighborhood, zip code" aria-label="Search by address, neighborhood, zip code"><button type="submit" data-go="building-split" aria-label="Search"><img src="assets/icons/search.svg" alt=""></button></form>
+<div class="abs lists">
+  <section class="sec"><div class="top"><h2>Recommended Listings</h2><a class="bp-pill" href="#" data-go="building-split"><img src="assets/icons/search.svg" alt="">See more</a></div><div class="row" data-render="buildings:atrium,elgreco,eight70,rochester"></div></section>
+  <hr>
+  <section class="sec"><div class="top"><h2>Recommended Listings</h2><a class="bp-pill" href="#" data-go="building-split"><img src="assets/icons/search.svg" alt="">See more</a></div><div class="row" data-render="buildings:atrium,elgreco,eight70,rochester"></div></section>
+  <hr>
+  <section class="sec"><div class="top"><h2>Recommended Listings</h2><a class="bp-pill" href="#" data-go="building-split"><img src="assets/icons/search.svg" alt="">See more</a></div><div class="row" data-render="buildings:atrium,elgreco,eight70,rochester"></div></section>
+</div>
+<footer data-render="footer"></footer>
+</div><script src="bp.js"></script><script src="proto.js"></script>
+</body></html>

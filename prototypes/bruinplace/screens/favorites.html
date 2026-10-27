@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>BruinPlace · Favorites</title>
+<link rel="stylesheet" href="bp.css">
+<style>
+</style></head>
+<body><div class="screen" aria-label="Profile: favorited buildings">
+<header data-render="header"></header>
+<main class="pf"><div class="pf-who"><i class="me-photo">JB</i><div><h1 class="me-name">joe_bruin</h1><p><span>3 listings</span><span>9 reviews</span></p></div></div><nav class="pf-tabs"><a href="#" class=on aria-current=page>Favorited Listings</a><a href="#" data-go=reviews>Reviews</a><a href="#" data-go=settings>Settings</a></nav><div class="pf-fav"><nav class="pf-side"><a href="#" class=on aria-current=page>Buildings</a><a href="#" data-go=favorites-units>Units</a></nav><div class="pf-grid" data-render="buildings:atrium!,elgreco!,eight70!,rochester!,luxe!,levering!,atrium!,elgreco!,eight70!/sm"></div></div></main>
+<footer data-render="footer"></footer>
+</div><script>
+try {
+  var p = sessionStorage.getItem('bp-photo'), n = sessionStorage.getItem('bp-name');
+  if (p) document.querySelectorAll('.me-photo').forEach(function (el) { el.innerHTML = '<img src="' + p + '" alt="">'; });
+  if (n) document.querySelectorAll('.me-name').forEach(function (el) { el.textContent = n; });
+} catch (e) {}
+</script><script src="bp.js"></script><script src="proto.js"></script>
+</body></html>

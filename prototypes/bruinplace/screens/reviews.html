@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>BruinPlace · Your reviews</title>
+<link rel="stylesheet" href="bp.css">
+<style>
+.avg { display: flex; align-items: center; gap: 120px; margin: 50px 0 0 70px; }
+.avg h2 { font: 600 20px/28px "Inter"; }
+.avg .stars { margin-top: 22px; gap: 20px; }
+.avg .stars svg { width: 42px; height: 42px; }
+.avg p { margin-top: 20px; font: 400 20px/28px "Inter"; }
+.avg p b { font-weight: 600; }
+.avg p i { font-style: normal; color: var(--gray2); }
+.avg .rv-bars { width: 456px; flex: none; gap: 23px 24px; }
+.mine { margin: 40px 0 0 15px; width: 1012px; padding: 42px 44px 40px; border-radius: 25px; background: #fff; box-shadow: 0 0 0 1px #e6e6e6, 0 4px 6px rgba(0,0,0,.12); }
+.mine-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 26px; }
+.mine-head h2 { font: 600 26px/36px "Inter"; }
+.mine-head > div { display: flex; gap: 16px; }
+.mine .rv-search { width: 236px; height: 37px; border: 0; box-shadow: 0 2px 4px rgba(0,0,0,.25); }
+.mine .rv-search svg { width: 16px; height: 16px; }
+.mine .rv-search input { font-size: 13px; }
+.mine .bp-outline { height: 37px; border-color: var(--gray); }
+.mine .rv-list { gap: 31px; }
+.mine .rv { width: auto; padding: 28px 30px; }
+.mine .rv-who > i { width: 57px; height: 57px; overflow: hidden; }
+.mine .rv-who > i img { width: 100%; height: 100%; object-fit: cover; }
+.mine .where { display: block; margin-top: 3px; font: 400 14px/24px "Inter"; color: var(--gray); text-decoration: underline; }</style></head>
+<body><div class="screen" aria-label="Profile: reviews you have written">
+<header data-render="header"></header>
+<main class="pf"><div class="pf-who"><i class="me-photo">JB</i><div><h1 class="me-name">joe_bruin</h1><p><span>3 listings</span><span>9 reviews</span></p></div></div><nav class="pf-tabs"><a href="#" data-go=favorites>Favorited Listings</a><a href="#" class=on aria-current=page>Reviews</a><a href="#" data-go=settings>Settings</a></nav>
+<section class="avg"><div><h2>Average user rating</h2><div class="stars" data-stars="4"></div><p><b>4.3</b> out of 5 stars <i>(3)</i></p></div>
+  <div class="rv-bars"><span>5 stars</span><i style="--w:92%"></i><span>4 stars</span><i style="--w:72%"></i><span>3 stars</span><i style="--w:32%"></i><span>2 stars</span><i style="--w:21%"></i><span>1 stars</span><i style="--w:13%"></i></div></section>
+<section class="mine"><div class="mine-head"><h2>Reviews (3)</h2><div><label class="rv-search"><svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input type="search" placeholder="Search reviews" aria-label="Search reviews"></label>
+  <div class="menu"><button class="bp-outline" type="button">Sort by<img src="assets/icons/chevron-down.svg" alt=""></button><ul role="listbox"><li>Most recent</li><li>Highest rated</li><li>Lowest rated</li></ul></div></div></div>
+  <div class="rv-list"><article class="rv"><div class="rv-head"><div class="rv-who"><i style="background:var(--blue)" class="me-photo">JB</i><div><b>Joe Bruin</b><a class="where" href="#" data-go="building-listing">330 De Neve Dr, Los Angeles, CA 90024</a></div></div><div class="stars" data-stars="4"></div></div>
+  <p class="rv-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...<span class="rest" id="r0" hidden> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</span></p><a href="#" class="more" data-more="#r0" aria-expanded="false" data-label="Read more"><span>Read more</span><img src="assets/icons/chevron-down.svg" alt=""></a>
+  <div class="chipset rcats"><span class="lchip"><img src="assets/icons/user.svg" alt="">Management: 5/5</span><span class="lchip"><img src="assets/icons/flower.svg" alt="">Cleanliness: 4/5</span><span class="lchip"><img src="assets/icons/megaphone.svg" alt="">Noise Level: 5/5</span><span class="lchip"><img src="assets/icons/clipboard-list.svg" alt="">Lease Flexibility: 5/5</span></div></article><article class="rv"><div class="rv-head"><div class="rv-who"><i style="background:var(--blue)" class="me-photo">JB</i><div><b>Joe Bruin</b><a class="where" href="#" data-go="building-listing">330 De Neve Dr, Los Angeles, CA 90024</a></div></div><div class="stars" data-stars="4"></div></div>
+  <p class="rv-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...<span class="rest" id="r1" hidden> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</span></p><a href="#" class="more" data-more="#r1" aria-expanded="false" data-label="Read more"><span>Read more</span><img src="assets/icons/chevron-down.svg" alt=""></a>
+  <div class="chipset rcats"><span class="lchip"><img src="assets/icons/user.svg" alt="">Management: 5/5</span><span class="lchip"><img src="assets/icons/flower.svg" alt="">Cleanliness: 4/5</span><span class="lchip"><img src="assets/icons/megaphone.svg" alt="">Noise Level: 5/5</span><span class="lchip"><img src="assets/icons/clipboard-list.svg" alt="">Lease Flexibility: 5/5</span></div></article><article class="rv"><div class="rv-head"><div class="rv-who"><i style="background:var(--blue)" class="me-photo">JB</i><div><b>Joe Bruin</b><a class="where" href="#" data-go="building-listing">330 De Neve Dr, Los Angeles, CA 90024</a></div></div><div class="stars" data-stars="4"></div></div>
+  <p class="rv-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...<span class="rest" id="r2" hidden> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</span></p><a href="#" class="more" data-more="#r2" aria-expanded="false" data-label="Read more"><span>Read more</span><img src="assets/icons/chevron-down.svg" alt=""></a>
+  <div class="chipset rcats"><span class="lchip"><img src="assets/icons/user.svg" alt="">Management: 5/5</span><span class="lchip"><img src="assets/icons/flower.svg" alt="">Cleanliness: 4/5</span><span class="lchip"><img src="assets/icons/megaphone.svg" alt="">Noise Level: 5/5</span><span class="lchip"><img src="assets/icons/clipboard-list.svg" alt="">Lease Flexibility: 5/5</span></div></article></div></section></main>
+<footer data-render="footer"></footer>
+</div><script>
+try {
+  var p = sessionStorage.getItem('bp-photo'), n = sessionStorage.getItem('bp-name');
+  if (p) document.querySelectorAll('.me-photo').forEach(function (el) { el.innerHTML = '<img src="' + p + '" alt="">'; });
+  if (n) document.querySelectorAll('.me-name').forEach(function (el) { el.textContent = n; });
+} catch (e) {}
+</script><script src="bp.js"></script><script src="proto.js"></script>
+</body></html>

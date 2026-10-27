@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>BruinPlace · Review</title>
+<link rel="stylesheet" href="bp.css">
+<style>
+.screen { width: 926px; height: 830px; }
+.rvp { display: flex; gap: 25px; padding: 48px 100px 0; }
+.shots { width: 471px; }
+.big { width: 471px; height: 471px; border-radius: 25px; object-fit: cover; }
+.strip { position: relative; margin-top: 19px; overflow: hidden; }
+.track { display: flex; gap: 21px; transition: transform .25s; }
+.th { flex: none; width: 143px; height: 143px; border-radius: 22px; overflow: hidden; border: 4px solid transparent; }
+.th img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; }
+.th.on { border-color: var(--dark); }
+.next { position: absolute; right: 12px; top: 50%; margin-top: -21px; width: 42px; height: 42px; border-radius: 50%; background: var(--blue); display: grid; place-items: center; box-shadow: 0 2px 6px rgba(0,0,0,.2); }
+.next img { width: 24px; height: 24px; filter: brightness(0) invert(1); }
+.rv-side { width: 230px; display: grid; gap: 22px; align-content: start; }
+.rv-side .stars { gap: 10px; }
+.rv-side .stars svg { width: 32px; height: 32px; }</style></head>
+<body><div class="screen pop" aria-label="Review pop-up">
+<div class="pop-head" style="padding:28px 100px 26px 48px"><div class="chipset rcats" style="gap:10px;flex-wrap:nowrap"><span class="lchip"><img src="assets/icons/user.svg" alt="">Management: 5/5</span><span class="lchip"><img src="assets/icons/flower.svg" alt="">Cleanliness: 4/5</span><span class="lchip"><img src="assets/icons/megaphone.svg" alt="">Noise Level: 5/5</span><span class="lchip"><img src="assets/icons/clipboard-list.svg" alt="">Lease Flexibility: 4/5</span></div><a class="x" style="top:30px;right:40px" href="#" data-close aria-label="Close"><img src="assets/icons/x.svg" alt=""></a></div><div class="rvp"><div class="shots"><img class="big" src="assets/img/f75e9937.webp" alt="Photo from Joe Bruin’s review"><div class="strip"><div class="track"><button type="button" class="th on" data-src="assets/img/f75e9937.webp" aria-label="Photo 1"><img src="assets/img/f75e9937.webp" alt=""></button><button type="button" class="th" data-src="assets/img/73451bd7.webp" aria-label="Photo 2"><img src="assets/img/73451bd7.webp" alt=""></button><button type="button" class="th" data-src="assets/img/0a29eefe.webp" aria-label="Photo 3"><img src="assets/img/0a29eefe.webp" alt=""></button><button type="button" class="th" data-src="assets/img/6225c91a.webp" aria-label="Photo 4"><img src="assets/img/6225c91a.webp" alt=""></button><button type="button" class="th" data-src="assets/img/655fa60a.webp" aria-label="Photo 5"><img src="assets/img/655fa60a.webp" alt=""></button></div><button type="button" class="next" aria-label="More photos"><img src="assets/icons/chevron-right.svg" alt=""></button></div></div><div class="rv-side"><div class="rv-who"><i style="background:#818cf8">JB</i><div><b>Joe Bruin</b><small>2019 - 2020</small></div></div><div class="stars" data-stars="4"></div><p class="rv-text" style="font-size:16px;line-height:24px">Love the natural lighting in the units and the updated kitchen appliances. Move-in was really easy and management made the whole process feel very straightforward.</p></div></div>
+</div><script>
+(function () {
+  var big = document.querySelector('.big'), th = [].slice.call(document.querySelectorAll('.th')), track = document.querySelector('.track'), shift = 0;
+  th.forEach(function (b) { b.addEventListener('click', function () { big.src = b.dataset.src; th.forEach(function (x) { x.classList.toggle('on', x === b); }); }); });
+  document.querySelector('.next').addEventListener('click', function () {
+    var cur = th.findIndex(function (x) { return x.classList.contains('on'); }), n = th[(cur + 1) % th.length];
+    n.click(); shift = Math.max(0, Math.min(th.length - 3, th.indexOf(n) - 1)); track.style.transform = 'translateX(' + (-164 * shift) + 'px)';
+  });
+})();
+</script><script src="bp.js"></script><script src="proto.js"></script>
+</body></html>

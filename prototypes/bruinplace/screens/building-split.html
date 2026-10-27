@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>BruinPlace · Buildings</title>
+<link rel="stylesheet" href="bp.css">
+<style>
+.split { display: flex; gap: 50px; padding: 39px 50px 190px 39px; align-items: flex-start; }
+.list { width: 613px; display: grid; gap: 14px; }
+.bar { display: flex; align-items: center; justify-content: space-between; }
+.bar h1 { font: 700 20px/28px "Inter"; }
+.bar .tools { display: flex; gap: 10px; align-items: center; }
+.grid { display: grid; grid-template-columns: repeat(2, 295px); gap: 22.26px; }
+.mapwrap { position: sticky; top: 118px; margin-top: -4px; width: 689px; height: 638px; }
+.mapwrap .bp-map { width: 689px; height: 638px; }
+.tiles { left: 0; top: -25px; width: 689px; height: 716px; }
+</style></head>
+<body><div class="screen" aria-label="Search results by building, with a map">
+<header data-render="header:search"></header>
+<main class="split">
+  <section class="list">
+    <div class="bar"><h1>Over 100 buildings</h1><div class="tools"><button class="bp-outline" type="button">Sort by<img src="assets/icons/chevron-down.svg" alt=""></button>
+      <nav class="bp-switch" aria-label="Show buildings or units"><a class="on" aria-current="true">Building</a><a href="#" data-go="unit-split">Unit</a></nav></div></div>
+    <div class="grid" data-render="buildings:atrium,elgreco,eight70,rochester,luxe,levering,atrium,elgreco,eight70,rochester/sm"></div>
+  </section>
+  <div class="mapwrap">
+    <div class="bp-map">
+      <div class="tiles"><img src="assets/img/f380d121.webp" alt="Map of Westwood and Brentwood around UCLA"></div>
+      <div class="bp-pins">
+        <button class="pin" style="left:409.5px;top:133px">$1,257</button><button class="pin" style="left:453.5px;top:167px">$1,257</button>
+        <button class="pin" style="left:453.5px;top:112px">$1,257</button><button class="pin" style="left:497.5px;top:200px">$1,257</button>
+        <button class="pin" style="left:464.5px;top:323px">$1,257</button><button class="pin" style="left:487.5px;top:335px">$1,257</button>
+        <button class="pin" style="left:500.5px;top:432px">$1,257</button>
+      </div>
+      <div class="bp-ctrl"><a class="max" href="#" data-go="full-map" aria-label="Expand map"><img src="assets/icons/maximize-2.svg" alt=""></a>
+        <div class="zoom"><button type="button" data-zoom="in" aria-label="Zoom in">+</button><button type="button" data-zoom="out" aria-label="Zoom out">&minus;</button></div></div>
+    </div>
+    <div class="pin-card" hidden></div>
+  </div>
+</main>
+<footer data-render="footer"></footer>
+</div><script src="bp.js"></script><script src="proto.js"></script>
+</body></html>

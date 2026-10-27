@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>BruinPlace · Write a review</title>
+<link rel="stylesheet" href="bp.css">
+<style>
+.screen { width: 740px; height: 729px; }
+.ar { padding: 32px 100px 40px; display: grid; gap: 20px; }
+.ar h2 { display: flex; align-items: center; gap: 10px; margin-left: 0; font: 600 24px/32px "Inter"; }
+.ar h2 img { width: 30px; height: 30px; }
+.ar h2 i { font-style: normal; font-weight: 400; color: var(--gray2); }
+.ar hr { margin: 6px 0; border: 0; border-top: 1.5px solid #d9d9d9; }
+.drop-zone { position: relative; height: 266px; border: 2px dashed var(--gray); border-radius: 20px; display: grid; place-items: center; align-content: center; gap: 10px; font: 600 18px/28px "Inter"; color: var(--gray); cursor: pointer; transition: background .12s; }
+.drop-zone:hover { background: #f6fbff; }
+.drop-zone > img { width: 54px; height: 54px; }
+.drop-zone .picked { position: absolute; inset: 14px; display: none; grid-template-columns: repeat(5, 1fr); gap: 10px; align-content: center; }
+.drop-zone.has .picked { display: grid; background: #fff; }
+.drop-zone .picked img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; }
+.rates { display: grid; gap: 14px; padding-left: 0; }
+.rate-row { display: flex; align-items: center; justify-content: space-between; font: 400 20px/32px "Inter"; }
+.pick { display: flex; gap: 10px; }
+.pick button { width: 30px; height: 30px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.5l2.9 5.9 6.6 1-4.75 4.6 1.1 6.5L12 17.4l-5.85 3.1 1.1-6.5L2.5 9.4l6.6-1z' fill='none' stroke='%23FFCB64' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat; transition: transform .1s; }
+.pick button:hover { transform: scale(1.15); }
+.pick button.on { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.5l2.9 5.9 6.6 1-4.75 4.6 1.1 6.5L12 17.4l-5.85 3.1 1.1-6.5L2.5 9.4l6.6-1z' fill='%23FFCB64' stroke='%23FFCB64' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.len { display: flex; align-items: center; gap: 16px; font: 400 16px/20px "Inter"; }
+.len select { width: 150px; padding: 8px 12px; border: 1px solid var(--gray); border-radius: 12px; font: 400 15px/20px "Inter"; background: #fff; }
+.ar textarea { border: 1px solid var(--gray); border-radius: 15px; padding: 12px 16px; font: 400 16px/24px "Inter"; resize: none; outline: 0; }
+.ar textarea:focus, .len select:focus { border-color: var(--dark); box-shadow: 0 0 0 3px var(--lighter); }
+.ar-foot { flex: none; padding: 32px 66px 32px; box-shadow: 0 -3px 6px rgba(0,0,0,.12); z-index: 2; }
+.ar-foot .wide-btn { background: var(--blue); }
+.ar-foot .wide-btn:hover { background: var(--dark); }</style></head>
+<body><div class="screen pop" aria-label="Write a review pop-up">
+<div class="pop-head" style="padding:28px 50px 26px"><h1>Add review</h1><a class="x" href="#" data-close aria-label="Close"><img src="assets/icons/x.svg" alt=""></a></div><div class="pop-body"><div class="ar"><h2><img src="assets/icons/camera.svg" alt="">Add Photos <i>(<span id="pc">0</span>/5)</i></h2><label class="drop-zone"><input type="file" accept="image/*" multiple hidden><img src="assets/icons/plus.svg" alt=""><span>Upload your photos here</span><div class="picked"></div></label><hr><h2><img src="assets/icons/check.svg" alt="">Ratings</h2><div class="rates"><div class="rate-row"><span>Management</span><div class="pick" data-n="0"><button type="button" aria-label="Management: 1 of 5"></button><button type="button" aria-label="Management: 2 of 5"></button><button type="button" aria-label="Management: 3 of 5"></button><button type="button" aria-label="Management: 4 of 5"></button><button type="button" aria-label="Management: 5 of 5"></button></div></div><div class="rate-row"><span>Cleanliness</span><div class="pick" data-n="0"><button type="button" aria-label="Cleanliness: 1 of 5"></button><button type="button" aria-label="Cleanliness: 2 of 5"></button><button type="button" aria-label="Cleanliness: 3 of 5"></button><button type="button" aria-label="Cleanliness: 4 of 5"></button><button type="button" aria-label="Cleanliness: 5 of 5"></button></div></div><div class="rate-row"><span>Noise Level</span><div class="pick" data-n="0"><button type="button" aria-label="Noise Level: 1 of 5"></button><button type="button" aria-label="Noise Level: 2 of 5"></button><button type="button" aria-label="Noise Level: 3 of 5"></button><button type="button" aria-label="Noise Level: 4 of 5"></button><button type="button" aria-label="Noise Level: 5 of 5"></button></div></div><div class="rate-row"><span>Lease Flexibility</span><div class="pick" data-n="0"><button type="button" aria-label="Lease Flexibility: 1 of 5"></button><button type="button" aria-label="Lease Flexibility: 2 of 5"></button><button type="button" aria-label="Lease Flexibility: 3 of 5"></button><button type="button" aria-label="Lease Flexibility: 4 of 5"></button><button type="button" aria-label="Lease Flexibility: 5 of 5"></button></div></div></div><hr><h2><img src="assets/icons/calendar-days.svg" alt="">Lease Length</h2><div class="len"><select aria-label="Lease start"><option>Month / Year</option><option>Sep 2024</option><option>Jan 2025</option><option>Jun 2025</option><option>Sep 2025</option><option>Jan 2026</option><option>Jun 2026</option></select><span>to</span><select aria-label="Lease end"><option>Month / Year</option><option>Sep 2024</option><option>Jan 2025</option><option>Jun 2025</option><option>Sep 2025</option><option>Jan 2026</option><option>Jun 2026</option></select></div><hr><h2><img src="assets/icons/edit-2-blue.svg" alt="">Review</h2><textarea rows="5" placeholder="Type your review here..." aria-label="Your review"></textarea></div></div><div class="ar-foot"><a class="wide-btn" href="#" id="submit" data-overlay="review-sent">Submit review</a></div>
+</div><script>
+(function () {
+  document.querySelectorAll('.pick').forEach(function (p) {
+    var bs = [].slice.call(p.children);
+    bs.forEach(function (b, i) { b.addEventListener('click', function () { bs.forEach(function (x, j) { x.classList.toggle('on', j <= i); }); }); });
+  });
+  var zone = document.querySelector('.drop-zone'), input = zone.querySelector('input'), picked = zone.querySelector('.picked');
+  input.addEventListener('change', function () {
+    var files = [].slice.call(input.files, 0, 5); picked.innerHTML = '';
+    files.forEach(function (f) { var im = new Image(); im.src = URL.createObjectURL(f); im.alt = ''; picked.appendChild(im); });
+    zone.classList.toggle('has', files.length > 0); document.getElementById('pc').textContent = files.length;
+  });
+})();
+</script><script src="bp.js"></script><script src="proto.js"></script>
+</body></html>

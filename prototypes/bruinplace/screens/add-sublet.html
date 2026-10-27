@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>BruinPlace · Add listing</title>
+<link rel="stylesheet" href="bp.css">
+<style>
+.al { width: 645px; margin: 62px auto 0; padding-bottom: 95px; display: grid; gap: 40px; }
+.al-head { display: flex; align-items: center; justify-content: space-between; }
+.al-head h1 { font: 600 30px/36px "Inter"; letter-spacing: -.2px; }
+.bp-switch.big { width: auto; gap: 4px; padding: 4px; }
+.bp-switch.big a { padding: 4px 10px; font: 600 20px/28px "Inter"; }
+.al section { display: grid; gap: 22px; }
+.al h2 { display: flex; align-items: center; gap: 10px; font: 600 24px/32px "Inter"; }
+.al h2.sm { font-size: 20px; }
+.al h2 img { width: 32px; height: 32px; }
+.al h2 img.blue { filter: brightness(0) saturate(100%) invert(72%) sepia(32%) saturate(1000%) hue-rotate(178deg) brightness(102%); }
+.al h2 i { font-style: normal; font-weight: 400; color: var(--gray2); }
+.al hr { margin: 0; border: 0; border-top: 1px solid #d9d9d9; }
+.g2 { display: grid; grid-template-columns: 234px 234px; justify-content: space-between; gap: 30px 0; }
+.al .field { font: 600 20px/28px "Inter"; gap: 10px; }
+.al .field input { height: 50px; border-radius: 30px; padding: 0 15px; font-size: 14px; }
+.bb { display: grid; gap: 14px; align-content: start; }
+.bb.wide { grid-column: 1 / -1; }
+.bb .two { display: flex; justify-content: space-between; }
+.bb h3 { margin: 0; font: 600 20px/28px "Inter"; }
+.step { display: flex; align-items: center; gap: 12px; font: 400 16px/24px "Inter"; }
+.step > span { min-width: 82px; }
+.step button img { width: 30px; height: 30px; }
+.step output { width: 26px; text-align: center; }
+.al textarea { height: 125px; border: 1px solid var(--gray); border-radius: 20px; padding: 16px 14px; font: 400 14px/20px "Inter"; resize: none; outline: 0; }
+.al textarea:focus, .al .field input:focus { border-color: var(--dark); box-shadow: 0 0 0 3px var(--lighter); }
+.drop-zone { position: relative; height: 270px; border: 2px dashed var(--gray); border-radius: 12px; display: grid; place-items: center; align-content: center; gap: 12px; font: 600 20px/28px "Inter"; color: var(--gray); cursor: pointer; transition: background .12s; }
+.drop-zone:hover { background: #f6fbff; }
+.drop-zone > img { width: 60px; height: 60px; }
+.drop-zone .picked { position: absolute; inset: 16px; display: none; grid-template-columns: repeat(5, 1fr); gap: 10px; align-content: center; background: #fff; }
+.drop-zone.has .picked { display: grid; }
+.drop-zone .picked img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
+.submit { display: block; text-align: center; padding: 18px; border-radius: 50px; background: #3ea6fc; color: #fff; font: 600 24px/34px "Inter"; transition: background .12s; }
+.submit:hover { background: #2894ee; }</style></head>
+<body><div class="screen" aria-label="Add a listing for sublet">
+<header data-render="header"></header>
+<main class="al">
+<div class="al-head"><h1>Add listing</h1><nav class="bp-switch big" aria-label="Lease or sublet"><a href="#" data-overlay="switch-to-lease">Lease</a><a class="on" aria-current="true">Sublet</a></nav></div>
+<section><h2><img src="assets/icons/clipboard-list.svg" alt="">Property Details</h2>
+  <div class="g2"><label class="field ">Address<input placeholder="330 De Neve Dr Los Angeles..."></label><label class="field ">Unit number<input placeholder="Unit 204"></label><label class="field ">Sq ft<input placeholder="1,247 sq ft"></label><label class="field ">Parking spots<input placeholder="4"></label><div class="bb wide"><h3>Bed &amp; Bath</h3><div class="two"><span class="step"><span>Bedrooms</span><button type="button" data-step="-1" aria-label="Fewer bedrooms"><img src="assets/icons/minus-circle.svg" alt=""></button><output>4</output><button type="button" data-step="1" aria-label="More bedrooms"><img src="assets/icons/plus-circle.svg" alt=""></button></span><span class="step"><span>Bathrooms</span><button type="button" data-step="-1" aria-label="Fewer bathrooms"><img src="assets/icons/minus-circle.svg" alt=""></button><output>4</output><button type="button" data-step="1" aria-label="More bathrooms"><img src="assets/icons/plus-circle.svg" alt=""></button></span></div></div></div></section><hr>
+<section><h2><img src="assets/icons/dollar-sign.svg" alt="">Financial Information</h2><div class="g2"><label class="field ">Rent<input placeholder="$1,644 per month"></label></div></section><hr><section><h2><img src="assets/icons/calendar-days.svg" alt="">Availability</h2><div class="g2"><div class="bb"><h3>Occupancy</h3><span class="step"><span>Vacancies</span><button type="button" data-step="-1" aria-label="Fewer vacancies"><img src="assets/icons/minus-circle.svg" alt=""></button><output>4</output><button type="button" data-step="1" aria-label="More vacancies"><img src="assets/icons/plus-circle.svg" alt=""></button></span></div><div class="bb"><h3>Sublet length</h3><span class="step"><span>Months</span><button type="button" data-step="-1" aria-label="Fewer months"><img src="assets/icons/minus-circle.svg" alt=""></button><output>6</output><button type="button" data-step="1" aria-label="More months"><img src="assets/icons/plus-circle.svg" alt=""></button></span></div></div></section><hr>
+<section><h2><img src="assets/icons/tag.svg" alt="" class="blue">Additional Comments</h2><textarea rows="4" placeholder="Include any additional comments about this listing here." aria-label="Additional comments"></textarea></section><hr>
+<section><h2 class="sm"><img src="assets/icons/camera.svg" alt="">Add photos <i>(<span id="pc">0</span>/10)</i></h2>
+  <label class="drop-zone"><input type="file" accept="image/*" multiple hidden><img src="assets/icons/plus.svg" alt=""><span>Upload your photos here</span><div class="picked"></div></label></section>
+<a class="submit" href="#" data-overlay="listing-sent">Submit</a>
+</main>
+<footer data-render="footer"></footer>
+</div><script>
+(function () {
+  document.querySelectorAll('[data-step]').forEach(function (b) {
+    b.addEventListener('click', function () { var o = b.parentNode.querySelector('output'); o.textContent = Math.max(0, Math.min(36, +o.textContent + +b.dataset.step)); });
+  });
+  var zone = document.querySelector('.drop-zone'), input = zone.querySelector('input'), picked = zone.querySelector('.picked');
+  input.addEventListener('change', function () {
+    var files = [].slice.call(input.files, 0, 10); picked.innerHTML = '';
+    files.forEach(function (f) { var im = new Image(); im.src = URL.createObjectURL(f); im.alt = ''; picked.appendChild(im); });
+    zone.classList.toggle('has', files.length > 0); document.getElementById('pc').textContent = files.length;
+  });
+})();
+</script><script src="bp.js"></script><script src="proto.js"></script>
+</body></html>

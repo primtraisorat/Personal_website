@@ -5,6 +5,7 @@ Each Figma prototype rebuilt as plain HTML/CSS you can open and click through. N
 | Project | Open | Figma source |
 | --- | --- | --- |
 | TappedIn | `tappedin/index.html` | Mid-fis Lo-fis Design System, HighFi page |
+| BruinPlace | `bruinplace/index.html` | BruinPlace hi-fi flow (landing, search, listings, profile, add listing) |
 
 ## How a prototype is put together
 
@@ -18,3 +19,5 @@ Each Figma prototype rebuilt as plain HTML/CSS you can open and click through. N
 - Clicking a spot that isn't clickable outlines everything that is, like Figma's hotspot hints.
 
 To add a screen: copy one in `screens/`, change it, add it to `SCREENS` in `index.html`, and point a `data-go` or `data-overlay` at it.
+
+BruinPlace keeps its shared pieces (header, footer, listing cards, maps, star rows, dropdowns) in `bruinplace/screens/bp.js`, which fills in any element marked `data-render="…"` before `proto.js` wires the links.

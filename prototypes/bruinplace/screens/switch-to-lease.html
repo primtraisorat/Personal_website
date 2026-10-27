@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>BruinPlace · Change listing to lease?</title>
+<link rel="stylesheet" href="bp.css">
+<style>
+.screen { width: 465px; height: 202px; border-radius: 25px; }
+.warn { height: 100%; display: grid; align-content: center; justify-items: center; gap: 18px; padding: 0 40px; text-align: center; }
+.warn p { font: 400 16px/24px "Inter"; color: #333; }
+.warn b { display: block; font: 600 20px/30px "Inter"; color: #000; }
+.warn div { display: flex; gap: 12px; }
+.warn a { padding: 6px 20px; border-radius: 25px; font: 600 15px/24px "Inter"; border: 1px solid var(--dark); color: var(--dark); }
+.warn a.go { background: var(--dark); color: #fff; }
+.warn a:hover { filter: brightness(.95); }</style></head>
+<body><div class="screen" aria-label="Change listing to lease? pop-up">
+<div class="warn"><p><b>Change listing to lease?</b>Any information you’ve filled out will be erased.</p><div><a href="#" data-close>Cancel</a><a href="#" class="go" data-go="add-lease">Change to lease</a></div></div>
+</div><script src="proto.js"></script>
+</body></html>

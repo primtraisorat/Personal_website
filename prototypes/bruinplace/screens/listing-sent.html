@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>BruinPlace · Thank you for submitting a listing!</title>
+<link rel="stylesheet" href="bp.css">
+<style>
+.screen { width: 362px; height: 234px; }
+</style></head>
+<body><div class="screen note" aria-label="Thank you for submitting a listing! pop-up">
+<img src="assets/icons/smile.svg" alt=""><p>Thank you for<br>submitting a listing!</p>
+</div><script>/* Closes itself, like the Figma after-delay. A click closes it sooner. */
+setTimeout(function () { if (parent !== window) parent.postMessage({ bruinplace: true, close: true }, "*"); }, 2200);
+document.addEventListener("click", function () { if (parent !== window) parent.postMessage({ bruinplace: true, close: true }, "*"); });</script><script src="bp.js"></script><script src="proto.js"></script>
+</body></html>
