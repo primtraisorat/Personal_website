@@ -29,6 +29,8 @@
   .embed { --bar: 0px; }
   .embed .bar { display: none; }
   .embed .stage { overflow: hidden; }
+  /* The portfolio window is sized to the tallest screen (Dashboard), so shorter screens sit on white, not the dark shell */
+  .embed body { background: #fff; }
   @media (max-width: 1000px) { .help { display: none; } }
   @media (max-width: 700px) { .where { display: none; } }
 </style></head>
