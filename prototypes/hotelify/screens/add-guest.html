@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Hotelify · Add guest</title>
+<link rel="stylesheet" href="hf.css">
+<style>
+.screen { width: 752px; height: 572px; }
+.pic { display: flex; align-items: center; gap: 8px; margin-bottom: 26px; font-size: 14px; font-weight: 500; cursor: pointer; }
+.pic span { width: 80px; height: 80px; border-radius: 50%; background: #d0d5dd; background-size: cover; background-position: center; }
+</style></head>
+<body><div class="screen modal" aria-label="Add guest">
+<label class="pic"><span></span>Add image<input type="file" accept="image/*" hidden></label><div class="form"><div class="field"><label>Name</label><input placeholder="Enter guest name"></div><div class="field"><label>Passport number</label><input placeholder="Enter passport number"></div><div class="field"><label>Phone</label><input placeholder="Enter phone number"></div><div class="field"><label>Email</label><input placeholder="Enter email ID"></div><div class="field"><label>City</label><input placeholder="Enter the city"></div><div class="field"><label>Region</label><input placeholder="Enter the region"></div><div class="field"><label>Address</label><input placeholder="Enter the address"></div><div class="field"><label>Zip code</label><input placeholder="Enter the Zip code"></div></div><div class="actions"><button class="btn ghost" data-close>Cancel</button><button class="btn" data-close>Save</button></div>
+<script>document.querySelector(".pic input").addEventListener("change", function () { var f = this.files[0]; if (f) document.querySelector(".pic span").style.backgroundImage = "url(" + URL.createObjectURL(f) + ")"; });</script>
+</div><script src="hf.js"></script><script src="proto.js"></script>
+</body></html>

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Hotelify · Rooms</title>
+<link rel="stylesheet" href="hf.css">
+<style>
+.screen { width: 1280px; height: 960px; }
+</style></head>
+<body><div class="screen " aria-label="Rooms">
+<aside data-render="side:rooms"></aside>
+<header data-render="top"></header>
+<main class="hf-main">
+<p class="crumb">Rooms</p>
+<div class="toolbar"><div class="grp" data-tabs><button class="chip" data-tab aria-selected="true">All room(100)</button><button class="chip" data-tab aria-selected="false">Available room(20)</button><button class="chip" data-tab aria-selected="false">Booked(80)</button></div><button class="btn" data-overlay="add-room">Add room</button></div>
+<table class="tbl tall"><colgroup><col style="width:153px"><col style="width:200px"><col style="width:147px"><col style="width:298px"><col style="width:150px"><col></colgroup><thead><tr><th>Room number</th><th>Bed type</th><th>Room floor</th><th>Room facility</th><th>Status</th><th></th></tr></thead><tbody><tr><td>#001</td><td>Double bed</td><td>Floor - 1</td><td>AC, shower, Double bed, towel<br>bathtub, TV</td><td><span class="badge b-blue">Available</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>#002</td><td>Single bed</td><td>Floor -2</td><td>AC, shower, Double bed, towel<br>bathtub, TV</td><td><span class="badge b-red">Booked</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>#003</td><td>VIP</td><td>Floor -1</td><td>AC, shower, Double bed, towel<br>bathtub, TV</td><td><span class="badge b-red">Booked</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>#004</td><td>VIP</td><td>Floor -1</td><td>AC, shower, Double bed, towel<br>bathtub, TV</td><td><span class="badge b-green">Reserved</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>#005</td><td>Single bed</td><td>Floor -1</td><td>AC, shower, Double bed, towel<br>bathtub, TV</td><td><span class="badge b-green">Reserved</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>#006</td><td>Double bed</td><td>Floor -2</td><td>AC, shower, Double bed, towel<br>bathtub, TV</td><td><span class="badge b-amber">Waitlist</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>#007</td><td>Double bed</td><td>Floor -3</td><td>AC, shower, Double bed, towel<br>bathtub, TV</td><td><span class="badge b-green">Reserved</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>#008</td><td>Single bed</td><td>Floor -5</td><td>AC, shower, Double bed, towel<br>bathtub, TV</td><td><span class="badge b-amber">Blocked</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr></tbody></table>
+<div class="pager"><button class="btn ghost off"><i data-icon="left"></i>Previous</button><div class="pages" data-tabs><button data-tab aria-selected="true">1</button><button data-tab aria-selected="false">2</button><button data-tab aria-selected="false">3</button><button data-tab aria-selected="false">4</button><button data-tab aria-selected="false">5</button><button data-tab aria-selected="false">6</button><button data-tab aria-selected="false">7</button></div><button class="btn ghost">Next<i data-icon="right"></i></button></div>
+</main>
+</div><script src="hf.js"></script><script src="proto.js"></script>
+</body></html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Hotelify · Front desk · Create booking</title>
+<link rel="stylesheet" href="hf.css">
+<style>
+.screen { width: 1280px; height: 960px; }
+
+.crumb { margin-bottom: 18px; }
+.book { position: relative; height: 260px; margin-bottom: 20px; padding: 32px; border-radius: 6px; background: #fff; box-shadow: 0 2px 8px rgba(16,24,40,.12); }
+.dates { display: flex; gap: 32px; margin-top: 26px; }
+.dates .field { width: 190px; }
+.dt { display: flex; align-items: center; justify-content: space-between; height: 40px; padding: 0 15px; border: 1px solid #98a2b3; border-radius: 4px; color: var(--muted); }
+.dt svg { width: 18px; height: 18px; color: var(--text); }
+.go { position: absolute; right: 32px; top: 110px; padding: 0 24px; }
+.who { display: flex; gap: 32px; margin-top: 28px; }
+.ct { display: flex; align-items: center; gap: 32px; }
+.ct p { font-size: 14px; color: var(--muted); display: grid; gap: 6px; width: 128px; }
+.ct p b { font-weight: 500; color: var(--text); }
+.cnt { display: flex; align-items: center; gap: 22px; font-size: 18px; color: var(--ink); }
+.cnt output { width: 14px; text-align: center; }
+.cnt button { width: 36px; height: 36px; border-radius: 50%; background: var(--blue-50); color: var(--blue); display: grid; place-items: center; }
+.cnt button:hover { background: #d6e6fc; }
+.cnt svg { width: 20px; height: 20px; stroke-width: 2; }
+</style></head>
+<body><div class="screen " aria-label="Front desk · Create booking">
+<aside data-render="side:front-desk"></aside>
+<header data-render="top"></header>
+<main class="hf-main">
+<p class="crumb">Front desk</p>
+<section class="book">
+<div class="grp" data-tabs><button class="chip" data-tab aria-selected="true">All room(5)</button><button class="chip" data-tab aria-selected="false">Single</button><button class="chip" data-tab aria-selected="false">Double</button><button class="chip" data-tab aria-selected="false">Triple</button><button class="chip" data-tab aria-selected="false">VIP</button></div>
+<div class="dates"><div class="field"><label>Check in</label><div class="dt">Tue, Mar 2<i data-icon="calendar"></i></div></div>
+<div class="field"><label>Check out</label><div class="dt">Wed, Mar 10<i data-icon="calendar"></i></div></div>
+<button class="btn go" data-overlay="add-guest">Check availability</button></div>
+<div class="who"><div class="ct"><p><b>Adult</b>Older than 12 years</p><div class="cnt" data-count="1"><button data-step="-" aria-label="One fewer adult"><i data-icon="minus"></i></button><output>1</output><button data-step="+" aria-label="One more adult"><i data-icon="plus"></i></button></div></div>
+<div class="ct"><p><b>Children</b>0 - 12 years</p><div class="cnt" data-count="0"><button data-step="-" aria-label="One fewer child"><i data-icon="minus"></i></button><output>0</output><button data-step="+" aria-label="One more child"><i data-icon="plus"></i></button></div></div></div>
+</section>
+<table class="tbl tall"><colgroup><col style="width:153px"><col style="width:200px"><col style="width:147px"><col style="width:298px"><col style="width:150px"><col></colgroup><thead><tr><th>Room number</th><th>Bed type</th><th>Room floor</th><th>Room facility</th><th>Status</th><th></th></tr></thead><tbody><tr><td>#045</td><td>Double bed</td><td>Floor - 1</td><td>AC, shower, Double bed, towel<br>bathtub, TV</td><td><span class="badge b-blue">Available</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>#020</td><td>Single bed</td><td>Floor -2</td><td>AC, shower, Double bed, towel<br>bathtub, TV</td><td><span class="badge b-red">Booked</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>#003</td><td>VIP</td><td>Floor -1</td><td>AC, shower, Double bed, towel<br>bathtub, TV</td><td><span class="badge b-red">Booked</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>#040</td><td>VIP</td><td>Floor -1</td><td>AC, shower, Double bed, towel<br>bathtub, TV</td><td><span class="badge b-green">Reserved</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>#015</td><td>Single bed</td><td>Floor -1</td><td>AC, shower, Double bed, towel<br>bathtub, TV</td><td><span class="badge b-green">Reserved</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr></tbody></table>
+</main>
+</div><script src="hf.js"></script><script src="proto.js"></script>
+</body></html>

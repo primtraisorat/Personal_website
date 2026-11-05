@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Hotelify · Rate</title>
+<link rel="stylesheet" href="hf.css">
+<style>
+.screen { width: 1280px; height: 960px; }
+.tbl td:first-child { font-weight: 400; }
+.em { color: var(--ink); font-weight: 500; }
+</style></head>
+<body><div class="screen " aria-label="Rate">
+<aside data-render="side:rates"></aside>
+<header data-render="top"></header>
+<main class="hf-main">
+<p class="crumb">Rate</p>
+<div class="toolbar"><span></span><div class="grp"><button class="btn" data-overlay="add-rate">Add rate</button><button class="btn ghost"><i data-icon="filter"></i>Filter</button></div></div>
+<table class="tbl "><colgroup><col style="width:158px"><col style="width:158px"><col style="width:158px"><col style="width:158px"><col style="width:158px"><col style="width:134px"><col></colgroup><thead><tr><th>Room type</th><th>Deals</th><th>Cancellation policy</th><th>Deal price</th><th>Rate</th><th>Availability</th><th></th></tr></thead><tbody><tr><td>Single</td><td>Family deal</td><td>Strict</td><td>$ 800</td><td><span class="em">$ 800</span></td><td><span class="badge b-red">5 rooms</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>Double</td><td>Christmas deal</td><td>Strict</td><td>$ 1,200</td><td><span class="em">$ 1,200</span></td><td><span class="badge b-red">Full</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>Triple</td><td>Family deal</td><td>Flexible</td><td>$ 2,000</td><td><span class="em">$ 2,000</span></td><td><span class="badge b-blue">12 rooms</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr><tr><td>VIP</td><td>Black Friday</td><td>Non refundable</td><td>$ 4,000</td><td><span class="em">$ 4,000</span></td><td><span class="badge b-blue">10 rooms</span></td><td class="more"><i data-icon="dots" class="kebab"></i></td></tr></tbody></table>
+</main>
+</div><script src="hf.js"></script><script src="proto.js"></script>
+</body></html>

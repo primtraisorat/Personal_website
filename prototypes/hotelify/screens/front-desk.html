@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Hotelify · Front desk</title>
+<link rel="stylesheet" href="hf.css">
+<style>
+.screen { width: 1280px; height: 960px; }
+.hf-search.box { width: 300px; background: #fff; border-color: #98a2b3; border-radius: 4px; }
+
+.crumb { margin-bottom: 20px; }
+.fd .legend .badge { height: 36px; border-radius: 4px; padding: 0 8px; font-size: 14px; }
+.fd .legend { gap: 16px; }
+.months { display: flex; margin: 4px 0 0 -10px; padding-bottom: 8px; background: linear-gradient(var(--line), var(--line)) 18px 100% / 674px 1px no-repeat; }
+.months button { width: 88px; height: 36px; flex: none; font-size: 14px; color: var(--text); border-radius: 18px; text-align: center; margin-right: 0; }
+.months button:nth-child(n+9) { position: relative; }
+.days { display: flex; margin: 8px 0 0 0; }
+.days button { width: 48px; height: 36px; flex: none; margin-right: 31px; font-size: 14px; color: var(--text); border-radius: 18px; text-align: center; }
+.months button[aria-selected="true"], .days button[aria-selected="true"] { background: var(--blue-50); color: var(--blue); border: 1px solid var(--blue); }
+.months { overflow: visible; }
+.tl { position: relative; height: 592px; margin-top: 6px; }
+.tl i { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--blue-50); }
+.bk { position: absolute; height: 37px; border-radius: 4px; padding: 0 8px; display: flex; align-items: center; font-size: 14px; cursor: default; transition: filter .15s; }
+.bk:hover { filter: brightness(.96); }
+</style></head>
+<body><div class="screen " aria-label="Front desk">
+<aside data-render="side:front-desk"></aside>
+<header data-render="top"></header>
+<main class="hf-main">
+<p class="crumb">Front desk</p>
+<div class="toolbar fd"><div class="grp legend"><span class="badge b-amber">Due in</span><span class="badge b-blue">Checked out</span><span class="badge b-red">Due out</span><span class="badge b-green">Checked in</span></div>
+<div class="grp"><label class="hf-search box"><i data-icon="search"></i><input placeholder="Search by room number" aria-label="Search by room number"></label><button class="btn" data-go="booking">Create booking</button></div></div>
+<div class="months" data-tabs><button data-tab aria-selected="false">May</button><button data-tab aria-selected="false">Jun</button><button data-tab aria-selected="false">Jul</button><button data-tab aria-selected="false">Aug</button><button data-tab aria-selected="false">Sep</button><button data-tab aria-selected="false">Oct</button><button data-tab aria-selected="false">Nov</button><button data-tab aria-selected="false">Dec</button><button data-tab aria-selected="false">Jan</button><button data-tab aria-selected="true">Feb</button><button data-tab aria-selected="false">Mar</button></div>
+<div class="days" data-tabs><button data-tab aria-selected="false">1</button><button data-tab aria-selected="false">2</button><button data-tab aria-selected="false">3</button><button data-tab aria-selected="false">4</button><button data-tab aria-selected="false">5</button><button data-tab aria-selected="false">6</button><button data-tab aria-selected="false">7</button><button data-tab aria-selected="false">8</button><button data-tab aria-selected="false">9</button><button data-tab aria-selected="true">10</button><button data-tab aria-selected="false">11</button><button data-tab aria-selected="false">12</button></div>
+<div class="tl"><i style="left:29px"></i><i style="left:108px"></i><i style="left:187px"></i><i style="left:266px"></i><i style="left:345px"></i><i style="left:424px"></i><i style="left:503px"></i><i style="left:582px"></i><i style="left:661px"></i><i style="left:740px"></i><i style="left:819px"></i><i style="left:898px"></i><div class="bk b-amber" style="left:108px;top:14px;width:249px" title="Lewis">Lewis</div><div class="bk b-red" style="left:582px;top:14px;width:249px" title="Andrew">Andrew</div><div class="bk b-blue" style="left:187px;top:75px;width:249px" title="Mark">Mark</div><div class="bk b-blue" style="left:29px;top:136px;width:249px" title="Tate">Tate</div><div class="bk b-blue" style="left:582px;top:136px;width:249px" title="Lewis">Lewis</div><div class="bk b-amber" style="left:266px;top:220px;width:249px" title="Manson">Manson</div><div class="bk b-blue" style="left:424px;top:281px;width:249px" title="Mike">Mike</div><div class="bk b-red" style="left:116px;top:342px;width:249px" title="Bruce">Bruce</div><div class="bk b-green" style="left:582px;top:342px;width:249px" title="Mave">Mave</div><div class="bk b-amber" style="left:345px;top:440px;width:249px" title="Otis">Otis</div><div class="bk b-red" style="left:108px;top:546px;width:249px" title="Black">Black</div><div class="bk b-green" style="left:582px;top:546px;width:249px" title="White">White</div></div>
+</main>
+</div><script src="hf.js"></script><script src="proto.js"></script>
+</body></html>

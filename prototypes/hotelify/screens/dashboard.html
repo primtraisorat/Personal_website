@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Hotelify · Dashboard</title>
+<link rel="stylesheet" href="hf.css">
+<style>
+.screen { width: 1280px; height: 1102px; }
+
+.screen { background: var(--page); }
+.hf-top { background: var(--page); }
+.hf-main { left: 220px; right: 0; top: 96px; }
+.date { height: 56px; background: #fff; display: flex; align-items: center; justify-content: center; position: relative; font-size: 14px; color: var(--text); }
+.date .btn { position: absolute; right: 20px; top: 10px; height: 36px; }
+.cards { padding: 20px; display: grid; gap: 20px; }
+.card { background: #fff; border-radius: 6px; padding: 20px 16px; }
+.card h2 { font-size: 20px; font-weight: 500; color: var(--ink); }
+.card.ov { height: 135px; }
+.stats { display: flex; justify-content: space-between; margin-top: 22px; padding-right: 16px; }
+.stats small { font-size: 14px; color: var(--muted); }
+.stats p { font-size: 16px; color: var(--text); display: flex; align-items: baseline; gap: 16px; margin-top: 2px; }
+.stats b { font-size: 26px; font-weight: 600; color: var(--blue); }
+.card.ad { height: 236px; }
+.deals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 23px; margin-top: 18px; }
+.deal { position: relative; height: 150px; border: 1px solid #d0d5dd; border-radius: 4px; padding: 16px; box-shadow: 0 1px 3px rgba(16,24,40,.08); transition: box-shadow .15s; }
+.deal:hover { box-shadow: 0 4px 12px rgba(16,24,40,.12); }
+.deal .badge { height: 20px; border-radius: 3px; font-size: 12px; }
+.deal .dg { background: #b6e9d1; color: var(--green-d); }
+.deal .none { visibility: hidden; }
+.dk { width: 24px; height: 24px; color: var(--text); }
+.deal .dk { position: absolute; right: 16px; top: 16px; }
+.deal .n { font-size: 16px; margin-top: 7px; }
+.deal .q { font-size: 18px; color: var(--muted); margin-top: 8px; }
+.deal .q b { font-size: 22px; font-weight: 600; color: var(--text); }
+.deal .p { font-size: 16px; color: var(--muted); margin-top: 6px; }
+.deal .p b { font-size: 24px; font-weight: 600; color: var(--blue); }
+.row { display: grid; grid-template-columns: 604px 396px; gap: 20px; }
+.card.rs, .card.cr { height: 206px; }
+.two { display: grid; grid-template-columns: 236px 236px; gap: 99px; margin-top: 16px; }
+.two dl { display: grid; grid-template-columns: 1fr auto; row-gap: 9px; font-size: 16px; }
+.two dt, .two dd { margin: 0; color: var(--muted); }
+.two dt:first-child, .two dt:first-child + dd { color: var(--text); }
+.cr { position: relative; }
+.gauge { position: absolute; left: 40px; top: 62px; width: 220px; }
+.gauge text { font: 600 26px Inter, sans-serif; fill: var(--text); }
+.legend { position: absolute; left: 262px; top: 66px; list-style: none; font-size: 12px; color: var(--muted); display: grid; gap: 16px; }
+.legend i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 9px; }
+.card.os, .card.fb { height: 281px; }
+.hd { display: flex; justify-content: space-between; align-items: center; }
+.mo { height: 36px; padding: 0 14px; font-weight: 400; }
+.chart { display: flex; gap: 10px; margin-top: 20px; height: 196px; }
+.axis { display: flex; flex-direction: column; justify-content: space-between; font-size: 11px; color: var(--muted); height: 160px; margin-top: 1px; }
+.plot { flex: 1; display: grid; grid-template-columns: repeat(10, 1fr); gap: 0; height: 160px; background: repeating-linear-gradient(to bottom, #f2f4f7 0 1px, transparent 1px 40px); }
+.col { position: relative; display: flex; align-items: flex-end; justify-content: center; }
+.col .b { width: 22px; background: linear-gradient(#4a8ef2, #6aa1ef); border-radius: 1px; transition: filter .15s; }
+.col:hover .b { filter: brightness(.9); }
+.col span { position: absolute; bottom: -24px; font-size: 12px; color: var(--muted); }
+.fb ul { list-style: none; margin-top: 18px; }
+.fb li { display: flex; justify-content: space-between; align-items: center; padding: 0 0 10px; margin-bottom: 14px; border-bottom: 1px solid #d0d5dd; font-size: 14px; color: var(--muted); }
+.fb li:last-child { border: 0; }
+.fb .who { color: var(--text); margin-bottom: 8px; }
+.fb li span { color: var(--text); font-weight: 500; }
+</style></head>
+<body><div class="screen " aria-label="Dashboard">
+<aside data-render="side:dashboard"></aside>
+<header data-render="top"></header>
+<main class="hf-main">
+
+<div class="date"><span>Friday, November 18, 2025</span><button class="btn" data-overlay="add-deal">Add deal</button></div>
+<div class="cards">
+<section class="card ov"><h2>Overview</h2><div class="stats">
+<div><small>Today’s</small><p>Check-in <b>23</b></p></div><div><small>Today’s</small><p>Check-out <b>13</b></p></div>
+<div><small>Total</small><p>In hotel <b>60</b></p></div><div><small>Total</small><p>Offers sent <b>10</b></p></div>
+<div><small>Total</small><p>Revenue <b>$860</b></p></div></div></section>
+<section class="card ad"><h2>Active Deals</h2><div class="deals" data-go="deals"><div class="deal"><span class="badge dg">2 Deals</span><i data-icon="dots" class="dk"></i>
+<p class="n">Single sharing</p><p class="q"><b>2</b>/30</p><p class="p"><b>$ 568</b>/ day</p></div><div class="deal"><span class="badge dg">2 Deals</span><i data-icon="dots" class="dk"></i>
+<p class="n">Double sharing</p><p class="q"><b>2</b>/35</p><p class="p"><b>$ 1,068</b>/ day</p></div><div class="deal"><span class="badge none"></span><i data-icon="dots" class="dk"></i>
+<p class="n">Triple sharing</p><p class="q"><b>2</b>/25</p><p class="p"><b>$ 1,568</b>/ day</p></div><div class="deal"><span class="badge none"></span><i data-icon="dots" class="dk"></i>
+<p class="n">VIP Suit</p><p class="q"><b>4</b>/10</p><p class="p"><b>$ 2,568</b>/ day</p></div></div></section>
+<div class="row">
+<section class="card rs"><h2>Room Status</h2><div class="two">
+<dl><dt>Occupied rooms</dt><dd>104</dd><dt>Clean</dt><dd>90</dd><dt>Dirty</dt><dd>4</dd><dt>Inspected</dt><dd>60</dd></dl>
+<dl><dt>Available rooms</dt><dd>20</dd><dt>Clean</dt><dd>30</dd><dt>Dirty</dt><dd>19</dd><dt>Inspected</dt><dd>30</dd></dl></div></section>
+<section class="card cr"><h2>Conversion Rate</h2>
+<svg class="gauge" viewBox="0 0 220 130" role="img" aria-label="80% of deals sent were accepted">
+<path d="M20 112 A90 90 0 1 1 200 112" fill="none" stroke="#eef0f2" stroke-width="18" stroke-linecap="round"/>
+<path d="M20 112 A90 90 0 1 1 200 112" fill="none" stroke="#448df2" stroke-width="18" stroke-linecap="round" pathLength="100" stroke-dasharray="80 100"/>
+<text x="110" y="100" text-anchor="middle">80%</text></svg>
+<ul class="legend"><li><i style="background:#448df2"></i>Accepted deals</li><li><i style="background:#eef0f2"></i>Total deals sent</li></ul></section>
+</div>
+<div class="row">
+<section class="card os"><div class="hd"><h2>Occupancy Statistics</h2><button class="btn ghost mo"><i data-icon="calendar"></i>Monthly</button></div>
+<div class="chart"><div class="axis"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div><div class="plot"><div class="col"><div class="b" style="height:90%" title="May: 90%"></div><span>May</span></div><div class="col"><div class="b" style="height:68%" title="Jun: 68%"></div><span>Jun</span></div><div class="col"><div class="b" style="height:86%" title="Jul: 86%"></div><span>Jul</span></div><div class="col"><div class="b" style="height:48%" title="Aug: 48%"></div><span>Aug</span></div><div class="col"><div class="b" style="height:100%" title="Sep: 100%"></div><span>Sep</span></div><div class="col"><div class="b" style="height:89%" title="Oct: 89%"></div><span>Oct</span></div><div class="col"><div class="b" style="height:89%" title="Nov: 89%"></div><span>Nov</span></div><div class="col"><div class="b" style="height:89%" title="Dec: 89%"></div><span>Dec</span></div><div class="col"><div class="b" style="height:100%" title="Jan: 100%"></div><span>Jan</span></div><div class="col"><div class="b" style="height:99%" title="Feb: 99%"></div><span>Feb</span></div></div></div></section>
+<section class="card fb"><div class="hd"><h2>Customers feedback</h2><i data-icon="dots" class="dk"></i></div><ul><li><div><p class="who">Mark</p><p>Food could be better.</p></div><span>A201</span></li><li><div><p class="who">Christian</p><p>Facilities are not enough for amount paid.</p></div><span>A101</span></li><li><div><p class="who">Alexander</p><p>Room cleaning could be better.</p></div><span>A301</span></li></ul></section>
+</div></div>
+</main>
+</div><script src="hf.js"></script><script src="proto.js"></script>
+</body></html>
