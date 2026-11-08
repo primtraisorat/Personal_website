@@ -19,7 +19,13 @@
   addEventListener('load', report);
   if (window.ResizeObserver) new ResizeObserver(report).observe(screen);
 
+  // Overlays: tapping the dimmed backdrop closes them.
+  if (screen.classList.contains('ov')) document.documentElement.classList.add('is-ov');
+  function closeOv() {
+    if (inPlayer) send({ close: true }); else history.back();
+  }
   document.addEventListener('click', function (e) {
+    if (screen.classList.contains('ov') && (e.target === screen || e.target.closest('.st'))) { closeOv(); return; }
     var t = e.target.closest('[data-go], [data-overlay], [data-close], [data-toggle]');
     if (!t) {
       // Dead spot: flash what is clickable, the way Figma does.

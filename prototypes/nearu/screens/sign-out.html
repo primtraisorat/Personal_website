@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>nearU · Sign out</title>
 <link rel="stylesheet" href="nu.css">
-<style>.dim { color: #fff; } .card { color: var(--ink); } .card h2 { margin-top: 18px; }</style></head>
-<body><div class="screen dim" aria-label="Sign out">
-<div data-render="status"></div><div class="card"><h2>are you sure you want<br>to sign out?</h2><p>We definitely don’t want that</p><button class="btn" data-go="account">No, I want to stay</button><button class="btn gray" id="out">Yep, sign out</button></div>
-</div><script src="nu.js"></script><script>document.getElementById("out").addEventListener("click",function(){NU.set("signedOut","1");NU.go("account-empty");});</script><script src="proto.js"></script>
+<style>.card h2 { margin-top: 18px; }</style></head>
+<body><div class="screen ov mid" aria-label="Sign out">
+<div class="card"><h2>are you sure you want<br>to sign out?</h2><p>We definitely don’t want that</p><button class="btn" data-close>No, I want to stay</button><button class="btn gray" id="out">Yep, sign out</button></div>
+</div><script src="data.js"></script><script src="nu.js"></script><script>document.getElementById("out").addEventListener("click",function(){NU.set("signedOut","1");NU.go("account-empty");});</script><script src="proto.js"></script>
 </body></html>

@@ -1,22 +1,28 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>nearU · Product page</title>
 <link rel="stylesheet" href="nu.css">
-<style>.hero { position: relative; height: 393px; flex: none; background: #ece8e1 center / cover; } .hero .st { color: var(--ink); }
-.rb { position: absolute; top: 47px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.85); display: grid; place-items: center; } .rb svg { width: 22px; height: 22px; } .rb.l { left: 14px; } .rb.r { right: 14px; }
-.dots { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; gap: 3px; padding: 3px 5px; border-radius: 6px; background: rgba(255,255,255,.7); } .dots i { width: 5px; height: 5px; border-radius: 3px; background: #c9c9c9; } .dots i.on { width: 12px; background: var(--ink); }
-.pb { padding: 0; flex: 1; } .gray { background: var(--field); padding: 20px 16px 20px; } .price { font-size: 22px; font-weight: 600; } .d { color: var(--gray); font-size: 15px; line-height: 1.4; margin-top: 4px; }
-.sw { display: flex; gap: 10px; margin: 16px 0 20px; } .sw button { display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px; border-radius: 3px; background: #fff; border: 1px solid #e6e6e6; font-size: 13px; }
-.sw button i { width: 14px; height: 14px; border-radius: 50%; } .sw button[aria-selected="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
-.disc { display: flex; align-items: center; gap: 14px; margin: 16px; padding: 10px 14px; border-radius: 4px; background: var(--field); } .disc svg { width: 22px; height: 22px; } .disc .sp { flex: 1; font-size: 15px; } .disc small { display: block; font-size: 12px; color: var(--muted); }
+<style>.hero { position: relative; height: 340px; flex: none; } .hero > .pic { position: absolute; inset: 0; } .hero .st { position: relative; z-index: 1; color: var(--ink); }
+.rb { position: absolute; z-index: 1; top: 47px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.85); display: grid; place-items: center; } .rb svg { width: 22px; height: 22px; } .rb.l { left: 14px; } .rb.r { right: 14px; }
+.pb { padding: 0; flex: 1; } .gray { background: var(--field); padding: 18px 16px 20px; } .price { font-size: 22px; font-weight: 600; } .d { font-size: 15px; line-height: 1.4; margin-top: 4px; }
+.ds { color: var(--gray); font-size: 13px; line-height: 1.5; margin: 6px 0 18px; }
+.sl .av { width: 30px; height: 30px; border-radius: 50%; background: center / cover; flex: none; } .sl b { font-weight: 500; } .sl small { font-size: 12px; }
+.disc { display: flex; align-items: center; gap: 14px; margin: 10px 16px; padding: 10px 14px; border-radius: 4px; background: var(--field); } .disc svg { width: 22px; height: 22px; } .disc .sp { flex: 1; font-size: 14px; } .disc small { display: block; font-size: 12px; color: var(--muted); }
 .disc button { background: var(--yellow); height: 30px; padding: 0 12px; border-radius: 2px; font-size: 14px; font-weight: 500; } .pb .li { margin: 0 16px; border-bottom: 1px solid #f2f2f2; }</style></head>
 <body><div class="screen on-photo" aria-label="Product page">
-<div class="hero" style="background-image:url(assets/hero-bedside.webp)"><div data-render="status"></div><button class="rb l" data-go="catalog" aria-label="Back"><i data-icon="back"></i></button>
-<button class="rb r heart" data-toggle aria-pressed="true" aria-label="Save"><i data-icon="heart"></i></button><span class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></span></div>
-<div class="body pb"><div class="gray"><p class="price">$150.00</p><p class="d">Wooden bedside table featuring a raised design on the door</p>
-<div class="sw" data-tabs><button data-tab aria-selected="true"><i style="background:#9a6a1d"></i>Brown</button><button data-tab aria-selected="false"><i style="background:#1e1e1e"></i>Black</button></div>
-<button class="btn blue" data-go="bag">Add to bag <i data-icon="bagbtn"></i></button></div>
-<div class="disc"><i data-icon="percent"></i><span class="sp">Discount for you<small>Use promocode NEARU</small></span><button id="copy">Copy</button></div>
-<a class="li" data-go="product-info"><span class="sp">Product information</span><i data-icon="chev" class="chev"></i></a>
-<a class="li" data-go="reviews"><span class="sp">Reviews</span><span class="v">32</span></a></div>
-</div><script src="nu.js"></script><script>document.getElementById("copy").addEventListener("click",function(){var b=this;try{navigator.clipboard.writeText("NEARU").catch(function(){});}catch(e){}b.textContent="Copied";setTimeout(function(){b.textContent="Copy";},1500);});</script><script src="proto.js"></script>
+<div class="hero" id="hero"><div data-render="status"></div><button class="rb l" data-go="catalog" aria-label="Back"><i data-icon="back"></i></button>
+<button class="rb r heart" id="hh" data-toggle aria-pressed="false" aria-label="Save"><i data-icon="heart"></i></button></div>
+<div class="body pb"><div class="gray"><p class="price" id="price"></p><p class="d" id="title"></p><p class="ds" id="desc"></p>
+<button class="btn blue" id="add">Add to bag <i data-icon="bagbtn"></i></button></div>
+<a class="li sl" data-go="reviews"><span class="av" id="av"></span><span class="sp" id="seller"></span><span class="v">★ 4.9</span></a>
+<div class="disc"><i data-icon="percent"></i><span class="sp">$5 off your first pick-up<small>Use promocode NEARU</small></span><button id="copy">Copy</button></div>
+<a class="li" data-overlay="product-info"><span class="sp">Product information</span><i data-icon="chev" class="chev"></i></a>
+<a class="li" data-go="reviews"><span class="sp">Seller reviews</span><span class="v">32</span></a></div>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var it=NU.item(decodeURIComponent(location.hash.slice(1))||NU.get("item"));NU.set("item",it.id);
+document.getElementById("hero").insertAdjacentHTML("afterbegin",NU.pic(it,"hero"));document.querySelector(".rb.l").setAttribute("data-go","catalog#"+it.cat);
+var hh=document.getElementById("hh");hh.setAttribute("data-id",it.id);hh.setAttribute("aria-pressed",NU.isSaved(it.id));
+document.getElementById("price").textContent=NU.money(it);document.getElementById("title").textContent=it.title;
+document.getElementById("desc").textContent=it.cat==="housing"?it.cond+", close to campus. Message me to set up a viewing near "+it.place+".":it.cat==="tickets"?"Can’t make it anymore. "+it.cond+" right after you pay, venue is "+it.place+".":it.price?"Selling because I’m moving out at the end of the quarter. "+it.cond+", pick up near "+it.place+" or we can meet on campus.":"Free to whoever can pick it up first. "+it.cond+", near "+it.place+".";
+document.getElementById("seller").innerHTML="<b></b><small>UCLA student · replies in about an hour</small>";document.querySelector("#seller b").textContent=it.seller;document.getElementById("av").style.backgroundImage="url(assets/"+it.av+".webp)";
+document.getElementById("add").addEventListener("click",function(){NU.addToBag(it.id);NU.go("bag");});
+document.getElementById("copy").addEventListener("click",function(){var b=this;try{navigator.clipboard.writeText("NEARU").catch(function(){});}catch(e){}b.textContent="Copied";setTimeout(function(){b.textContent="Copy";},1500);});</script><script src="proto.js"></script>
 </body></html>

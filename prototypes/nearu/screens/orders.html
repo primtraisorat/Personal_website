@@ -2,11 +2,10 @@
 <html lang="en"><head><meta charset="utf-8"><title>nearU · My orders</title>
 <link rel="stylesheet" href="nu.css">
 <style>.duo { margin-bottom: 8px; } .od { display: block; padding: 14px 0 18px; } .r1 { display: flex; justify-content: space-between; font-size: 15px; } .r1 b { font-weight: 500; } .r2 { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-top: 2px; } .ok { color: var(--green); }
-.th { display: flex; gap: 11px; margin-top: 14px; } .th span { width: 51px; height: 62px; border-radius: 3px; background: center / cover; }</style></head>
+.th { display: flex; gap: 11px; margin-top: 14px; } .th .pic { width: 51px; height: 62px; border-radius: 3px; }</style></head>
 <body><div class="screen " aria-label="My orders">
 <div data-render="status"></div><header data-render="bar:My orders:back:account::"></header><div class="body"><label class="search"><i data-icon="search"></i><input placeholder="Search" aria-label="Search orders"></label>
-<div class="duo"><button>Sort <i data-icon="sort"></i></button><button>Filter <i data-icon="filter"></i></button></div>
-<a class="od" data-go="order"><div class="r1"><span>Yesterday, 10:00 am</span><b>$686.00</b></div><div class="r2"><span>Waiting for payment</span><span>#23124</span></div><div class="th"><span style="background-image:url(assets/bag-bedside.webp)"></span><span style="background-image:url(assets/bag-glass.webp)"></span></div></a>
-<a class="od" data-go="order"><div class="r1"><span>December 25</span><b>$450.00</b></div><div class="r2"><span class="ok">Delivered</span><span>#14124</span></div><div class="th"><span style="background-image:url(assets/o-chair.webp)"></span><span style="background-image:url(assets/o-jug.webp)"></span><span style="background-image:url(assets/o-vase.webp)"></span></div></a></div><nav data-render="tabs:account"></nav>
-</div><script src="nu.js"></script><script src="proto.js"></script>
+<div class="duo"><button>Sort <i data-icon="sort"></i></button><button>Filter <i data-icon="filter"></i></button></div><div id="ol"></div></div><nav data-render="tabs:account"></nav>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var paid=NU.list("paid"),O=[{items:paid.length?paid:[["bedside",1],["fridge",1]],when:paid.length?"Today, just now":"Yesterday, 10:00 am",st:paid.length?"Waiting for pick-up":"Waiting for payment",no:"#23124",total:paid.length?+NU.get("paidTotal"):100},
+ {items:[["calc",1],["lamp",1],["pothos",1]],when:"December 25",st:"Delivered",ok:1,no:"#14124",total:82}];document.getElementById("ol").innerHTML=O.map(function(o){return '<a class="od" data-go="order"><div class="r1"><span>'+o.when+'</span><b>'+NU.usd(o.total)+'</b></div><div class="r2"><span'+(o.ok?' class="ok"':'')+'>'+o.st+'</span><span>'+o.no+'</span></div><div class="th">'+o.items.map(function(r){return NU.pic(NU.item(r[0]),"thumb");}).join("")+'</div></a>';}).join("");</script><script src="proto.js"></script>
 </body></html>

@@ -36,8 +36,58 @@
   window.NU = { icon: icon, guy: guy,
     get: function (k) { try { return sessionStorage.getItem('nu:' + k); } catch (e) { return null; } },
     set: function (k, v) { try { sessionStorage.setItem('nu:' + k, v); } catch (e) {} },
-    go: function (target) { var a = document.createElement('a'); a.setAttribute('data-go', target); a.hidden = true; document.body.appendChild(a); a.click(); a.remove(); }
+    go: function (target) { var a = document.createElement('a'); a.setAttribute('data-go', target); a.hidden = true; document.body.appendChild(a); a.click(); a.remove(); },
+    close: function () { var a = document.createElement('a'); a.setAttribute('data-close', ''); a.hidden = true; document.body.appendChild(a); a.click(); a.remove(); }
   };
+
+  /* Listings (data.js). Bag, saved items and the last order are lists kept in sessionStorage. */
+  var D = window.NU_DATA || { cats: [], items: [], sellers: [['', '']] }, CAT = {}, ITEM = {};
+  NU.cats = D.cats.map(function (c) { return CAT[c[0]] = { key: c[0], emoji: c[1], label: c[2], bg: c[3] }; });
+  NU.items = D.items.map(function (r, i) {
+    var c = CAT[r[1]] || {}, s = D.sellers[i % D.sellers.length];
+    return ITEM[r[0]] = { id: r[0], cat: r[1], pic: r[2], price: r[3], title: r[4], cond: r[5], place: r[6], tag: r[7] || '', unit: r[8] || '', bg: c.bg, n: i,
+      seller: s[0], av: s[1], photo: r[2].charAt(0) === '@' ? r[2].slice(1) : '' };
+  });
+  NU.cat = function (k) { return CAT[k] || NU.cats[0]; };
+  NU.item = function (id) { return ITEM[id] || NU.items[0]; };
+  NU.money = function (it) { return it.price ? '$' + it.price.toLocaleString('en-US') + it.unit : 'Free'; };
+  NU.usd = function (n) { return '$' + n.toFixed(2); };
+  /* A listing's picture: a photo, or its emoji on the category color. kind = tile | hero | row | thumb */
+  NU.pic = function (it, kind, extra) {
+    return '<div class="pic ' + kind + (it.photo ? '' : ' em') + '" style="' + (it.photo ? 'background-image:url(assets/' + (kind === 'hero' && it.id === 'bedside' ? 'hero-bedside' : it.photo) + '.webp)' : 'background-color:' + it.bg) + '"' + (extra || '') + '>' +
+      (it.photo ? '' : '<span class="e" aria-hidden="true">' + it.pic + '</span>') + '</div>';
+  };
+  NU.list = function (k) {
+    var DEF = { bag: [['bedside', 1], ['fridge', 1]], saved: ['dunks', 'rivalry', 'guitar'] };
+    try { var v = JSON.parse(NU.get(k)); if (Array.isArray(v)) return v; } catch (e) {}
+    return (DEF[k] || []).slice();
+  };
+  NU.keep = function (k, v) { NU.set(k, JSON.stringify(v)); };
+  NU.isSaved = function (id) { return NU.list('saved').indexOf(id) >= 0; };
+  NU.addToBag = function (id) {
+    var b = NU.list('bag'), f = b.filter(function (r) { return r[0] === id; })[0];
+    if (f) f[1]++; else b.unshift([id, 1]);
+    NU.keep('bag', b);
+  };
+  NU.totals = function () {
+    var sub = 0; NU.list('bag').forEach(function (r) { sub += NU.item(r[0]).price * r[1]; });
+    var disc = !NU.get('nopromo') && sub >= 10 ? 5 : 0;
+    return { sub: sub, disc: disc, total: sub - disc };
+  };
+  NU.tile = function (it) {
+    return '<article class="tile">' + NU.pic(it, 'im', ' data-go="product#' + it.id + '"').replace('</div>', (it.tag ? '<span class="tag">' + it.tag + '</span>' : '') + '</div>') +
+      '<div class="pr"><span>' + NU.money(it) + '</span><button class="heart" data-id="' + it.id + '" data-toggle aria-pressed="' + NU.isSaved(it.id) + '" aria-label="Save">' + icon('heart') + '</button></div>' +
+      '<p>' + it.title + '</p><small class="mt">' + it.cond + ' · ' + it.place + '</small></article>';
+  };
+  /* Hearts anywhere keep the saved list (this runs before proto.js flips aria-pressed). */
+  document.addEventListener('click', function (e) {
+    var h = e.target.closest('.heart[data-id]'); if (!h) return;
+    var s = NU.list('saved'), id = h.getAttribute('data-id'), i = s.indexOf(id), on = h.getAttribute('aria-pressed') !== 'true';
+    if (on && i < 0) s.unshift(id); if (!on && i >= 0) s.splice(i, 1);
+    NU.keep('saved', s);
+  });
+  /* Overlays change state for the screen under them; let that screen redraw. */
+  NU.onStore = function (fn) { addEventListener('storage', function (e) { if (!e.key || e.key.indexOf('nu:') === 0) fn(e.key && e.key.slice(3)); }); };
 
   var SIG = '<span class="ic"><svg viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx=".8" fill="currentColor"/><rect x="5" y="5" width="3" height="6" rx=".8" fill="currentColor"/><rect x="10" y="2.5" width="3" height="8.5" rx=".8" fill="currentColor"/><rect x="15" y="0" width="3" height="11" rx=".8" fill="currentColor"/></svg>' +
     '<svg viewBox="0 0 16 11"><path d="M8 2.3c2.2 0 4.2.9 5.7 2.3l1.1-1.2A9.8 9.8 0 0 0 8 .7 9.8 9.8 0 0 0 1.2 3.4l1.1 1.2A8.1 8.1 0 0 1 8 2.3zm0 3.4c1.2 0 2.3.5 3.2 1.2l1.1-1.2A6.4 6.4 0 0 0 8 4.1a6.4 6.4 0 0 0-4.3 1.6l1.1 1.2c.9-.7 2-1.2 3.2-1.2zM8 9l1.5 1.6L8 12.1 6.5 10.6z" fill="currentColor"/></svg>' +
@@ -58,7 +108,7 @@
     else if (r[0] === 'tabs') {
       el.className = 'tabs';
       el.innerHTML = TABS.map(function (t) {
-        var target = t[0] === 'bag' ? (NU.get('bagEmpty') ? 'bag-empty' : 'bag') : t[0] === 'saved' ? (NU.get('savedEmpty') ? 'saved-empty' : 'saved') : t[0] === 'account' ? (NU.get('signedOut') ? 'account-empty' : 'account') : 'home';
+        var target = t[0] === 'bag' ? (NU.list('bag').length ? 'bag' : 'bag-empty') : t[0] === 'saved' ? (NU.list('saved').length ? 'saved' : 'saved-empty') : t[0] === 'account' ? (NU.get('signedOut') ? 'account-empty' : 'account') : 'home';
         return '<a data-go="' + target + '" aria-label="' + t[2] + '"' + (t[0] === r[1] ? ' aria-current="page"' : '') + '>' + t[1] + '</a>';
       }).join('');
     }
@@ -97,5 +147,5 @@
     g.dispatchEvent(new CustomEvent('tab', { detail: t }));
   });
   // Every screen has the iPhone home indicator
-  var s = document.querySelector('.screen'); if (s && !s.classList.contains('pop')) { var h = document.createElement('i'); h.className = 'homebar'; s.appendChild(h); }
+  var s = document.querySelector('.screen'); if (s && !s.matches('.pop, .ov.mid')) { var h = document.createElement('i'); h.className = 'homebar'; s.appendChild(h); }
 })();

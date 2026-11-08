@@ -4,5 +4,5 @@
 <style>.screen.blue { background: var(--blue); } .sp { flex: 1; display: grid; place-items: center; align-content: center; gap: 2px; margin-top: -44px; } .sp img { width: 46px; height: auto; } .sp b { font-size: 26px; font-weight: 600; }</style></head>
 <body><div class="screen blue" aria-label="Splash">
 <div data-render="status"></div><div class="sp"><img src="assets/splash-hand.webp" alt="" width="46" height="37"><b>nearU</b></div>
-</div><script src="nu.js"></script><script>NU.set("fresh","1");setTimeout(function(){ NU.go("home"); }, 1800);document.addEventListener("click", function(e){ if (!e.target.closest("[data-go]")) NU.go("home"); });</script><script src="proto.js"></script>
+</div><script src="data.js"></script><script src="nu.js"></script><script>setTimeout(function(){ NU.go("home"); }, 1800);document.addEventListener("click", function(e){ if (!e.target.closest("[data-go]")) NU.go("home"); });</script><script src="proto.js"></script>
 </body></html>

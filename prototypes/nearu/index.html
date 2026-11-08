@@ -19,12 +19,9 @@
   .embed .frame { box-shadow: 0 10px 40px rgba(0,0,0,.12); }
   /* color-scheme must match the screens (light), or browsers paint an opaque box behind the iframe and the rounded corners disappear */
   .frame iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: transparent; color-scheme: light; }
-  .shade { position: fixed; inset: var(--bar) 0 0 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; }
-  .shade.open { display: flex; }
-  .pop { position: relative; flex: none; }
-  .pop { filter: drop-shadow(0 20px 40px rgba(0,0,0,.35)); }
-  .pop iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: transparent; color-scheme: light; }
-  .pop .clip { position: absolute; inset: 0; overflow: hidden; border-radius: var(--r, 25px); }
+  /* Overlays (sort, sheets, the sign-out card) sit on top of the screen inside the same phone frame */
+  .frame #over { display: none; }
+  .frame.ov #over { display: block; }
   .help { color: #8a8a8a; }
   /* index.html?embed (the portfolio): just the screens, no bar */
   .embed { --bar: 0px; }
@@ -38,35 +35,30 @@
 <body>
 <div class="bar">
   <b>nearU</b><span class="where" id="where"></span><span class="sp"></span>
-  <span class="help">Click anywhere to see what's clickable · Esc closes pop-ups</span>
+  <span class="help">Click anywhere to see what's clickable · Esc closes overlays</span>
   <select id="jump" aria-label="Jump to screen"></select>
   <button id="restart">Restart</button>
 </div>
-<div class="stage" id="stage"><div class="frame" id="frame"><iframe id="main" title="nearU screen"></iframe></div></div>
-<div class="shade" id="shade"><div class="pop" id="pop"><div class="clip"><iframe id="over" title="nearU pop-up"></iframe></div></div></div>
+<div class="stage" id="stage"><div class="frame" id="frame"><iframe id="main" title="nearU screen"></iframe><iframe id="over" title="nearU overlay"></iframe></div></div>
 <script>
 /* Screens and how they open. Sizes are the Figma frame sizes. */
 var SCREENS = {
   'splash': ['Splash', 375, 812],
-  'home': ['Home', 375, 812],
-  'newsletter': ['Newsletter pop-up', 375, 812],
-  'categories': ['Categories', 375, 812],
-  'catalog': ['Catalog', 375, 812],
+  'home': ['Home · all categories', 375, 812],
+  'catalog': ['Catalog (one category)', 375, 812],
   'product': ['Product page', 375, 812],
-  'product-2': ['Product page (spoon rest)', 375, 812],
-  'story': ['Story', 375, 812],
   'reviews': ['Reviews', 375, 812],
   'new-review': ['New review', 375, 812],
-  'product-info': ['Product information', 375, 812],
+  'product-info': ['Product information (overlay)', 375, 812, 1],
   'filter': ['Filter', 375, 812],
   'filter-category': ['Filter · Category', 375, 812],
-  'sort': ['Sort', 375, 812],
+  'sort': ['Sort (overlay)', 375, 812, 1],
   'no-internet': ['No connection', 375, 812],
   'bag-empty': ['Bag (empty)', 375, 812],
   'bag': ['Bag', 375, 812],
   'contact': ['Checkout · Contact info', 375, 812],
   'delivery': ['Checkout · Delivery', 375, 812],
-  'delivery-address': ['Delivery address', 375, 812],
+  'delivery-address': ['Delivery address (overlay)', 375, 812, 1],
   'payment': ['Checkout · Payment', 375, 812],
   'success': ['Order placed', 375, 812],
   'search': ['Search', 375, 812],
@@ -84,8 +76,8 @@ var SCREENS = {
   'address': ['Address', 375, 812],
   'delivery-country': ['Delivery country', 375, 812],
   'payment-methods': ['Payment methods', 375, 812],
-  'new-card': ['New card', 375, 812],
-  'sign-out': ['Sign out', 375, 812],
+  'new-card': ['New card (overlay)', 375, 812, 1],
+  'sign-out': ['Sign out (overlay)', 375, 812, 1],
   'settings': ['Settings', 375, 812],
   'orders': ['My orders', 375, 812],
   'order': ['Order #23124', 375, 812],
@@ -94,8 +86,7 @@ var SCREENS = {
 };
 var START = 'splash';
 var main = document.getElementById('main'), over = document.getElementById('over'),
-    frame = document.getElementById('frame'), pop = document.getElementById('pop'),
-    shade = document.getElementById('shade'), stage = document.getElementById('stage'),
+    frame = document.getElementById('frame'), stage = document.getElementById('stage'),
     jump = document.getElementById('jump'), where = document.getElementById('where');
 var base = START, overlay = null, embedded = window.top !== window;
 if (/[?&]embed\b/.test(location.search)) document.documentElement.classList.add('embed');
@@ -113,7 +104,7 @@ function fit() {
   /* Phone screens: scale the whole 375x812 frame to fit the stage, centered. */
   var s = SCREENS[base], pad = document.documentElement.classList.contains('embed') ? 0 : 24,
       scale = Math.min(1.25, (stage.clientWidth - pad) / s[1], (stage.clientHeight - pad) / s[2]);
-  main.style.width = s[1] + 'px'; main.style.height = s[2] + 'px'; main.style.transform = 'scale(' + scale + ')';
+  [main, over].forEach(function (f) { f.style.width = s[1] + 'px'; f.style.height = s[2] + 'px'; f.style.transform = 'scale(' + scale + ')'; });
   frame.style.width = s[1] * scale + 'px'; frame.style.height = s[2] * scale + 'px';
   frame.style.marginTop = Math.max(0, (stage.clientHeight - s[2] * scale) / 2) + 'px';
 }
@@ -128,12 +119,11 @@ function show(target, push) {
 }
 function open(name, extra, push) {
   if (!main.src) { main.src = 'screens/' + base + '.html'; }
-  overlay = name; load(over, 'screens/' + name + '.html' + (extra || '')); shade.classList.add('open');
-  pop.style.setProperty('--r', SCREENS[name][3] + 'px'); sync(push);
+  overlay = name; load(over, 'screens/' + name + '.html' + (extra || '')); frame.classList.add('ov'); sync(push);
 }
 function close(quiet) {
   if (!overlay) return;
-  overlay = null; shade.classList.remove('open'); over.removeAttribute('src');
+  overlay = null; frame.classList.remove('ov'); over.removeAttribute('src');
   if (!quiet) sync(true);
 }
 function sync(push) {
@@ -161,7 +151,6 @@ addEventListener('message', function (e) {
   else if (m.overlay) show(m.overlay, true);
   else if (m.close) close();
 });
-shade.addEventListener('click', function (e) { if (e.target === shade) close(); });
 addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 addEventListener('popstate', fromHash);
 addEventListener('resize', fit);

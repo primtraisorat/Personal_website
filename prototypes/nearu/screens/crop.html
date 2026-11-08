@@ -5,5 +5,5 @@
 .cr { position: relative; margin-top: 80px; height: 375px; background: url(assets/crop.webp) center / cover; } .cr i { position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, transparent 183px, rgba(0,0,0,.55) 184px); }</style></head>
 <body><div class="screen dim" aria-label="Crop photo">
 <div data-render="status"></div><div class="cb"><button data-go="gallery" aria-label="Back"><i data-icon="back"></i></button><button id="ok" aria-label="Use photo"><i data-icon="check"></i></button></div><div class="cr" id="cr"><i></i></div>
-</div><script src="nu.js"></script><script>var g=NU.get("pick");if(g)document.getElementById("cr").style.backgroundImage="url(assets/"+g+".webp)";document.getElementById("ok").addEventListener("click",function(){NU.set("photo",g||"crop");NU.go("profile-setup");});</script><script src="proto.js"></script>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var g=NU.get("pick");if(g)document.getElementById("cr").style.backgroundImage="url(assets/"+g+".webp)";document.getElementById("ok").addEventListener("click",function(){NU.set("photo",g||"crop");NU.go("profile-setup");});</script><script src="proto.js"></script>
 </body></html>

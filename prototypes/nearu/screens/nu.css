@@ -149,3 +149,27 @@ body.solo .screen { border-radius: 40px; box-shadow: 0 20px 60px rgba(0,0,0,.18)
 .card .btn + .btn { margin-top: 8px; }
 [hidden] { display: none !important; }
 .snack[hidden] { display: flex !important; }
+
+/* Listing pictures: a photo, or the listing's emoji on its category color */
+.pic { background: center / cover no-repeat; position: relative; }
+.pic.em { display: grid; place-items: center; }
+.pic .e { line-height: 1; font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+.tile .pic .e { font-size: 76px; }
+.bi .pic .e { font-size: 46px; }
+.pic.hero .e { font-size: 150px; }
+.pic.thumb .e { font-size: 26px; }
+.tile .mt { display: block; font-size: 11px; color: var(--muted); margin-top: 3px; }
+.tile .pr span { white-space: nowrap; }
+
+/* Overlays: drawn over the screen underneath (the player stacks them in the same phone frame) */
+html.is-ov, html.is-ov body { background: transparent; }
+.screen.ov { background: rgba(0,0,0,.42); animation: ov-fade .2s ease-out; }
+.screen.ov .sheet { animation: ov-up .28s cubic-bezier(.2,.8,.2,1); }
+.screen.ov .card { animation: ov-pop .22s ease-out; }
+.screen.ov.closing { animation: ov-fade .18s ease-in reverse forwards; }
+.screen.ov.closing .sheet { animation: ov-up .18s ease-in reverse forwards; }
+body.solo .screen.ov { background-color: #6b6b6b; }
+@keyframes ov-fade { from { background-color: rgba(0,0,0,0); } }
+@keyframes ov-up { from { transform: translateY(100%); } }
+@keyframes ov-pop { from { transform: scale(.94); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .screen.ov, .screen.ov .sheet, .screen.ov .card { animation: none !important; } }

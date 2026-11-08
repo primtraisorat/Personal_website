@@ -7,9 +7,9 @@
 <div data-render="status"></div><header data-render="bar:Checkout|2 of 3:back:contact::"></header><div class="body"><h2 class="h2 t">delivery method</h2>
 <div data-tabs><button class="li" data-tab aria-selected="true"><i data-icon="car"></i><span class="sp">By courier<small>Tomorrow, any time</small></span><span class="radio"><i data-icon="check"></i></span></button>
 <button class="li" data-tab aria-selected="false"><i data-icon="cart"></i><span class="sp">I’ll pick it up near campus<small>Any day from tomorrow</small></span><span class="radio"><i data-icon="check"></i></span></button></div>
-<h2 class="h2 t2">delivery address</h2><a class="li" data-go="delivery-address"><i data-icon="pin"></i><span class="sp" id="addr">Los Angeles, 308 Westwood Plaza<small>Hanna Gouse, +1 310 123-4323</small></span><i data-icon="chev" class="chev"></i></a>
+<h2 class="h2 t2">delivery address</h2><a class="li" data-overlay="delivery-address"><i data-icon="pin"></i><span class="sp" id="addr">Los Angeles, 308 Westwood Plaza<small>Hanna Gouse, +1 310 123-4323</small></span><i data-icon="chev" class="chev"></i></a>
 <h2 class="h2 t2">delivery time</h2><div class="pills" data-tabs><button data-tab aria-selected="true">Tomorrow</button><button data-tab>Jun 25</button><button data-tab>Jun 26</button><button data-tab>Jun 27</button></div>
 <div class="pills" data-tabs><button data-tab aria-selected="true">12:00 pm</button><button data-tab>2:00 pm</button><button data-tab>4:00 pm</button><button data-tab>6:00 pm</button></div></div>
 <div class="foot"><button class="btn" data-go="payment">Continue</button></div>
-</div><script src="nu.js"></script><script>var a=NU.get("addr");if(a==="2")document.getElementById("addr").innerHTML="Los Angeles, 330 De Neve Drive<small>Jane Smith, +1 424 343-1254</small>";</script><script src="proto.js"></script>
+</div><script src="data.js"></script><script src="nu.js"></script><script>function d(){var a=NU.get("addr");document.getElementById("addr").innerHTML=a==="2"?"Los Angeles, 330 De Neve Drive<small>Jane Smith, +1 424 343-1254</small>":"Los Angeles, 308 Westwood Plaza<small>Hanna Gouse, +1 310 123-4323</small>";}d();NU.onStore(function(k){if(k==="addr")d();});</script><script src="proto.js"></script>
 </body></html>

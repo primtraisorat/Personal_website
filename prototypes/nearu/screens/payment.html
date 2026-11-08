@@ -7,6 +7,6 @@
 <button class="li" data-tab aria-selected="true"><span class="mc"><i></i><i></i></span><span class="sp">Mastercard 9833<small>734, Exp: 12/29</small></span><span class="radio"><i data-icon="check"></i></span></button>
 <button class="li" data-tab><b class="visa">VISA</b><span class="sp">Visa 7233<small>321, Exp: 11/29</small></span><span class="radio"><i data-icon="check"></i></span></button>
 <button class="li" data-tab><svg class="apple" viewBox="0 0 24 24"><path fill="currentColor" d="M16.4 12.6c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8s-1.7-.8-2.8-.8c-1.5 0-2.8.9-3.6 2.2-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.2s1.5-.7 2.8-.7 1.7.7 2.8.7 1.9-1.1 2.6-2.1c.8-1.2 1.1-2.3 1.2-2.4-.1 0-2.2-.8-2.2-3.5zM14.2 6.1c.6-.7 1-1.7.9-2.6-.9 0-1.9.6-2.5 1.3-.6.6-1 1.6-.9 2.6 1 .1 1.9-.5 2.5-1.3z"/></svg><span class="sp">Apple pay</span><span class="radio"><i data-icon="check"></i></span></button></div></div>
-<div class="foot"><button class="btn" data-go="success">Pay $686.00</button></div>
-</div><script src="nu.js"></script><script src="proto.js"></script>
+<div class="foot"><button class="btn" data-go="success" id="pay">Pay</button></div>
+</div><script src="data.js"></script><script src="nu.js"></script><script>document.getElementById("pay").textContent="Pay "+NU.usd(NU.totals().total);</script><script src="proto.js"></script>
 </body></html>
