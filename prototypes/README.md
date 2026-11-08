@@ -6,7 +6,7 @@ Each Figma prototype rebuilt as plain HTML/CSS you can open and click through. N
 | --- | --- | --- |
 | TappedIn | `tappedin/index.html` | Mid-fis Lo-fis Design System, HighFi page |
 | BruinPlace | `bruinplace/index.html` | BruinPlace hi-fi flow (landing, search, listings, profile, add listing) |
-| nearU | `nearu/index.html` | nearU app (Ulmo e-commerce kit): browse, product, bag and checkout, search, sign-in, account, saved items |
+| nearU | `nearu/index.html` | nearU college marketplace (Ulmo e-commerce kit look): emoji categories, made-up campus listings, product, bag and checkout, search, sign-in, account, saved items. Sort and other sheets open as overlays |
 | Hotelify | `hotelify/index.html` | Hotelify dashboard flow (dashboard, front desk, guests, rooms, deals, rates, add forms) |
 
 ## How a prototype is put together
@@ -26,4 +26,4 @@ BruinPlace keeps its shared pieces (header, footer, listing cards, maps, star ro
 
 Hotelify keeps its sidebar, top bar and icons in `hotelify/screens/hf.js` (filled in from `data-render="side:rooms"`, `data-render="top"` and `<i data-icon="…">`), plus tab groups (`data-tabs`) and the guest counters (`data-count`).
 
-nearU keeps its status bar, top bar, tab bar, keyboards and the little empty-state character in `nearu/screens/nu.js`. Small bits of state (bag emptied, signed out, chosen photo, new card) live in sessionStorage so the flow stays consistent while you click around.
+nearU keeps its status bar, top bar, tab bar, keyboards and the little empty-state character in `nearu/screens/nu.js`. Small bits of state (bag emptied, signed out, chosen photo, new card) live in sessionStorage so the flow stays consistent while you click around. Listings and categories live in `nearu/screens/data.js`.
