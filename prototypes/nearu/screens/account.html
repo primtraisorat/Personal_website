@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · My account</title>
+<link rel="stylesheet" href="nu.css">
+<style>.g { display: flex; justify-content: flex-end; padding-top: 6px; } .g svg { width: 24px; height: 24px; } .big { margin-bottom: 12px; } .me .av { width: 30px; height: 30px; border-radius: 50%; background: center / cover; } .li { font-size: 15px; }</style></head>
+<body><div class="screen " aria-label="My account">
+<div data-render="status"></div><div class="body"><div class="g"><button data-go="settings" aria-label="Settings"><i data-icon="gear"></i></button></div><h1 class="big">my account</h1><div class="li me"><span class="av" style="background-image:url(assets/av-tanya.webp)"></span><span class="sp">Tanya Morenko<small>+1 310 323-3212</small></span></div><a class="li" data-go="orders"><i data-icon="bag"></i><span class="sp">My orders</span><span class="v">14</span></a><a class="li" data-go="details"><i data-icon="user"></i><span class="sp">My Details</span><span class="v"></span></a><a class="li" data-go="address-book"><i data-icon="pin"></i><span class="sp">Address book</span><span class="v"></span></a><a class="li" data-go="payment-methods"><i data-icon="card"></i><span class="sp">Payment Methods</span><span class="v"></span></a><a class="li" data-go="sign-out"><i data-icon="out"></i><span class="sp">Sign out</span><span class="v"></span></a></div><nav data-render="tabs:account"></nav>
+</div><script src="nu.js"></script><script>NU.set("signedOut","");var p=NU.get("photo");document.querySelectorAll(".av").forEach(function(a){if(p)a.style.backgroundImage="url(assets/"+p+".webp)";});</script><script src="proto.js"></script>
+</body></html>

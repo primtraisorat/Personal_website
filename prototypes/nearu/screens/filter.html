@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Filter</title>
+<link rel="stylesheet" href="nu.css">
+<style>.range { display: flex; justify-content: space-between; font-size: 15px; font-weight: 500; margin-top: 8px; } .slider { position: relative; height: 30px; margin: 4px 0 18px; }
+.slider::before { content: ""; position: absolute; left: 0; right: 0; top: 14px; height: 1px; background: #e0e0e0; } #fill { position: absolute; top: 14px; height: 1px; background: var(--yellow); }
+.slider input { position: absolute; inset: 0; width: 100%; margin: 0; background: none; pointer-events: none; -webkit-appearance: none; appearance: none; }
+.slider input::-webkit-slider-thumb { -webkit-appearance: none; pointer-events: auto; width: 28px; height: 14px; border-radius: 2px; background: var(--yellow); cursor: pointer; }
+.slider input::-moz-range-thumb { pointer-events: auto; width: 28px; height: 14px; border: 0; border-radius: 2px; background: var(--yellow); cursor: pointer; } .li { font-size: 15px; } .li .v { font-size: 14px; }</style></head>
+<body><div class="screen " aria-label="Filter">
+<div data-render="status"></div><header data-render="bar:Filter:close:catalog:Clear:"></header><div class="body"><div class="range"><span id="lo">$0</span><span id="hi">$700</span></div>
+<div class="slider"><input type="range" min="0" max="1000" value="0" id="a" aria-label="Lowest price"><input type="range" min="0" max="1000" value="700" id="b" aria-label="Highest price"><i id="fill"></i></div><a class="li" data-go="filter-category"><span class="sp">Category</span><span class="v">furniture</span></a><a class="li" ><span class="sp">Product type</span><span class="v">All</span></a><a class="li" ><span class="sp">Color</span><span class="v">All</span></a><a class="li" ><span class="sp">Size</span><span class="v">All</span></a><a class="li" ><span class="sp">Quality</span><span class="v">All</span></a></div>
+<div class="foot"><button class="btn" data-go="catalog">Show 25 items</button></div>
+</div><script src="nu.js"></script><script>var a=document.getElementById("a"),b=document.getElementById("b");function u(){if(+a.value>+b.value-50)a.value=+b.value-50;document.getElementById("lo").textContent="$"+a.value;document.getElementById("hi").textContent="$"+b.value;var f=document.getElementById("fill");f.style.left=a.value/10+"%";f.style.right=(100-b.value/10)+"%";}
+a.addEventListener("input",u);b.addEventListener("input",u);u();document.querySelector(".bar .r").addEventListener("click",function(){a.value=0;b.value=1000;u();});</script><script src="proto.js"></script>
+</body></html>

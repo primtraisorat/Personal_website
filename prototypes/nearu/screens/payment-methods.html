@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Payment methods</title>
+<link rel="stylesheet" href="nu.css">
+<style>.mc { display: inline-flex; width: 22px; flex: none; } .mc i { width: 13px; height: 13px; border-radius: 50%; background: #eb001b; } .mc i + i { background: #f79e1b; margin-left: -6px; opacity: .9; } .visa { width: 22px; flex: none; font-size: 10px; font-weight: 700; font-style: italic; color: #1a1f71; } .apple { width: 22px; height: 22px; flex: none; }.add { margin-top: 18px; }</style></head>
+<body><div class="screen " aria-label="Payment methods">
+<div data-render="status"></div><header data-render="bar:Payment methods:back:account::"></header><div class="body"><div class="li"><span class="mc"><i></i><i></i></span><span class="sp">Mastercard 9833<small>734, Exp: 12/29</small></span></div><div class="li"><b class="visa">VISA</b><span class="sp">Visa 7233<small>321, Exp: 11/29</small></span></div>
+<div id="new"></div><button class="btn gray add" data-go="new-card">Add new payment method</button></div><nav data-render="tabs:account"></nav>
+</div><script src="nu.js"></script><script>var n=NU.get("card");if(n)document.getElementById("new").innerHTML='<div class="li"><span class="mc"><i></i><i></i></span><span class="sp">Mastercard '+n+'<small>Exp: 02/26</small></span></div>';</script><script src="proto.js"></script>
+</body></html>

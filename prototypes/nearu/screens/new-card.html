@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · New card</title>
+<link rel="stylesheet" href="nu.css">
+<style>.mc { display: inline-flex; width: 22px; flex: none; } .mc i { width: 13px; height: 13px; border-radius: 50%; background: #eb001b; } .mc i + i { background: #f79e1b; margin-left: -6px; opacity: .9; } .visa { width: 22px; flex: none; font-size: 10px; font-weight: 700; font-style: italic; color: #1a1f71; } .apple { width: 22px; height: 22px; flex: none; }.dim { color: #fff; } .sheet { color: var(--ink); flex: 1; margin-top: 10px; } .x svg { width: 24px; height: 24px; } .big { margin: 8px 0 18px; } .row { display: flex; align-items: center; gap: 12px; } .row > svg { width: 22px; height: 22px; } .row > span:not(.mc) { display: grid; flex: 1; } .row label { font-size: 12px; color: var(--muted); } .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; } .sv { margin-top: 18px; }</style></head>
+<body><div class="screen dim" aria-label="New card">
+<div data-render="status"></div><div class="sheet"><div class="grab"></div><button class="x" data-go="payment-methods" aria-label="Close"><i data-icon="close"></i></button><h1 class="big">new card</h1>
+<div class="fields"><div class="fld row"><i data-icon="card"></i><span><label>Card number</label><input id="cn" value="2343 1234 5431 2345" inputmode="numeric" aria-label="Card number"></span><span class="mc"><i></i><i></i></span></div>
+<div class="two"><div class="fld"><label>Expiry date</label><input type="text" value="02/26" aria-label="Expiry date"></div><div class="fld"><label>CVC/CVV</label><input type="text" value="•••" aria-label="CVC/CVV"></div></div><div class="fld"><label>Name on card</label><input type="text" value="Tanya Morenko" aria-label="Name on card"></div></div><button class="btn sv" id="save">Save card</button></div>
+</div><script src="nu.js"></script><script>document.getElementById("save").addEventListener("click",function(){NU.set("card",document.getElementById("cn").value.replace(/\s/g,"").slice(-4));NU.go("payment-methods");});</script><script src="proto.js"></script>
+</body></html>

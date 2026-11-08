@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Home</title>
+<link rel="stylesheet" href="nu.css">
+<style>.logo { text-align: center; font-size: 28px; font-weight: 600; padding: 34px 0 24px; }
+.rooms { display: grid; gap: 14px; margin-top: 21px; } .room { display: flex; justify-content: space-between; height: 86px; border-radius: 4px; background: var(--field); overflow: hidden; }
+.room b { font-size: 22px; font-weight: 600; padding: 14px 16px; } .room span { width: 82px; background: center / cover; }
+.room.all { height: 56px; align-items: center; } .room.all b { font-size: 16px; font-weight: 500; } .room.all svg { width: 22px; height: 22px; margin-right: 16px; }</style></head>
+<body><div class="screen " aria-label="Home">
+<div data-render="status"></div><div class="body"><h1 class="logo">nearU</h1><label class="search" data-go="search"><i data-icon="search"></i><span>Search</span></label><div class="rooms"><a class="room" data-go="catalog#bedroom"><b>bedroom</b><span style="background-image:url(assets/room-bedroom.webp)"></span></a><a class="room" data-go="catalog#living room"><b>living room</b><span style="background-image:url(assets/room-living.webp)"></span></a><a class="room" data-go="story"><b>kitchen</b><span style="background-image:url(assets/room-kitchen.webp)"></span></a><a class="room" data-go="catalog#dining"><b>dining</b><span style="background-image:url(assets/room-dining.webp)"></span></a><a class="room all" data-go="categories"><b>all categories</b><i data-icon="chev"></i></a></div></div><nav data-render="tabs:home"></nav>
+</div><script src="nu.js"></script><script>if(NU.get("fresh")){NU.set("fresh","");setTimeout(function(){NU.go("newsletter");},900);}</script><script src="proto.js"></script>
+</body></html>

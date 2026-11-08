@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Story</title>
+<link rel="stylesheet" href="nu.css">
+<style>.screen { background: #2a2622; color: #fff; } .ph { position: absolute; inset: 0; background: center / cover; } .ph::after { content: ""; position: absolute; inset: 45% 0 0; background: linear-gradient(transparent, rgba(0,0,0,.72)); }
+.st { position: relative; z-index: 2; } .cl { position: absolute; z-index: 3; right: 14px; top: 47px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.85); color: var(--ink); display: grid; place-items: center; } .cl svg { width: 22px; height: 22px; }
+.tx { position: absolute; z-index: 2; left: 16px; right: 16px; bottom: 76px; } .tx h2 { font-size: 22px; font-weight: 600; line-height: 1.3; } .tx p { font-size: 14px; line-height: 1.5; margin-top: 8px; opacity: .9; }
+.prog { position: absolute; z-index: 2; left: 16px; right: 16px; bottom: 58px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; } .prog i { height: 2px; background: rgba(255,255,255,.35); overflow: hidden; } .prog i::before { content: ""; display: block; height: 100%; width: 0; background: #fff; }
+.prog i.done::before { width: 100%; } .prog i.run::before { width: 100%; transition: width 4s linear; } .next { position: absolute; inset: 100px 0 120px 40%; z-index: 1; }</style></head>
+<body><div class="screen on-photo" aria-label="Story">
+<div class="ph" style="background-image:url(assets/story-jar.webp)"></div><div data-render="status"></div><button class="cl" data-go="home" aria-label="Close"><i data-icon="close"></i></button>
+<div class="tx" id="tx"><h2>glass storage jar with golden lid</h2><p>Hermetic storage jar. Made of glass with a raised slogan detail and a golden screw-on lid. Available in three sizes.</p></div>
+<div class="prog"><i></i><i></i><i></i></div><button class="next" aria-label="Next story"></button>
+</div><script src="nu.js"></script><script>var S=[["glass storage jar with golden lid","Hermetic storage jar. Made of glass with a raised slogan detail and a golden screw-on lid. Available in three sizes."],
+["three sizes, one shelf","Stack the 0.5 l, 1 l and 1.5 l jars for pasta, beans and coffee. The lids click shut and keep everything fresh."],
+["pair it with acacia wood","Our silicone and acacia spoon rest keeps the counter clean. Tap to see it."]], i=0, bars=document.querySelectorAll(".prog i"), t;
+function show(n){i=n;bars.forEach(function(b,j){b.className=j<n?"done":"";});document.querySelector("#tx h2").textContent=S[n][0];document.querySelector("#tx p").textContent=S[n][1];
+ var b=bars[n];b.offsetWidth;b.className="run";clearTimeout(t);t=setTimeout(next,4000);}
+function next(){if(i<2)show(i+1);else NU.go("product-2");}
+document.querySelector(".next").addEventListener("click",next);show(0);</script><script src="proto.js"></script>
+</body></html>

@@ -6,6 +6,7 @@ Each Figma prototype rebuilt as plain HTML/CSS you can open and click through. N
 | --- | --- | --- |
 | TappedIn | `tappedin/index.html` | Mid-fis Lo-fis Design System, HighFi page |
 | BruinPlace | `bruinplace/index.html` | BruinPlace hi-fi flow (landing, search, listings, profile, add listing) |
+| nearU | `nearu/index.html` | nearU app (Ulmo e-commerce kit): browse, product, bag and checkout, search, sign-in, account, saved items |
 | Hotelify | `hotelify/index.html` | Hotelify dashboard flow (dashboard, front desk, guests, rooms, deals, rates, add forms) |
 
 ## How a prototype is put together
@@ -24,3 +25,5 @@ To add a screen: copy one in `screens/`, change it, add it to `SCREENS` in `inde
 BruinPlace keeps its shared pieces (header, footer, listing cards, maps, star rows, dropdowns) in `bruinplace/screens/bp.js`, which fills in any element marked `data-render="…"` before `proto.js` wires the links.
 
 Hotelify keeps its sidebar, top bar and icons in `hotelify/screens/hf.js` (filled in from `data-render="side:rooms"`, `data-render="top"` and `<i data-icon="…">`), plus tab groups (`data-tabs`) and the guest counters (`data-count`).
+
+nearU keeps its status bar, top bar, tab bar, keyboards and the little empty-state character in `nearu/screens/nu.js`. Small bits of state (bag emptied, signed out, chosen photo, new card) live in sessionStorage so the flow stays consistent while you click around.

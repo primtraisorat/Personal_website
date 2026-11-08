@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Checkout · Contact info</title>
+<link rel="stylesheet" href="nu.css">
+<style>.t { margin: 6px 0 20px; } .mid { margin-top: 22px; display: none; } .typing .mid { display: flex; } .typing #ft { display: none; } .body { flex: 1; }</style></head>
+<body><div class="screen " aria-label="Checkout · Contact info">
+<div data-render="status"></div><header data-render="bar:Checkout|1 of 3:back:bag::"></header><div class="body"><h2 class="h2 t">contact info</h2><div class="fields"><div class="fld"><label>Full name</label><input type="text" value="Hanna Gouse" aria-label="Full name"></div><div class="fld"><label>Phone</label><input type="tel" value="+1 310 123-4323" aria-label="Phone"></div><div class="fld"><label>Email</label><input type="email" value="hanna.g@g.ucla.edu" aria-label="Email"></div></div>
+<button class="btn mid" data-go="delivery">Continue</button></div><div data-render="kbd" id="kb" hidden></div><div class="foot" id="ft"><button class="btn" data-go="delivery">Continue</button></div>
+</div><script src="nu.js"></script><script>var s=document.querySelector(".screen"),k=document.getElementById("kb");document.querySelectorAll(".fld input").forEach(function(i){i.addEventListener("focus",function(){s.classList.add("typing");k.hidden=false;});});
+document.addEventListener("nukey",function(e){if(e.detail==="enter"){s.classList.remove("typing");k.hidden=true;e.preventDefault();}});</script><script src="proto.js"></script>
+</body></html>

@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · My details</title>
+<link rel="stylesheet" href="nu.css">
+<style>.ch { display: grid; justify-items: center; gap: 8px; font-size: 13px; font-weight: 500; margin: 4px 0 22px; cursor: pointer; } .av { width: 48px; height: 48px; border-radius: 50%; background: center / cover; }</style></head>
+<body><div class="screen " aria-label="My details">
+<div data-render="status"></div><header data-render="bar:My details:back:account:Save:account"></header><div class="body"><label class="ch"><span class="av" style="background-image:url(assets/av-tanya.webp)"></span>Change photo<input type="file" accept="image/*" hidden></label>
+<div class="fields"><div class="fld"><label>Full name</label><input type="text" value="Tanya Morenko" aria-label="Full name"></div><div class="fld"><label>Phone</label><input type="tel" value="+1 310 323-3212" aria-label="Phone"></div><div class="fld"><label>Email</label><input type="email" value="tanya.m@g.ucla.edu" aria-label="Email"></div><div class="fld"><label>Date of birth</label><input type="text" value="June 3, 2004" aria-label="Date of birth"></div></div></div><nav data-render="tabs:account"></nav>
+</div><script src="nu.js"></script><script>var p=NU.get("photo");document.querySelectorAll(".av").forEach(function(a){if(p)a.style.backgroundImage="url(assets/"+p+".webp)";});document.querySelector(".ch input").addEventListener("change",function(){var f=this.files[0];if(f)document.querySelector(".ch .av").style.backgroundImage="url("+URL.createObjectURL(f)+")";});</script><script src="proto.js"></script>
+</body></html>

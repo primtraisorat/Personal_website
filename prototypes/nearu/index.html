@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nearU prototype</title>
+<style>
+  /* Dark presentation shell around the light app screens, like Figma's prototype viewer. */
+  :root { --bar: 44px; --shell: #1e1e1e; --bar-bg: #2c2c2c; --ink: #e5e5e5; --muted: #a3a3a3; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--shell); color: var(--ink); font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden; }
+  .bar { height: var(--bar); display: flex; align-items: center; gap: 12px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); background: var(--bar-bg); border-bottom: 1px solid #000; }
+  .bar b { font-weight: 600; }
+  .bar .where { color: #a3a3a3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bar .sp { flex: 1; }
+  .bar button, .bar select { font: inherit; color: inherit; background: #3a3a3a; border: 1px solid #4a4a4a; border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+  .bar button:hover, .bar select:hover { background: #454545; }
+  .stage { position: absolute; inset: var(--bar) 0 0 0; overflow: auto; }
+  .frame { position: relative; margin: 0 auto; border-radius: 40px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 20px 50px rgba(0,0,0,.4); }
+  .embed .frame { box-shadow: 0 10px 40px rgba(0,0,0,.12); }
+  /* color-scheme must match the screens (light), or browsers paint an opaque box behind the iframe and the rounded corners disappear */
+  .frame iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: transparent; color-scheme: light; }
+  .shade { position: fixed; inset: var(--bar) 0 0 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; }
+  .shade.open { display: flex; }
+  .pop { position: relative; flex: none; }
+  .pop { filter: drop-shadow(0 20px 40px rgba(0,0,0,.35)); }
+  .pop iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: transparent; color-scheme: light; }
+  .pop .clip { position: absolute; inset: 0; overflow: hidden; border-radius: var(--r, 25px); }
+  .help { color: #8a8a8a; }
+  /* index.html?embed (the portfolio): just the screens, no bar */
+  .embed { --bar: 0px; }
+  .embed .bar { display: none; }
+  .embed .stage { overflow: hidden; }
+  /* In the portfolio the phone sits on a soft neutral ground */
+  .embed body { background: #eef1f4; }
+  @media (max-width: 1000px) { .help { display: none; } }
+  @media (max-width: 700px) { .where { display: none; } }
+</style></head>
+<body>
+<div class="bar">
+  <b>nearU</b><span class="where" id="where"></span><span class="sp"></span>
+  <span class="help">Click anywhere to see what's clickable · Esc closes pop-ups</span>
+  <select id="jump" aria-label="Jump to screen"></select>
+  <button id="restart">Restart</button>
+</div>
+<div class="stage" id="stage"><div class="frame" id="frame"><iframe id="main" title="nearU screen"></iframe></div></div>
+<div class="shade" id="shade"><div class="pop" id="pop"><div class="clip"><iframe id="over" title="nearU pop-up"></iframe></div></div></div>
+<script>
+/* Screens and how they open. Sizes are the Figma frame sizes. */
+var SCREENS = {
+  'splash': ['Splash', 375, 812],
+  'home': ['Home', 375, 812],
+  'newsletter': ['Newsletter pop-up', 375, 812],
+  'categories': ['Categories', 375, 812],
+  'catalog': ['Catalog', 375, 812],
+  'product': ['Product page', 375, 812],
+  'product-2': ['Product page (spoon rest)', 375, 812],
+  'story': ['Story', 375, 812],
+  'reviews': ['Reviews', 375, 812],
+  'new-review': ['New review', 375, 812],
+  'product-info': ['Product information', 375, 812],
+  'filter': ['Filter', 375, 812],
+  'filter-category': ['Filter · Category', 375, 812],
+  'sort': ['Sort', 375, 812],
+  'no-internet': ['No connection', 375, 812],
+  'bag-empty': ['Bag (empty)', 375, 812],
+  'bag': ['Bag', 375, 812],
+  'contact': ['Checkout · Contact info', 375, 812],
+  'delivery': ['Checkout · Delivery', 375, 812],
+  'delivery-address': ['Delivery address', 375, 812],
+  'payment': ['Checkout · Payment', 375, 812],
+  'success': ['Order placed', 375, 812],
+  'search': ['Search', 375, 812],
+  'account-empty': ['My account (signed out)', 375, 812],
+  'country': ['Choose your country', 375, 812],
+  'phone': ['Enter your phone number', 375, 812],
+  'sms': ['Enter code from SMS', 375, 812],
+  'welcome-back': ['Welcome back (SMS code)', 375, 812],
+  'profile-setup': ['Set up your profile', 375, 812],
+  'gallery': ['Choose a photo', 375, 812],
+  'crop': ['Crop photo', 375, 812],
+  'account': ['My account', 375, 812],
+  'details': ['My details', 375, 812],
+  'address-book': ['Address book', 375, 812],
+  'address': ['Address', 375, 812],
+  'delivery-country': ['Delivery country', 375, 812],
+  'payment-methods': ['Payment methods', 375, 812],
+  'new-card': ['New card', 375, 812],
+  'sign-out': ['Sign out', 375, 812],
+  'settings': ['Settings', 375, 812],
+  'orders': ['My orders', 375, 812],
+  'order': ['Order #23124', 375, 812],
+  'saved-empty': ['Saved items (empty)', 375, 812],
+  'saved': ['Saved items', 375, 812]
+};
+var START = 'splash';
+var main = document.getElementById('main'), over = document.getElementById('over'),
+    frame = document.getElementById('frame'), pop = document.getElementById('pop'),
+    shade = document.getElementById('shade'), stage = document.getElementById('stage'),
+    jump = document.getElementById('jump'), where = document.getElementById('where');
+var base = START, overlay = null, embedded = window.top !== window;
+if (/[?&]embed\b/.test(location.search)) document.documentElement.classList.add('embed');
+/* Load a screen into a frame. Embedded, replace instead of adding history, so the page's back button still leaves the page. */
+function load(el, url) {
+  if (embedded && el.contentWindow) { el.contentWindow.location.replace(new URL(url, location.href).href); }
+  else el.src = url;
+}
+
+Object.keys(SCREENS).forEach(function (k) {
+  var o = document.createElement('option'); o.value = k; o.textContent = SCREENS[k][0]; jump.appendChild(o);
+});
+
+function fit() {
+  /* Phone screens: scale the whole 375x812 frame to fit the stage, centered. */
+  var s = SCREENS[base], pad = document.documentElement.classList.contains('embed') ? 0 : 24,
+      scale = Math.min(1.25, (stage.clientWidth - pad) / s[1], (stage.clientHeight - pad) / s[2]);
+  main.style.width = s[1] + 'px'; main.style.height = s[2] + 'px'; main.style.transform = 'scale(' + scale + ')';
+  frame.style.width = s[1] * scale + 'px'; frame.style.height = s[2] * scale + 'px';
+  frame.style.marginTop = Math.max(0, (stage.clientHeight - s[2] * scale) / 2) + 'px';
+}
+/* A target can carry data after #, e.g. "event-details#3" (which event) or "split-screen#chill" (the search). */
+function show(target, push) {
+  var name = target.split('#')[0], extra = target.slice(name.length);
+  if (!SCREENS[name]) return;
+  if (SCREENS[name][3]) { open(name, extra, push); return; }
+  close(true);
+  base = name; load(main, 'screens/' + name + '.html' + extra); stage.scrollTop = 0;
+  sync(push);
+}
+function open(name, extra, push) {
+  if (!main.src) { main.src = 'screens/' + base + '.html'; }
+  overlay = name; load(over, 'screens/' + name + '.html' + (extra || '')); shade.classList.add('open');
+  pop.style.setProperty('--r', SCREENS[name][3] + 'px'); sync(push);
+}
+function close(quiet) {
+  if (!overlay) return;
+  overlay = null; shade.classList.remove('open'); over.removeAttribute('src');
+  if (!quiet) sync(true);
+}
+function sync(push) {
+  var key = overlay ? base + '+' + overlay : base;
+  // Embedded in a page (the portfolio), keep the page's back button for the page: swap the hash instead of adding history.
+  if (push && location.hash.slice(1) !== key) { if (window.top === window) history.pushState(null, '', '#' + key); else history.replaceState(null, '', '#' + key); }
+  jump.value = overlay || base;
+  where.textContent = SCREENS[overlay || base][0];
+  fit();
+}
+function fromHash() {
+  var h = location.hash.slice(1).split('+');
+  base = SCREENS[h[0]] && !SCREENS[h[0]][3] ? h[0] : START;
+  main.src = 'screens/' + base + '.html';
+  if (h[1] && SCREENS[h[1]]) open(h[1], '', false); else { close(true); sync(false); }
+}
+
+addEventListener('message', function (e) {
+  var m = e.data; if (!m || !m.nearu) return;
+  if (m.size) {  // a screen can grow (Settings opens its fields), so take its real size
+    var s = SCREENS[m.from]; if (s && (s[1] !== m.size[0] || s[2] !== m.size[1])) { s[1] = m.size[0]; s[2] = m.size[1]; fit(); }
+    return;
+  }
+  if (m.go) show(m.go, true);
+  else if (m.overlay) show(m.overlay, true);
+  else if (m.close) close();
+});
+shade.addEventListener('click', function (e) { if (e.target === shade) close(); });
+addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+addEventListener('popstate', fromHash);
+addEventListener('resize', fit);
+jump.addEventListener('change', function () { show(jump.value, true); });
+document.getElementById('restart').addEventListener('click', function () { show(START, true); });
+fromHash();
+</script>
+</body></html>

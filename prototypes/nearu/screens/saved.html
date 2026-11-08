@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Saved items</title>
+<link rel="stylesheet" href="nu.css">
+<style>.t { padding: 36px 0 22px; } .bi { grid-template-columns: 80px 1fr 24px; } .bi .im { height: 99px; }</style></head>
+<body><div class="screen " aria-label="Saved items">
+<div data-render="status"></div><div class="snack" hidden id="snack"><i data-icon="spin"></i><span class="sp" id="sm">Item removed</span><button id="undo">Cancel</button></div>
+<div class="body"><h1 class="big t">saved items</h1><label class="search"><i data-icon="search"></i><input placeholder="Search" aria-label="Search saved items"></label><div class="duo"><button>Sort <i data-icon="sort"></i></button><button>Filter <i data-icon="filter"></i></button></div><div id="items"><div class="bi"><div class="im" style="background-image:url(assets/p-bedside.webp)" data-go="product"></div><div><b>$150.00</b><p>Wooden bedside table featuring a raised design</p><button class="small-btn mv">Move to bag</button></div><button class="x" aria-label="Remove"><i data-icon="x"></i></button></div><div class="bi"><div class="im" style="background-image:url(assets/p-glass.webp)" data-go="product"></div><div><b>$280.50</b><p>Square bedside table with legs, a rattan shelf and a…</p><button class="small-btn mv">Move to bag</button></div><button class="x" aria-label="Remove"><i data-icon="x"></i></button></div></div></div><nav data-render="tabs:saved"></nav>
+</div><script src="nu.js"></script><script>NU.set("savedEmpty","");var undo=null,tm;function rm(r,msg,then){var nx=r.nextSibling;r.remove();undo=[r,nx];document.getElementById("sm").textContent=msg;var s=document.getElementById("snack");s.hidden=false;clearTimeout(tm);
+ tm=setTimeout(function(){s.hidden=true;undo=null;if(then)then();else if(!document.querySelector(".bi")){NU.set("savedEmpty","1");NU.go("saved-empty");}},2200);}
+document.querySelectorAll(".bi").forEach(function(r){r.querySelector(".x").addEventListener("click",function(){rm(r,"Item removed");});r.querySelector(".mv").addEventListener("click",function(){NU.set("bagEmpty","");rm(r,"Moved to bag",function(){NU.go("bag");});});});
+document.getElementById("undo").addEventListener("click",function(){if(undo){document.getElementById("items").insertBefore(undo[0],undo[1]&&undo[1].parentNode?undo[1]:null);undo=null;}document.getElementById("snack").hidden=true;clearTimeout(tm);});</script><script src="proto.js"></script>
+</body></html>

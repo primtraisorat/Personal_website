@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Search</title>
+<link rel="stylesheet" href="nu.css">
+<style>.sb { margin-top: 0; } .sb button svg { width: 24px; height: 24px; color: var(--ink); } #list li { display: flex; align-items: center; gap: 14px; min-height: 55px; font-size: 15px; cursor: pointer; }
+#list li svg { width: 22px; height: 22px; } #list li .sp { flex: 1; } #list li small { display: block; font-size: 12px; color: var(--muted); } #list li .rm svg { color: var(--gray); } .nf { padding-top: 70px; } .nf[hidden] { display: none; }</style></head>
+<body><div class="screen " aria-label="Search">
+<div data-render="status"></div><div class="body"><div class="search sb"><button data-go="home" aria-label="Back"><i data-icon="back"></i></button><input id="q" placeholder="" aria-label="Search" autocomplete="off"><button id="qx" aria-label="Clear"><i data-icon="mic"></i></button></div>
+<ul id="list"></ul><div class="empty nf" id="nf" hidden><i data-guy="puzzled"></i><h2>nothing found, try<br>something else</h2></div></div><div data-render="kbd"></div>
+</div><script src="nu.js"></script><script>var RECENT=["Wood chair","Dark wood"],ALL=[["Wood chair","living room / furniture"],["Wood table","living room / furniture"],["Wooden bedside table","bedroom / furniture"],["Glass storage jar","kitchen / storage"],["Chair cushion","living room / cushions"],["Table lamp","bedroom / lighting"],["Dining table","dining / furniture"],["Rattan basket","living room / baskets"],["Mirror","bedroom / mirrors"]];
+var q=document.getElementById("q"),L=document.getElementById("list"),nf=document.getElementById("nf"),qx=document.getElementById("qx");
+function draw(){var v=q.value.trim().toLowerCase();nf.hidden=true;qx.innerHTML=NU.icon(v?"x":"mic");
+ if(!v){L.innerHTML=RECENT.map(function(r,i){return '<li data-go="catalog#Furniture">'+NU.icon("clock")+'<span class="sp">'+r+'</span><button class="rm" data-i="'+i+'" aria-label="Remove">'+NU.icon("x")+'</button></li>';}).join("");}
+ else{var m=ALL.filter(function(a){return a[0].toLowerCase().indexOf(v)>=0;});L.innerHTML=m.map(function(a){return '<li data-go="catalog#'+a[1].split(" / ")[0]+'"><span class="sp">'+a[0]+'<small>'+a[1]+'</small></span></li>';}).join("");nf.hidden=!!m.length;}}
+L.addEventListener("click",function(e){var r=e.target.closest(".rm");if(r){e.stopPropagation();RECENT.splice(+r.dataset.i,1);draw();return;}var li=e.target.closest("li");if(li)NU.go(li.getAttribute("data-go"));},true);
+qx.addEventListener("click",function(){q.value="";draw();q.focus();});q.addEventListener("input",draw);
+q.addEventListener("keydown",function(e){if(e.key==="Enter"){var f=L.querySelector("li");if(f)NU.go(f.getAttribute("data-go"));}});
+q.value=decodeURIComponent(location.hash.slice(1));draw();q.focus();</script><script src="proto.js"></script>
+</body></html>

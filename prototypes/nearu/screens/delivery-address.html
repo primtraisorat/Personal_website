@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Delivery address</title>
+<link rel="stylesheet" href="nu.css">
+<style>.dim { color: #fff; } .sheet { color: var(--ink); padding-top: 40px; } #ad { margin: 14px 0 22px; } .li { width: 100%; text-align: left; }</style></head>
+<body><div class="screen dim" aria-label="Delivery address">
+<div data-render="status"></div><div class="sheet"><h1 class="big">delivery address</h1><div data-tabs id="ad">
+<button class="li" data-tab data-v="1" aria-selected="true"><i data-icon="pin"></i><span class="sp">Los Angeles, 308 Westwood Plaza<small>Hanna Gouse, +1 310 123-4323</small></span><span class="radio"><i data-icon="check"></i></span></button>
+<button class="li" data-tab data-v="2" aria-selected="false"><i data-icon="pin"></i><span class="sp">Los Angeles, 330 De Neve Drive<small>Jane Smith, +1 424 343-1254</small></span><span class="radio"><i data-icon="check"></i></span></button></div>
+<button class="btn gray" data-go="delivery">Cancel</button></div>
+</div><script src="nu.js"></script><script>if(NU.get("addr")==="2")document.querySelectorAll("#ad .li").forEach(function(b){b.setAttribute("aria-selected",b.dataset.v==="2"?"true":"false");});document.getElementById("ad").addEventListener("tab",function(e){NU.set("addr",e.detail.dataset.v);setTimeout(function(){NU.go("delivery");},250);});</script><script src="proto.js"></script>
+</body></html>
