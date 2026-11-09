@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Listing posted</title>
+<link rel="stylesheet" href="nu.css">
+<style>.yel { background: var(--yellow-soft); } .empty p { color: var(--ink); }</style></head>
+<body><div class="screen yel" aria-label="Listing posted">
+<div data-render="status"></div><div class="empty"><i data-guy="smile"></i><h2>your listing is live</h2><p id="p">students near campus can see it now. we’ll ping you when someone messages.</p></div><div class="foot"><button class="btn" id="v">View listing</button><button class="btn line" data-go="home">Back to browsing</button></div>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var id=NU.get("posted"),it=NU.item(id);document.getElementById("p").textContent="it’s in "+NU.cat(it.cat).label+" for students near campus. we’ll ping you when someone messages.";document.getElementById("v").setAttribute("data-go","product#"+id);</script><script src="proto.js"></script>
+</body></html>

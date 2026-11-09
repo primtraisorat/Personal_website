@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · New listing</title>
+<link rel="stylesheet" href="nu.css">
+<style>.phs { display: flex; align-items: center; gap: 10px; margin: 4px 0 16px; } .cam { width: 76px; height: 76px; border-radius: 4px; background: var(--field); display: grid; place-items: center; align-content: center; gap: 4px; font-size: 11px; cursor: pointer; flex: none; } .cam svg { width: 22px; height: 22px; }
+.pv { width: 76px; height: 76px; border-radius: 4px; background: center / cover; flex: none; display: none; } .pv.on { display: block; } .hint { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.li .v { display: flex; align-items: center; gap: 6px; } .seg { margin: 6px 0 14px; } .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; } .lb { font-size: 13px; color: var(--gray); margin: 16px 0 8px; }
+.dl { margin-top: 8px; } .dl small { font-size: 12px; } #dw { margin-bottom: 4px; } .post { margin-top: 14px; }</style></head>
+<body><div class="screen " aria-label="New listing">
+<div data-render="status"></div><header data-render="bar:New listing:close:home::"></header><div class="body">
+<div class="phs"><label class="cam"><i data-icon="camera"></i><span>Add photo</span><input type="file" accept="image/*" hidden id="file"></label><span class="pv" id="pv"></span><p class="hint">No photo? Your listing shows the category emoji.</p></div>
+<div class="fields"><div class="fld"><label>Title</label><input id="t" type="text" value="Twin XL bedding set, washed" aria-label="Title"></div></div>
+<a class="li" data-overlay="sell-category"><span class="sp">Category</span><span class="v" id="cv"></span><i data-icon="chev" class="chev"></i></a>
+<div class="seg" data-tabs id="md"><button data-tab data-m="sale" aria-selected="true">Sell it</button><button data-tab data-m="rent" aria-selected="false">Rent it out</button></div>
+<div class="two"><div class="fld"><label>Price ($)</label><input id="pr" type="number" value="20" aria-label="Price ($)"></div><div class="fld"><label>Pick-up spot</label><input id="pl" type="text" value="De Neve" aria-label="Pick-up spot"></div></div>
+<p class="lb">condition</p><div class="chips" data-tabs id="cd"><button data-tab>New</button><button data-tab aria-selected="true">Like new</button><button data-tab>Good</button><button data-tab>Fair</button></div>
+<div class="li dl"><span class="sp">Ask for a deposit<small>nearU holds it until you both verify the meet-up</small></span><button class="tg" id="dp" data-toggle aria-pressed="false" aria-label="Ask for a deposit"></button></div>
+<div class="fields" id="dw" hidden><div class="fld"><label>Deposit ($)</label><input id="da" type="number" value="5" aria-label="Deposit ($)"></div></div>
+<button class="btn post" id="post">Post listing</button></div><nav data-render="tabs:sell"></nav>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var D={};try{D=JSON.parse(NU.get("draft"))||{};}catch(e){}var F=["t","pr","pl","da"];
+F.forEach(function(k){var el=document.getElementById(k);if(D[k]!=null)el.value=D[k];el.addEventListener("input",save);});
+function cat(){var c=NU.cat(NU.get("sellCat")||"dorm");document.getElementById("cv").innerHTML='<span style="font-family:'+"Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji"+'">'+c.emoji+'</span>'+c.label;return c;}cat();NU.onStore(function(k){if(k==="sellCat")cat();});
+var md=D.md||"sale",dp=document.getElementById("dp");function mode(){document.querySelectorAll("#md button").forEach(function(b){b.setAttribute("aria-selected",b.dataset.m===md?"true":"false");});document.querySelector("#pr").previousElementSibling.textContent=md==="rent"?"Price per day ($)":"Price ($)";}mode();
+document.getElementById("md").addEventListener("tab",function(e){md=e.detail.dataset.m;mode();save();});
+if(D.cd)document.querySelectorAll("#cd button").forEach(function(b){b.setAttribute("aria-selected",b.textContent===D.cd?"true":"false");});document.getElementById("cd").addEventListener("tab",save);
+if(D.dp)dp.setAttribute("aria-pressed","true");function dep(){document.getElementById("dw").hidden=dp.getAttribute("aria-pressed")!=="true";}dep();dp.addEventListener("click",function(){setTimeout(function(){dep();save();},0);});
+function pv(){var p=document.getElementById("pv");if(D.photo){p.style.backgroundImage="url("+D.photo+")";p.classList.add("on");}else p.classList.remove("on");}pv();
+document.getElementById("file").addEventListener("change",function(){var f=this.files[0];if(!f)return;var im=new Image();im.onload=function(){var s=Math.min(1,360/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);D.photo=c.toDataURL("image/jpeg",.72);pv();save();};im.src=URL.createObjectURL(f);});
+function save(){F.forEach(function(k){D[k]=document.getElementById(k).value;});D.md=md;var s=document.querySelector("#cd [aria-selected=true]");D.cd=s?s.textContent:"Like new";D.dp=dp.getAttribute("aria-pressed")==="true";NU.set("draft",JSON.stringify(D));}
+document.getElementById("post").addEventListener("click",function(){save();if(!D.t.trim()){document.getElementById("t").focus();return;}NU.go("post-confirm");});
+var t=document.getElementById("t");t.addEventListener("focus",function(){t.select();});</script><script src="proto.js"></script>
+</body></html>

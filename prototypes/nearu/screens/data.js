@@ -1,6 +1,6 @@
 /* nearU listings: a made-up college marketplace near UCLA. Loaded before nu.js.
    Category: [key, emoji, label, tile color]
-   Listing:  [id, category, picture (an emoji, or @name for assets/name.webp), price (0 = free), title, condition, pick-up spot, tag, price unit] */
+   Listing:  [id, category, picture (an emoji, or @name for assets/name.webp), price (0 = free), title, condition, pick-up spot, tag, price unit; a unit means it's for rent] */
 var NU_DATA = {
   cats: [
     ['furniture', '🛋️', 'Furniture', '#efebe4'],
@@ -74,10 +74,22 @@ var NU_DATA = {
     ['landfair', 'housing', '🏠', 1200, 'Summer sublet, 1 bed on Landfair Ave', 'Furnished', 'Landfair Ave', 'new', '/mo'],
     ['gayley', 'housing', '🏢', 850, 'Shared room near Gayley, spring quarter', 'Furnished', 'Gayley Ave', '', '/mo'],
     ['parking', 'housing', '🔑', 120, 'Parking spot on Strathmore', 'Gated', 'Strathmore Dr', '', '/mo'],
+    ['gopro', 'electronics', '📷', 12, 'GoPro Hero 9 with mounts', 'Good', 'Ackerman Union', '', '/day'],
+    ['projector', 'electronics', '📽️', 15, 'Mini projector for movie nights', 'Good', 'Rieber Hall', '', '/day'],
+    ['chemrent', 'textbooks', '📓', 15, 'Chem 14B textbook for the quarter', 'Good', 'Young Hall', '', '/qtr'],
+    ['suit', 'clothes', '🤵', 30, 'Suit for formals, size 40R', 'Like new', 'Hilgard Ave', '', '/night'],
+    ['tent', 'sports', '⛺', 10, '2-person camping tent for weekend trips', 'Good', 'Sunset Rec', '', '/day'],
+    ['scootday', 'bikes', '🛵', 8, 'E-scooter by the day, charger included', 'Good', 'Westwood', '', '/day'],
     ['futon', 'free', '🛋️', 0, 'Futon, must pick up this weekend', 'Fair', 'Kelton Ave', 'free'],
     ['boxes', 'free', '📦', 0, 'About 15 moving boxes', 'Good', 'Westwood', 'free'],
     ['mugs', 'free', '☕', 0, 'Plates and mugs, set of 6', 'Good', 'Landfair Ave', 'free'],
     ['notes', 'free', '📝', 0, 'Chem 14A notes and old exams', 'Like new', 'Young Hall', 'free']
   ],
-  sellers: [['Erin Mango', 'av-erin'], ['Corey Rosser', 'av-corey'], ['Paityn Saris', 'av-paityn']]
+  /* name, avatar, trust score, number of ratings, verified seller */
+  sellers: [['Erin Mango', 'av-erin', 4.9, 32, 1], ['Corey Rosser', 'av-corey', 4.6, 12, 1], ['Paityn Saris', 'av-paityn', 5.0, 8, 0]],
+  /* Conversations that already exist when the prototype starts */
+  seed: {
+    calc: { stage: 0, msgs: [['me', 'Hi! Is the access code still unused?'], ['them', 'Yes, never scratched off 🙂 Happy to meet at Royce.']] },
+    lamp: { stage: 4, price: 12, msgs: [['me', 'Can I grab the lamp today?'], ['them', 'Sure, Rieber lobby at 6?'], ['sys', 'Deal confirmed · $12 · cash at meet-up'], ['sys', 'Exchange verified · LED desk lamp marked sold'], ['them', 'Thanks for the trade! 🙌']] }
+  }
 };

@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Sign up</title>
+<link rel="stylesheet" href="nu.css">
+<style>.body { padding-top: 18px; } .sub { color: var(--gray); font-size: 14px; margin: 4px 0 20px; } .err { color: var(--red); font-size: 12px; margin-top: 6px; } .loc { margin: 6px 0 10px; } .loc small { font-size: 12px; } .alt { text-align: center; font-size: 13px; color: var(--gray); margin-top: 14px; } .alt a { color: var(--ink); font-weight: 500; text-decoration: underline; cursor: pointer; }</style></head>
+<body><div class="screen " aria-label="Sign up">
+<div data-render="status"></div><div class="body"><h1 class="big">join nearU</h1><p class="sub">Buy, sell and rent with verified students near you.</p>
+<div class="fields"><div class="fld"><label>School email (.edu)</label><input id="em" type="email" value="tanya.m@g.ucla.edu" aria-label="School email (.edu)"></div></div><p class="err" id="err" hidden>Use your school email that ends in .edu</p>
+<div class="li loc"><i data-icon="pin"></i><span class="sp">UCLA · Westwood<small>Los Angeles · from your email and location</small></span><span class="vbadge"><i data-icon="check"></i>Near campus</span></div>
+<button class="btn" id="go">Continue</button><p class="alt">Already a member? <a data-go="welcome-back">Sign in</a></p></div><div data-render="kbd"></div>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var em=document.getElementById("em");function go(){var v=em.value.trim().toLowerCase();var ok=/^[^@\s]+@[^@\s]+\.edu$/.test(v);document.getElementById("err").hidden=ok;if(ok){NU.set("email",v);NU.go("verify");}}
+document.getElementById("go").addEventListener("click",go);em.addEventListener("keydown",function(e){if(e.key==="Enter")go();});em.addEventListener("input",function(){document.getElementById("err").hidden=true;});</script><script src="proto.js"></script>
+</body></html>

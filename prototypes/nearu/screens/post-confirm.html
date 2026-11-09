@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Post listing?</title>
+<link rel="stylesheet" href="nu.css">
+<style>.big { margin-bottom: 16px; } .bi { grid-template-columns: 80px 1fr; margin-bottom: 14px; } .bi .im { height: 96px; } .bi small { display: block; font-size: 12px; color: var(--muted); margin-top: 4px; } .ok { margin-top: 16px; } .btn + .btn { margin-top: 8px; }</style></head>
+<body><div class="screen ov" aria-label="Post listing?">
+<div class="sheet"><div class="grab"></div><h1 class="big">post this listing?</h1><div class="bi" id="pv"></div>
+<div class="note"><i data-icon="shield"></i><span id="nt"></span></div><button class="btn ok" id="ok">Post it</button><button class="btn gray" data-close>Keep editing</button></div>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var D={};try{D=JSON.parse(NU.get("draft"))||{};}catch(e){}var c=NU.cat(NU.get("sellCat")||"dorm"),rent=D.md==="rent",price=Math.max(0,Math.round(+D.pr||0)),dep=D.dp?Math.max(1,Math.round(+D.da||0)):0;
+var it={pic:D.photo?"":c.emoji,photo:"",upload:D.photo||"",bg:c.bg,price:price,unit:rent?"/day":""};
+document.getElementById("pv").innerHTML=NU.pic(it,"im")+'<div><b>'+NU.money(it)+'</b><p></p><small></small></div>';document.querySelector("#pv p").textContent=D.t;document.querySelector("#pv small").textContent=(D.cd||"Like new")+" · "+(D.pl||"Westwood")+(dep?" · $"+dep+" deposit":"");
+document.getElementById("nt").innerHTML="It shows up in <b>"+c.emoji+" "+c.label+"</b> for students near campus right away."+(dep?" Buyers hold a $"+dep+" deposit until you both verify the meet-up.":"");
+document.getElementById("ok").addEventListener("click",function(){var mine=[];try{mine=JSON.parse(NU.get("mine"))||[];}catch(e){}var id="my"+Date.now().toString(36);
+ mine.unshift([id,c.key,D.photo||c.emoji,price,D.t,D.cd||"Like new",D.pl||"Westwood","",rent?"/day":"",dep]);NU.set("mine",JSON.stringify(mine));NU.set("posted",id);NU.set("draft","");NU.go("posted");});</script><script src="proto.js"></script>
+</body></html>

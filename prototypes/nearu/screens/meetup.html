@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Meet up</title>
+<link rel="stylesheet" href="nu.css">
+<style>.code { display: flex; gap: 10px; margin: 26px 0 0; } .code span { width: 40px; height: 54px; border-radius: 4px; background: var(--field); display: grid; place-items: center; font-size: 20px; } .code span.cur { background: #fff; border: 1px solid #d9d9d9; } .code span.cur::after { content: "|"; color: var(--ink); animation: blink 1s steps(1) infinite; } @keyframes blink { 50% { opacity: 0; } } .nc { text-align: center; color: var(--gray); margin-top: 72px; font-size: 14px; }.mt { display: flex; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 4px; background: var(--field); margin-top: 2px; } .mt svg { width: 22px; height: 22px; flex: none; } .mt .sp { flex: 1; font-size: 14px; } .mt b { font-weight: 500; display: block; } .mt small { color: var(--gray); font-size: 12px; }
+.lb { font-size: 13px; color: var(--gray); margin: 18px 0 8px; } .mine { display: flex; gap: 10px; } .mine span { width: 48px; height: 56px; border-radius: 4px; background: var(--yellow); display: grid; place-items: center; font-size: 24px; font-weight: 600; }
+.hint { font-size: 12px; color: var(--muted); margin-top: 8px; } .hint.bad { color: var(--red); } .code { margin-top: 0; } .code span { width: 48px; }
+.shake { animation: sh .35s; } @keyframes sh { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.done { text-align: center; padding-top: 22px; } .ck { width: 64px; height: 64px; border-radius: 50%; background: var(--green); color: #fff; display: grid; place-items: center; margin: 0 auto 12px; } .ck svg { width: 34px; height: 34px; stroke-width: 2.2; }
+.done h2 { font-size: 22px; font-weight: 600; } .done ul { text-align: left; margin-top: 18px; display: grid; gap: 12px; } .done li { display: flex; gap: 10px; align-items: center; font-size: 14px; } .done li svg { width: 20px; height: 20px; color: var(--green); flex: none; }</style></head>
+<body><div class="screen " aria-label="Meet up">
+<div data-render="status"></div><header data-render="bar:Meet up:back:chat::"></header><div class="body">
+<div class="mt"><i data-icon="pin"></i><span class="sp"><b id="pl"></b><small>Today · 4:00 pm</small></span><span class="pill g" id="pill">Confirmed / hold</span></div>
+<div id="codes"><p class="lb">your code</p><div class="mine"><span>4</span><span>8</span><span>2</span><span>1</span></div><p class="hint" id="h1"></p>
+<p class="lb">enter <span class="fn"></span>’s code</p><div class="code" id="code"><span></span><span></span><span></span><span></span></div><p class="hint" id="h2"></p></div>
+<div class="done" id="done" hidden><div class="ck"><i data-icon="check"></i></div><h2>exchange verified</h2><ul><li><i data-icon="check"></i><span><span class="fn"></span> confirmed your code</span></li><li><i data-icon="check"></i><span>You confirmed <span class="fn"></span>’s code</span></li><li><i data-icon="tag"></i><span id="sold"></span></li><li id="rf"><i data-icon="shield"></i><span id="ref"></span></li></ul></div>
+</div><div data-render="num" id="num"></div><div class="foot" id="ft" hidden><button class="btn" id="rate">Rate</button></div>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var it=NU.item(decodeURIComponent(location.hash.slice(1))||NU.get("item"));NU.set("item",it.id);var C=NU.chat(it.id);document.querySelector(".bar .l").setAttribute("data-go","chat#"+it.id);
+document.querySelectorAll(".fn").forEach(function(s){s.textContent=it.first;});document.getElementById("pl").textContent=it.place;
+document.getElementById("h1").textContent="Show this to "+it.first+" so they can confirm on their phone.";document.getElementById("h2").textContent="Ask "+it.first+" for their code (in this prototype it’s 7305).";
+if(!C.dep)document.getElementById("pill").textContent="Confirmed";
+var d=[],sp=document.querySelectorAll("#code span");function draw(){sp.forEach(function(s,i){s.textContent=d[i]||"";s.className=i===d.length?"cur":"";});}draw();
+function finish(){document.getElementById("codes").hidden=true;document.getElementById("num").hidden=true;document.getElementById("done").hidden=false;document.getElementById("ft").hidden=false;
+ document.getElementById("sold").textContent=it.title+(NU.rent(it)?" marked rented":" marked sold");if(C.dep)document.getElementById("ref").textContent="$"+C.dep+" deposit refunded to you";else document.getElementById("rf").hidden=true;
+ document.getElementById("pill").textContent=NU.rent(it)?"Rented":"Sold";document.getElementById("pill").className="pill k";document.getElementById("rate").textContent="Rate "+it.first;document.getElementById("rate").setAttribute("data-go","feedback#"+it.id);
+ if(C.stage<3){C.stage=3;C.msgs.push(["sys","Exchange verified both ways · "+(NU.rent(it)?"marked rented":"item marked sold")]);if(C.dep)C.msgs.push(["sys","$"+C.dep+" deposit refunded"]);NU.chat(it.id,C);
+  var S=[];try{S=JSON.parse(NU.get("sold"))||["lamp"];}catch(e){S=["lamp"];}if(S.indexOf(it.id)<0)S.push(it.id);NU.set("sold",JSON.stringify(S));}}
+if(C.stage>=3)finish();
+document.addEventListener("nukey",function(e){e.preventDefault();if(e.detail==="del")d.pop();else if(d.length<4)d.push(e.detail);draw();
+ if(d.length===4){if(d.join("")==="7305")setTimeout(finish,300);else{var c=document.getElementById("code");c.classList.add("shake");var h=document.getElementById("h2");h.textContent="That code doesn’t match. Try again (it’s 7305).";h.classList.add("bad");setTimeout(function(){c.classList.remove("shake");d=[];draw();},400);}}});</script><script src="proto.js"></script>
+</body></html>

@@ -1,28 +1,31 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>nearU · Product page</title>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Listing</title>
 <link rel="stylesheet" href="nu.css">
-<style>.hero { position: relative; height: 340px; flex: none; } .hero > .pic { position: absolute; inset: 0; } .hero .st { position: relative; z-index: 1; color: var(--ink); }
+<style>.hero { position: relative; height: 320px; flex: none; } .hero > .pic { position: absolute; inset: 0; } .hero .st { position: relative; z-index: 1; color: var(--ink); }
 .rb { position: absolute; z-index: 1; top: 47px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.85); display: grid; place-items: center; } .rb svg { width: 22px; height: 22px; } .rb.l { left: 14px; } .rb.r { right: 14px; }
-.pb { padding: 0; flex: 1; } .gray { background: var(--field); padding: 18px 16px 20px; } .price { font-size: 22px; font-weight: 600; } .d { font-size: 15px; line-height: 1.4; margin-top: 4px; }
-.ds { color: var(--gray); font-size: 13px; line-height: 1.5; margin: 6px 0 18px; }
-.sl .av { width: 30px; height: 30px; border-radius: 50%; background: center / cover; flex: none; } .sl b { font-weight: 500; } .sl small { font-size: 12px; }
-.disc { display: flex; align-items: center; gap: 14px; margin: 10px 16px; padding: 10px 14px; border-radius: 4px; background: var(--field); } .disc svg { width: 22px; height: 22px; } .disc .sp { flex: 1; font-size: 14px; } .disc small { display: block; font-size: 12px; color: var(--muted); }
-.disc button { background: var(--yellow); height: 30px; padding: 0 12px; border-radius: 2px; font-size: 14px; font-weight: 500; } .pb .li { margin: 0 16px; border-bottom: 1px solid #f2f2f2; }</style></head>
-<body><div class="screen on-photo" aria-label="Product page">
+.pb { padding: 0; flex: 1; } .gray { background: var(--field); padding: 18px 16px 20px; } .pt { display: flex; align-items: center; justify-content: space-between; } .price { font-size: 22px; font-weight: 600; } .d { font-size: 15px; line-height: 1.4; margin-top: 4px; }
+.ds { color: var(--gray); font-size: 13px; line-height: 1.5; margin: 6px 0 18px; } .btn[disabled] { background: #e6e6e6; color: var(--gray); cursor: default; }
+.sl .av { width: 34px; height: 34px; } .sl .nm { display: flex; align-items: center; gap: 8px; } .sl b { font-weight: 500; } .sl small { font-size: 12px; }
+.dp { margin: 10px 16px 4px; } .pb .li { margin: 0 16px; border-bottom: 1px solid #f2f2f2; }</style></head>
+<body><div class="screen on-photo" aria-label="Listing">
 <div class="hero" id="hero"><div data-render="status"></div><button class="rb l" data-go="catalog" aria-label="Back"><i data-icon="back"></i></button>
 <button class="rb r heart" id="hh" data-toggle aria-pressed="false" aria-label="Save"><i data-icon="heart"></i></button></div>
-<div class="body pb"><div class="gray"><p class="price" id="price"></p><p class="d" id="title"></p><p class="ds" id="desc"></p>
-<button class="btn blue" id="add">Add to bag <i data-icon="bagbtn"></i></button></div>
-<a class="li sl" data-go="reviews"><span class="av" id="av"></span><span class="sp" id="seller"></span><span class="v">★ 4.9</span></a>
-<div class="disc"><i data-icon="percent"></i><span class="sp">$5 off your first pick-up<small>Use promocode NEARU</small></span><button id="copy">Copy</button></div>
+<div class="body pb"><div class="gray"><div class="pt"><p class="price" id="price"></p><span id="pl"></span></div><p class="d" id="title"></p><p class="ds" id="desc"></p>
+<button class="btn" id="msg"><i data-icon="chat"></i><span id="msgt">Message seller</span></button></div>
+<a class="li sl" data-go="reviews"><span class="av" id="av"></span><span class="sp"><span class="nm"><b id="sn"></b><span id="vb"></span></span><small id="st"></small></span><i data-icon="chev" class="chev"></i></a>
+<div class="note dp" id="dp" hidden><i data-icon="shield"></i><span id="dpt"></span></div>
 <a class="li" data-overlay="product-info"><span class="sp">Product information</span><i data-icon="chev" class="chev"></i></a>
-<a class="li" data-go="reviews"><span class="sp">Seller reviews</span><span class="v">32</span></a></div>
+<a class="li" data-go="reviews"><span class="sp">Seller reviews</span><span class="v" id="rc"></span></a></div>
 </div><script src="data.js"></script><script src="nu.js"></script><script>var it=NU.item(decodeURIComponent(location.hash.slice(1))||NU.get("item"));NU.set("item",it.id);
 document.getElementById("hero").insertAdjacentHTML("afterbegin",NU.pic(it,"hero"));document.querySelector(".rb.l").setAttribute("data-go","catalog#"+it.cat);
 var hh=document.getElementById("hh");hh.setAttribute("data-id",it.id);hh.setAttribute("aria-pressed",NU.isSaved(it.id));
-document.getElementById("price").textContent=NU.money(it);document.getElementById("title").textContent=it.title;
-document.getElementById("desc").textContent=it.cat==="housing"?it.cond+", close to campus. Message me to set up a viewing near "+it.place+".":it.cat==="tickets"?"Can’t make it anymore. "+it.cond+" right after you pay, venue is "+it.place+".":it.price?"Selling because I’m moving out at the end of the quarter. "+it.cond+", pick up near "+it.place+" or we can meet on campus.":"Free to whoever can pick it up first. "+it.cond+", near "+it.place+".";
-document.getElementById("seller").innerHTML="<b></b><small>UCLA student · replies in about an hour</small>";document.querySelector("#seller b").textContent=it.seller;document.getElementById("av").style.backgroundImage="url(assets/"+it.av+".webp)";
-document.getElementById("add").addEventListener("click",function(){NU.addToBag(it.id);NU.go("bag");});
-document.getElementById("copy").addEventListener("click",function(){var b=this;try{navigator.clipboard.writeText("NEARU").catch(function(){});}catch(e){}b.textContent="Copied";setTimeout(function(){b.textContent="Copy";},1500);});</script><script src="proto.js"></script>
+document.getElementById("price").textContent=NU.money(it);document.getElementById("pl").innerHTML=it.sold?'<span class="pill k">Sold</span>':NU.rent(it)?'<span class="pill b">For rent</span>':it.price?'<span class="pill">For sale</span>':'<span class="pill y">Free</span>';
+document.getElementById("title").textContent=it.title;
+document.getElementById("desc").textContent=it.mine?"Your listing. "+it.cond+", pick up at "+it.place+".":it.cat==="housing"?it.cond+", close to campus. Message me to set up a viewing near "+it.place+".":NU.rent(it)?"Rent it "+it.unit.replace("/","per ").replace("qtr","quarter")+". "+it.cond+", pick up and drop off at "+it.place+".":it.cat==="tickets"?"Can’t make it anymore. "+it.cond+" right after we confirm, venue is "+it.place+".":it.price?"Selling because I’m moving out at the end of the quarter. "+it.cond+", pick up near "+it.place+" or we can meet on campus.":"Free to whoever can pick it up first. "+it.cond+", near "+it.place+".";
+var me=NU.me();document.getElementById("sn").textContent=it.mine?"You":it.seller;document.getElementById("av").style.backgroundImage="url(assets/"+(it.mine&&NU.get("photo")?NU.get("photo"):it.av)+".webp)";
+var ver=it.mine?me.verified:it.verified;document.getElementById("vb").innerHTML=ver?'<span class="vbadge">'+NU.icon("shield")+'Verified seller</span>':'';
+document.getElementById("st").textContent=it.mine?NU.trust(me.score,me.ratings):NU.trust(it.score,it.ratings)+" · UCLA student";document.getElementById("rc").textContent=it.mine?me.ratings:it.ratings;
+if(it.dep){document.getElementById("dp").hidden=false;document.getElementById("dpt").innerHTML="<b>$"+it.dep+" deposit protection</b><br>"+(it.mine?"Buyers hold a deposit when they confirm.":"Hold a deposit when you confirm. nearU refunds it once you both verify the meet-up.");}
+var b=document.getElementById("msg");if(it.sold){b.disabled=true;document.getElementById("msgt").textContent="Sold";}else if(it.mine){b.classList.add("gray");document.getElementById("msgt").textContent="See messages";b.setAttribute("data-go","messages");}
+else{document.getElementById("msgt").textContent=(NU.chat(it.id).msgs.length?"Open chat with ":"Message ")+it.first;b.setAttribute("data-go","chat#"+it.id);}</script><script src="proto.js"></script>
 </body></html>

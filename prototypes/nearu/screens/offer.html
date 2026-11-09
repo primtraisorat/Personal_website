@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Make an offer</title>
+<link rel="stylesheet" href="nu.css">
+<style>.sub { color: var(--gray); font-size: 13px; margin-top: 2px; } .amt { display: flex; align-items: center; justify-content: space-between; margin: 22px 0 16px; } .amt button { width: 52px; height: 52px; border-radius: 50%; background: var(--field); font-size: 26px; text-align: center; } .amt output { font-size: 40px; font-weight: 600; } .chips { justify-content: center; } .sd { margin-top: 20px; } .btn + .btn { margin-top: 8px; }</style></head>
+<body><div class="screen ov" aria-label="Make an offer">
+<div class="sheet"><div class="grab"></div><h1 class="big">make an offer</h1><p class="sub" id="sub"></p>
+<div class="amt"><button id="mn" aria-label="Lower">−</button><output id="v">$0</output><button id="pl" aria-label="Higher">+</button></div>
+<div class="chips" data-tabs id="qk"></div><button class="btn sd" id="send">Send offer</button><button class="btn gray" data-close>Cancel</button></div>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var it=NU.item(NU.get("item")),P=it.price,st=P<40?1:5,v=Math.round(P*.85/st)*st;document.getElementById("sub").textContent=it.title+" · listed at "+NU.money(it);
+function d(){document.getElementById("v").textContent="$"+v.toLocaleString("en-US");}d();
+document.getElementById("mn").addEventListener("click",function(){v=Math.max(st,v-st);d();});document.getElementById("pl").addEventListener("click",function(){v+=st;d();});
+var Q=[["80%",.8],["90%",.9],["Asking price",1]];document.getElementById("qk").innerHTML=Q.map(function(q,i){return '<button data-tab data-f="'+q[1]+'">'+q[0]+'</button>';}).join("");
+document.getElementById("qk").addEventListener("tab",function(e){v=Math.max(1,Math.round(P*e.detail.dataset.f));d();});
+document.getElementById("send").addEventListener("click",function(){NU.set("offer",v);NU.close();});</script><script src="proto.js"></script>
+</body></html>

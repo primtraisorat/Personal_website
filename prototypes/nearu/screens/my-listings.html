@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · My listings</title>
+<link rel="stylesheet" href="nu.css">
+<style>.bi { grid-template-columns: 80px 1fr auto; margin-bottom: 16px; } .bi .im { height: 90px; } .bi small { display: block; font-size: 12px; color: var(--muted); margin-top: 4px; } .bi .pill { margin-top: 4px; } .t2 { margin: 12px 0 14px; } .empty { padding: 30px 0 10px; } .sl { margin-top: 10px; }</style></head>
+<body><div class="screen " aria-label="My listings">
+<div data-render="status"></div><header data-render="bar:My listings:back:account:@sell:sell"></header><div class="body"><div id="ls"></div><div class="empty" id="em" hidden><i data-guy="surprised"></i><h2>nothing listed yet</h2><p>sell or rent out something you don’t need</p></div><h2 class="h2 t2" id="th">completed trades</h2><div id="tr"></div><button class="btn sl" data-go="sell">Sell or rent something</button></div><nav data-render="tabs:account"></nav>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var mine=NU.items.filter(function(i){return i.mine;});function row(it,st){return '<div class="bi">'+NU.pic(it,"im",' data-go="product#'+it.id+'"')+'<div><b>'+NU.money(it)+'</b><p>'+it.title.replace(/</g,"&lt;")+'</p><small>'+it.cond+' · '+it.place+'</small></div>'+st+'</div>';}
+document.getElementById("ls").innerHTML=mine.map(function(it){return row(it,it.sold?'<span class="pill k">Sold</span>':'<span class="pill g">Active</span>');}).join("");document.getElementById("em").hidden=!!mine.length;
+var done=NU.items.filter(function(i){return !i.mine&&NU.chat(i.id).stage>=3;});document.getElementById("tr").innerHTML=done.map(function(it){return row(it,'<span class="pill">'+(NU.rent(it)?"Rented":"Bought")+'</span>');}).join("");document.getElementById("th").hidden=!done.length;</script><script src="proto.js"></script>
+</body></html>

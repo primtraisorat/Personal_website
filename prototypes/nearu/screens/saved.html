@@ -6,11 +6,11 @@
 <div data-render="status"></div><div class="snack" hidden id="snack"><i data-icon="spin"></i><span class="sp" id="sm">Item removed</span><button id="undo">Cancel</button></div>
 <div class="body"><h1 class="big t">saved items</h1><label class="search"><i data-icon="search"></i><input placeholder="Search" aria-label="Search saved items" id="f"></label><div class="duo"><button>Sort <i data-icon="sort"></i></button><button>Filter <i data-icon="filter"></i></button></div><div id="items"></div></div><nav data-render="tabs:saved"></nav>
 </div><script src="data.js"></script><script src="nu.js"></script><script>var S=NU.list("saved"),undo=null,tm;
-function draw(){var v=document.getElementById("f").value.toLowerCase();document.getElementById("items").innerHTML=S.map(function(id,i){var it=NU.item(id);if(v&&it.title.toLowerCase().indexOf(v)<0)return "";return '<div class="bi" data-i="'+i+'">'+NU.pic(it,"im",' data-go="product#'+it.id+'"')+'<div><b>'+NU.money(it)+'</b><p>'+it.title+'</p><button class="small-btn mv">Move to bag</button></div><button class="x" aria-label="Remove">'+NU.icon("x")+'</button></div>';}).join("");NU.keep("saved",S);}
+function draw(){var v=document.getElementById("f").value.toLowerCase();document.getElementById("items").innerHTML=S.map(function(id,i){var it=NU.item(id);if(v&&it.title.toLowerCase().indexOf(v)<0)return "";return '<div class="bi" data-i="'+i+'">'+NU.pic(it,"im",' data-go="product#'+it.id+'"')+'<div><b>'+NU.money(it)+'</b><p>'+it.title+'</p><button class="small-btn mv">Message</button></div><button class="x" aria-label="Remove">'+NU.icon("x")+'</button></div>';}).join("");NU.keep("saved",S);}
 function rm(i,msg,then){undo=[i,S.splice(i,1)[0]];draw();document.getElementById("sm").textContent=msg;var s=document.getElementById("snack");s.hidden=false;clearTimeout(tm);
  tm=setTimeout(function(){s.hidden=true;undo=null;if(then)then();else if(!S.length)NU.go("saved-empty");},2200);}
 document.getElementById("items").addEventListener("click",function(e){var row=e.target.closest(".bi");if(!row)return;var i=+row.dataset.i;
- if(e.target.closest(".x"))rm(i,"Item removed");else if(e.target.closest(".mv")){NU.addToBag(S[i]);rm(i,"Moved to bag",function(){NU.go("bag");});}});
+ if(e.target.closest(".x"))rm(i,"Item removed");else if(e.target.closest(".mv")){NU.go("chat#"+S[i]);}});
 document.getElementById("undo").addEventListener("click",function(){if(undo){S.splice(undo[0],0,undo[1]);undo=null;draw();}document.getElementById("snack").hidden=true;clearTimeout(tm);});
 document.getElementById("f").addEventListener("input",draw);draw();</script><script src="proto.js"></script>
 </body></html>

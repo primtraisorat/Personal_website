@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Confirm the deal</title>
+<link rel="stylesheet" href="nu.css">
+<style>.mc { display: inline-flex; width: 22px; flex: none; } .mc i { width: 13px; height: 13px; border-radius: 50%; background: #eb001b; } .mc i + i { background: #f79e1b; margin-left: -6px; opacity: .9; } .visa { width: 22px; flex: none; font-size: 10px; font-weight: 700; font-style: italic; color: #1a1f71; } .apple { width: 22px; height: 22px; flex: none; }.row { display: flex; gap: 12px; align-items: center; margin: 12px 0 4px; } .row .pic { width: 48px; height: 48px; border-radius: 4px; flex: none; } .row .pic .e { font-size: 26px; } .row .sp { flex: 1; font-size: 13px; color: var(--gray); } .row b { font-size: 20px; font-weight: 600; color: var(--ink); }
+.lb { font-size: 13px; color: var(--gray); margin: 14px 0 0; } #pay .li, .dl { width: 100%; text-align: left; min-height: 50px; } .li small { font-size: 12px; }
+.zl { width: 22px; height: 22px; border-radius: 5px; background: #6d1ed4; color: #fff; font-size: 12px; display: grid; place-items: center; flex: none; } .cash { width: 22px; height: 22px; border-radius: 5px; background: #e6f5ea; color: #2f7d35; font-size: 13px; font-weight: 600; display: grid; place-items: center; flex: none; }
+.note { margin-top: 6px; } .ok { margin-top: 14px; }</style></head>
+<body><div class="screen ov" aria-label="Confirm the deal">
+<div class="sheet"><div class="grab"></div><h1 class="big">confirm the deal</h1><div class="row" id="row"></div>
+<p class="lb">how will you pay?</p><div data-tabs id="pay">
+<button class="li" data-tab data-p="paying in nearU" aria-selected="true"><span class="mc"><i></i><i></i></span><span class="sp">Pay in nearU<small>Mastercard 9833 · released after the meet-up</small></span><span class="radio"><i data-icon="check"></i></span></button>
+<button class="li" data-tab data-p="Zelle at meet-up"><b class="zl">Z</b><span class="sp">Zelle<small>Send when you meet</small></span><span class="radio"><i data-icon="check"></i></span></button>
+<button class="li" data-tab data-p="cash at meet-up"><span class="cash">$</span><span class="sp">Cash<small>Pay when you meet</small></span><span class="radio"><i data-icon="check"></i></span></button></div>
+<div class="li dl"><span class="sp" id="dl"></span><button class="tg" id="dp" data-toggle aria-pressed="true" aria-label="Hold a deposit"></button></div>
+<div class="note"><i data-icon="shield"></i><span>To avoid fraud, nearU holds the deposit and marks the order <b>confirmed / hold</b>. It’s refunded automatically when you both verify the exchange.</span></div>
+<button class="btn ok" id="ok">Confirm deal</button></div>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var it=NU.item(NU.get("item")),C=NU.chat(it.id),p=C.price!=null?C.price:it.price,D=it.dep||Math.max(5,Math.round(p*.2/5)*5);
+document.getElementById("row").innerHTML=NU.pic(it,"thumb")+'<span class="sp"></span><b>$'+p.toLocaleString("en-US")+'</b>';document.querySelector("#row .sp").textContent=it.title;
+document.getElementById("dl").innerHTML="Hold a $"+D+" deposit<small>Refunded after you both verify</small>";if(!p){document.querySelector(".dl").hidden=true;document.getElementById("dp").setAttribute("aria-pressed","false");}
+document.getElementById("ok").addEventListener("click",function(){var s=document.querySelector("#pay [aria-selected=true]");NU.set("deal",JSON.stringify({pay:p?s.dataset.p:"free pick-up",dep:document.getElementById("dp").getAttribute("aria-pressed")==="true"?D:0}));NU.close();});</script><script src="proto.js"></script>
+</body></html>

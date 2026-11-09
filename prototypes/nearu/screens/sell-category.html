@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Choose category</title>
+<link rel="stylesheet" href="nu.css">
+<style>.cl { max-height: 520px; overflow-y: auto; margin-top: 8px; scrollbar-width: none; } .cl .li { width: 100%; text-align: left; } .cl .e { width: 24px; font-size: 19px; text-align: center; font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }</style></head>
+<body><div class="screen ov" aria-label="Choose category">
+<div class="sheet"><div class="grab"></div><h1 class="big">category</h1><div class="cl" data-tabs id="cl"></div></div>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var cur=NU.get("sellCat")||"dorm",L=document.getElementById("cl");L.innerHTML=NU.cats.map(function(c){return '<button class="li" data-tab data-c="'+c.key+'" aria-selected="'+(c.key===cur)+'"><span class="e" aria-hidden="true">'+c.emoji+'</span><span class="sp">'+c.label+'</span><span class="radio">'+NU.icon("check")+'</span></button>';}).join("");
+L.addEventListener("tab",function(e){NU.set("sellCat",e.detail.dataset.c);setTimeout(NU.close,220);});</script><script src="proto.js"></script>
+</body></html>

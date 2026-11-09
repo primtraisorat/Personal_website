@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Messages</title>
+<link rel="stylesheet" href="nu.css">
+<style>.t { padding: 36px 0 14px; } .cv { display: flex; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #f4f4f4; cursor: pointer; } .cv .pic { width: 52px; height: 52px; border-radius: 4px; flex: none; } .cv .pic .e { font-size: 28px; } .cv .sp { flex: 1; min-width: 0; } .cv b { font-weight: 500; font-size: 15px; display: flex; justify-content: space-between; align-items: center; gap: 8px; } .cv small { display: block; font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .cv .last { color: var(--gray); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .cv .last.new { color: var(--ink); font-weight: 500; }</style></head>
+<body><div class="screen " aria-label="Messages">
+<div data-render="status"></div><div class="body"><h1 class="big t">messages</h1><div id="cl"></div><div class="empty" id="em" hidden><i data-guy="smile"></i><h2>no messages yet</h2><p>message a seller from any listing</p></div></div><nav data-render="tabs:messages"></nav>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var ids=[];try{for(var i=0;i<sessionStorage.length;i++){var k=sessionStorage.key(i);if(k.indexOf("nu:chat:")===0)ids.push(k.slice(8));}}catch(e){}["calc","lamp"].forEach(function(s){if(ids.indexOf(s)<0)ids.push(s);});
+var ST=["",'<span class="pill y">Agreed</span>','<span class="pill g">Confirmed / hold</span>','<span class="pill k">Sold</span>','<span class="pill k">Sold</span>'];
+var rows=ids.map(function(id){var it=NU.item(id),c=NU.chat(id);if(!c.msgs.length)return "";var m=c.msgs[c.msgs.length-1];
+ return '<div class="cv" data-go="chat#'+id+'">'+NU.pic(it,"thumb")+'<span class="sp"><b>'+it.seller+(ST[c.stage]||"")+'</b><small>'+it.title+'</small><p class="last'+(m[0]==="them"&&c.stage<3?" new":"")+'"></p></span></div>';});
+document.getElementById("cl").innerHTML=rows.join("");var ls=document.querySelectorAll(".cv .last");var k=0;ids.forEach(function(id){var c=NU.chat(id);if(!c.msgs.length)return;var m=c.msgs[c.msgs.length-1];ls[k++].textContent=(m[0]==="me"?"You: ":"")+m[1];});
+document.getElementById("em").hidden=!!document.querySelector(".cv");</script><script src="proto.js"></script>
+</body></html>

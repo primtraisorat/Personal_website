@@ -1,14 +1,18 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>nearU · Catalog</title>
 <link rel="stylesheet" href="nu.css">
-<style>.duo { margin-bottom: 8px; } .cnt { font-size: 12px; color: var(--muted); margin-bottom: 14px; } .nf { padding-top: 40px; }</style></head>
+<style>.duo { margin: 14px 0 12px; } .cnt { font-size: 12px; color: var(--muted); margin: 12px 0 14px; } .nf { padding-top: 40px; }</style></head>
 <body><div class="screen " aria-label="Catalog">
 <div data-render="status"></div><header data-render="bar:Furniture:back:home::"></header><div class="body"><label class="search" data-go="search"><i data-icon="search"></i><span>Search</span></label><div class="duo"><button data-overlay="sort">Sort <i data-icon="sort"></i></button><button data-go="filter">Filter <i data-icon="filter"></i></button></div>
-<p class="cnt" id="cnt"></p><div class="grid" id="grid"></div><div class="empty nf" id="nf" hidden><i data-guy="puzzled"></i><h2>nothing in this<br>price range</h2><p>try a wider range in Filter</p></div></div><nav data-render="tabs:home"></nav>
+<div class="seg" data-tabs id="md"><button data-tab data-m="all" aria-selected="true">All</button><button data-tab data-m="sale" aria-selected="false">For sale</button><button data-tab data-m="rent" aria-selected="false">For rent</button></div>
+<p class="cnt" id="cnt"></p><div class="grid" id="grid"></div><div class="empty nf" id="nf" hidden><i data-guy="puzzled"></i><h2>nothing here yet</h2><p>try another filter, or be the first to list one</p></div></div><nav data-render="tabs:home"></nav>
 </div><script src="data.js"></script><script src="nu.js"></script><script>var k=decodeURIComponent(location.hash.slice(1))||NU.get("cat")||"furniture",c=NU.cat(k);NU.set("cat",c.key);document.querySelector(".bar h1").textContent=c.label;
+var md=NU.get("mode")||"all";document.querySelectorAll("#md button").forEach(function(b){b.setAttribute("aria-selected",b.dataset.m===md?"true":"false");});
 function draw(){var lo=+(NU.get("lo")||0),hi=+(NU.get("hi")||1e9),so=+(NU.get("sort")||0);
- var L=NU.items.filter(function(i){return i.cat===c.key&&i.price>=lo&&i.price<=hi;});
- if(so===1)L.sort(function(a,b){return (b.tag==="new")-(a.tag==="new");});else if(so===2)L.sort(function(a,b){return a.price-b.price;});else if(so===3)L.sort(function(a,b){return b.price-a.price;});
+ var L=NU.items.filter(function(i){return i.cat===c.key&&i.price>=lo&&i.price<=hi&&(md==="all"||(md==="rent")===NU.rent(i));});
+ if(so===1)L.sort(function(a,b){return (b.tag==="new"||b.mine)-(a.tag==="new"||a.mine);});else if(so===2)L.sort(function(a,b){return a.price-b.price;});else if(so===3)L.sort(function(a,b){return b.price-a.price;});
+ L.sort(function(a,b){return a.sold-b.sold;});
  document.getElementById("grid").innerHTML=L.map(NU.tile).join("");document.getElementById("cnt").textContent=L.length+(L.length===1?" listing":" listings")+" near campus";document.getElementById("nf").hidden=!!L.length;}
+document.getElementById("md").addEventListener("tab",function(e){md=e.detail.dataset.m;NU.set("mode",md);draw();});
 draw();NU.onStore(function(k){if(k==="sort"||k==="lo"||k==="hi"||k==="saved")draw();});</script><script src="proto.js"></script>
 </body></html>

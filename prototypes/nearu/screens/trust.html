@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>nearU · Trust score updated</title>
+<link rel="stylesheet" href="nu.css">
+<style>.yel { background: var(--yellow-soft); } .tb { display: grid; justify-items: center; text-align: center; padding-top: 24px; } .tb .guy { width: 86px; height: 86px; } .tb > h2 { font-size: 21px; font-weight: 600; margin: 8px 0 16px; }
+.tc { background: #fff; border-radius: 6px; padding: 16px; width: 100%; text-align: left; } .tc .me { display: flex; gap: 12px; align-items: center; } .tc .av { width: 44px; height: 44px; } .tc b { font-weight: 500; } .tc small { display: block; font-size: 12px; color: var(--muted); }
+.sc { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 16px 0 12px; } .sc svg { width: 20px; height: 20px; color: var(--muted); } .was { font-size: 13px; color: var(--muted); text-decoration: line-through; } .now { font-size: 22px; font-weight: 600; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; font-size: 12px; color: var(--muted); border-top: 1px solid #f2f2f2; border-bottom: 1px solid #f2f2f2; padding: 10px 0; } .stats b { display: block; font-size: 18px; color: var(--ink); font-weight: 600; }
+.bg { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 12px; } .unl { animation: pop .6s .4s both cubic-bezier(.2,1.6,.4,1); } @keyframes pop { from { transform: scale(.4); opacity: 0; } }
+.qt { font-size: 13px; color: var(--gray); text-align: center; margin-top: 12px; line-height: 1.5; } .foot { padding-bottom: 40px; } @media (prefers-reduced-motion: reduce) { .unl { animation: none; } }</style></head>
+<body><div class="screen yel" aria-label="Trust score updated">
+<div data-render="status"></div><div class="body tb"><i data-guy="wink"></i><h2>your trust score went up</h2>
+<div class="tc"><div class="me"><span class="av" id="av"></span><span class="sp"><b>Tanya Morenko</b><small>Westwood, Los Angeles</small></span></div>
+<div class="sc"><span class="was" id="was"></span><i data-icon="chev"></i><span class="now" id="now"></span></div>
+<div class="stats"><span><b id="tr"></b>trades</span><span><b id="ra"></b>ratings</span><span><b id="ls"></b>listings</span></div>
+<div class="bg"><span class="vbadge"><i data-icon="check"></i>.edu verified</span><span class="vbadge unl" id="vs"><i data-icon="shield"></i>Verified seller unlocked</span></div>
+<p class="qt" id="qt"></p></div></div>
+<div class="foot"><button class="btn" data-go="sell">Sell or rent something</button><button class="btn line" data-go="home">Keep browsing</button></div>
+</div><script src="data.js"></script><script src="nu.js"></script><script>var m=NU.me(),p={score:0,ratings:0};try{p=JSON.parse(NU.get("prevMe"))||p;}catch(e){}var it=NU.item(NU.get("lastRated")||"bedside");
+var ph=NU.get("photo");document.getElementById("av").style.backgroundImage="url(assets/"+(ph||"av-tanya")+".webp)";
+document.getElementById("was").textContent=p.ratings?"★ "+p.score.toFixed(1)+" · "+p.ratings:"New member";document.getElementById("now").textContent=NU.trust(m.score,m.ratings);
+document.getElementById("tr").textContent=m.trades;document.getElementById("ra").textContent=m.ratings;var mine=[];try{mine=JSON.parse(NU.get("mine"))||[];}catch(e){}document.getElementById("ls").textContent=mine.length;
+if(p.verified){var v=document.getElementById("vs");v.classList.remove("unl");v.lastChild.textContent="Verified seller";}
+document.getElementById("qt").textContent=it.first+" rated you ★★★★★ “Quick and friendly, would trade again.” Your finished trade now shows on your profile.";</script><script src="proto.js"></script>
+</body></html>

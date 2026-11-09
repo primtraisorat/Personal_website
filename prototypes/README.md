@@ -6,7 +6,7 @@ Each Figma prototype rebuilt as plain HTML/CSS you can open and click through. N
 | --- | --- | --- |
 | TappedIn | `tappedin/index.html` | Mid-fis Lo-fis Design System, HighFi page |
 | BruinPlace | `bruinplace/index.html` | BruinPlace hi-fi flow (landing, search, listings, profile, add listing) |
-| nearU | `nearu/index.html` | nearU college marketplace (Ulmo e-commerce kit look): emoji categories, made-up campus listings, product, bag and checkout, search, sign-in, account, saved items. Sort and other sheets open as overlays |
+| nearU | `nearu/index.html` | nearU college marketplace (Ulmo kit look) following Taey’s user flow: .edu sign-up and verification, profile with trust score, sale and rent feed, new listing with optional deposit, chat with offers, deal confirm (in app, Zelle, cash) with deposit on hold, two-way meet-up codes, feedback, trust score update and verified seller tag |
 | Hotelify | `hotelify/index.html` | Hotelify dashboard flow (dashboard, front desk, guests, rooms, deals, rates, add forms) |
 
 ## How a prototype is put together

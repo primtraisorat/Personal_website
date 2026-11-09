@@ -1,7 +1,7 @@
 /* Shared pieces for the nearU screens. Runs before proto.js, so links it adds get wired like hand-written ones.
    <div data-render="status">                 status bar (white text on .dim / .on-photo screens)
    <header data-render="bar:Title:back:catalog:Right text:target">  top bar: left icon (back|close|none) going to a screen, title, right link
-   <nav data-render="tabs:home">               tab bar (home | bag | saved | account)
+   <nav data-render="tabs:home">               tab bar (home | messages | sell | saved | account)
    <div data-render="kbd"> / "num"             keyboard that types into the focused field
    <i data-icon="bag"> / <i data-guy="sad">    icons and the little character
    [data-tabs] > [data-tab]                    one selected at a time; fires a "tab" event on the group */
@@ -21,6 +21,11 @@
     cart: '<path d="M3.5 5h2.5l2 10h10l1.7-7H7"/><circle cx="9" cy="19" r="1.3"/><circle cx="17" cy="19" r="1.3"/>', camera: '<path d="M4 8.5h3.2L9 6h6l1.8 2.5H20V19H4z"/><circle cx="12" cy="13.5" r="3.2"/>',
     percent: '<path d="M6 18 18 6"/><circle cx="7.5" cy="7.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/>', spin: '<path d="M12 4a8 8 0 1 0 8 8"/>', minuscircle: '<circle cx="12" cy="12" r="8"/><path d="M8 12h8"/>',
     del: '<path d="M8.5 6H20v12H8.5L3.5 12z"/><path d="m11 9.5 5 5M16 9.5l-5 5"/>', shift: '<path d="M12 4.5 4.5 12H8.5v6.5h7V12h4z"/>', bagbtn: '<path d="M6 8.5h12v11.5H6z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/>',
+    chat: '<path class="fillable" d="M4.5 6.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3.5v-3.5h0a2 2 0 0 1-1.5-2z"/>',
+    sell: '<rect class="fillable" x="4.5" y="4.5" width="15" height="15" rx="3"/><path class="on-fill" d="M12 8.5v7M8.5 12h7"/>',
+    send: '<path d="M4.5 12 19.5 5l-4 14-3.5-5.5z"/><path d="m12 13.5 7.5-8.5"/>', shield: '<path d="M12 3.5 5 6.5v5c0 4.3 3 7.6 7 9 4-1.4 7-4.7 7-9v-5z"/><path d="m9 12 2.2 2.2L15.5 10"/>',
+    star: '<path d="m12 3.5 2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/>', tag: '<path d="M4 4h7.5l8.5 8.5-7.5 7.5L4 11.5z"/><circle cx="8.3" cy="8.3" r="1.4"/>',
+    list: '<path d="M9 7h11M9 12h11M9 17h11"/><circle cx="5" cy="7" r=".8" fill="currentColor"/><circle cx="5" cy="12" r=".8" fill="currentColor"/><circle cx="5" cy="17" r=".8" fill="currentColor"/>',
     calendar: '<rect x="4" y="5.5" width="16" height="14" rx="1.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/>'
   };
   function icon(n, cls) { return '<svg' + (cls ? ' class="' + cls + '"' : '') + ' viewBox="0 0 24 24" ' + P + ' aria-hidden="true">' + (I[n] || '') + '</svg>'; }
@@ -41,21 +46,42 @@
   };
 
   /* Listings (data.js). Bag, saved items and the last order are lists kept in sessionStorage. */
-  var D = window.NU_DATA || { cats: [], items: [], sellers: [['', '']] }, CAT = {}, ITEM = {};
+  var D = window.NU_DATA || { cats: [], items: [], sellers: [['', '', 5, 0, 0]] }, CAT = {}, ITEM = {};
+  /* Listings Tanya posted with the Sell form are kept in sessionStorage and join the feed. */
+  var MINE = []; try { MINE = JSON.parse(sessionStorage.getItem('nu:mine')) || []; } catch (e) {}
   NU.cats = D.cats.map(function (c) { return CAT[c[0]] = { key: c[0], emoji: c[1], label: c[2], bg: c[3] }; });
-  NU.items = D.items.map(function (r, i) {
-    var c = CAT[r[1]] || {}, s = D.sellers[i % D.sellers.length];
+  var SOLD = []; try { SOLD = JSON.parse(sessionStorage.getItem('nu:sold')) || ['lamp']; } catch (e) {}
+  NU.items = MINE.concat(D.items).map(function (r, i) {
+    var c = CAT[r[1]] || {}, mine = i < MINE.length, s = mine ? ['Tanya Morenko', 'av-tanya'] : D.sellers[(i - MINE.length) % D.sellers.length];
     return ITEM[r[0]] = { id: r[0], cat: r[1], pic: r[2], price: r[3], title: r[4], cond: r[5], place: r[6], tag: r[7] || '', unit: r[8] || '', bg: c.bg, n: i,
-      seller: s[0], av: s[1], photo: r[2].charAt(0) === '@' ? r[2].slice(1) : '' };
+      dep: r[9] != null ? r[9] : (r[3] >= 50 && !r[8] ? Math.max(5, Math.round(r[3] * .2 / 5) * 5) : 0), mine: mine, sold: SOLD.indexOf(r[0]) >= 0,
+      seller: s[0], av: s[1], score: s[2], ratings: s[3], verified: !!s[4], first: s[0].split(' ')[0],
+      photo: r[2].charAt(0) === '@' ? r[2].slice(1) : '', upload: r[2].indexOf('data:') === 0 ? r[2] : '' };
   });
+  NU.rent = function (it) { return !!it.unit; };
+  /* Tanya's own trust profile. Starts empty for a new member; the first finished trade adds a rating and unlocks the verified seller tag. */
+  NU.me = function (v) {
+    if (v) { NU.set('me', JSON.stringify(v)); return v; }
+    try { var m = JSON.parse(NU.get('me')); if (m) return m; } catch (e) {}
+    return { score: 0, ratings: 0, trades: 0, verified: false };
+  };
+  NU.trust = function (score, ratings) { return ratings ? '★ ' + score.toFixed(1) + ' · ' + ratings + (ratings === 1 ? ' rating' : ' ratings') : 'New member · no ratings yet'; };
+  /* One conversation per listing: { msgs: [[who, text, kind]], stage: 0 open, 1 agreed, 2 confirmed / deposit on hold, 3 exchanged, 4 rated; price; pay; dep } */
+  NU.chat = function (id, v) {
+    if (v) { NU.set('chat:' + id, JSON.stringify(v)); return v; }
+    try { var c = JSON.parse(NU.get('chat:' + id)); if (c) return c; } catch (e) {}
+    var sd = D.seed && D.seed[id]; return sd ? JSON.parse(JSON.stringify(sd)) : { msgs: [], stage: 0 };
+  };
   NU.cat = function (k) { return CAT[k] || NU.cats[0]; };
   NU.item = function (id) { return ITEM[id] || NU.items[0]; };
   NU.money = function (it) { return it.price ? '$' + it.price.toLocaleString('en-US') + it.unit : 'Free'; };
   NU.usd = function (n) { return '$' + n.toFixed(2); };
   /* A listing's picture: a photo, or its emoji on the category color. kind = tile | hero | row | thumb */
   NU.pic = function (it, kind, extra) {
-    return '<div class="pic ' + kind + (it.photo ? '' : ' em') + '" style="' + (it.photo ? 'background-image:url(assets/' + (kind === 'hero' && it.id === 'bedside' ? 'hero-bedside' : it.photo) + '.webp)' : 'background-color:' + it.bg) + '"' + (extra || '') + '>' +
-      (it.photo ? '' : '<span class="e" aria-hidden="true">' + it.pic + '</span>') + '</div>';
+    var bg = it.upload ? 'background-image:url(' + it.upload + ')' : it.photo ? 'background-image:url(assets/' + (kind === 'hero' && it.id === 'bedside' ? 'hero-bedside' : it.photo) + '.webp)' : 'background-color:' + it.bg;
+    var img = it.upload || it.photo;
+    return '<div class="pic ' + kind + (img ? '' : ' em') + (it.sold ? ' sold' : '') + '" style="' + bg + '"' + (extra || '') + '>' +
+      (img ? '' : '<span class="e" aria-hidden="true">' + (it.pic.indexOf('data:') === 0 ? '' : it.pic) + '</span>') + '</div>';
   };
   NU.list = function (k) {
     var DEF = { bag: [['bedside', 1], ['fridge', 1]], saved: ['dunks', 'rivalry', 'guitar'] };
@@ -75,7 +101,7 @@
     return { sub: sub, disc: disc, total: sub - disc };
   };
   NU.tile = function (it) {
-    return '<article class="tile">' + NU.pic(it, 'im', ' data-go="product#' + it.id + '"').replace('</div>', (it.tag ? '<span class="tag">' + it.tag + '</span>' : '') + '</div>') +
+    return '<article class="tile">' + NU.pic(it, 'im', ' data-go="product#' + it.id + '"').replace('</div>', (it.sold ? '<span class="tag sold">sold</span>' : it.mine ? '<span class="tag">yours</span>' : NU.rent(it) ? '<span class="tag rent">for rent</span>' : it.tag ? '<span class="tag">' + it.tag + '</span>' : '') + '</div>') +
       '<div class="pr"><span>' + NU.money(it) + '</span><button class="heart" data-id="' + it.id + '" data-toggle aria-pressed="' + NU.isSaved(it.id) + '" aria-label="Save">' + icon('heart') + '</button></div>' +
       '<p>' + it.title + '</p><small class="mt">' + it.cond + ' · ' + it.place + '</small></article>';
   };
@@ -92,7 +118,7 @@
   var SIG = '<span class="ic"><svg viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx=".8" fill="currentColor"/><rect x="5" y="5" width="3" height="6" rx=".8" fill="currentColor"/><rect x="10" y="2.5" width="3" height="8.5" rx=".8" fill="currentColor"/><rect x="15" y="0" width="3" height="11" rx=".8" fill="currentColor"/></svg>' +
     '<svg viewBox="0 0 16 11"><path d="M8 2.3c2.2 0 4.2.9 5.7 2.3l1.1-1.2A9.8 9.8 0 0 0 8 .7 9.8 9.8 0 0 0 1.2 3.4l1.1 1.2A8.1 8.1 0 0 1 8 2.3zm0 3.4c1.2 0 2.3.5 3.2 1.2l1.1-1.2A6.4 6.4 0 0 0 8 4.1a6.4 6.4 0 0 0-4.3 1.6l1.1 1.2c.9-.7 2-1.2 3.2-1.2zM8 9l1.5 1.6L8 12.1 6.5 10.6z" fill="currentColor"/></svg>' +
     '<svg viewBox="0 0 26 11"><rect x=".5" y=".5" width="21" height="10" rx="2.6" fill="none" stroke="currentColor" opacity=".35"/><rect x="2" y="2" width="18" height="7" rx="1.5" fill="currentColor"/><path d="M23 3.7v3.6c.8-.3 1.3-1 1.3-1.8s-.5-1.5-1.3-1.8z" fill="currentColor" opacity=".4"/></svg></span>';
-  var TABS = [['home', '<span class="u">u</span>', 'Home'], ['bag', icon('bag'), 'Bag'], ['saved', icon('heart'), 'Saved items'], ['account', icon('user'), 'Account']];
+  var TABS = [['home', '<span class="u">u</span>', 'Home'], ['messages', icon('chat'), 'Messages'], ['sell', icon('sell'), 'Sell'], ['saved', icon('heart'), 'Saved items'], ['account', icon('user'), 'Account']];
   var KEYS = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
 
   document.querySelectorAll('[data-render]').forEach(function (el) {
@@ -108,7 +134,7 @@
     else if (r[0] === 'tabs') {
       el.className = 'tabs';
       el.innerHTML = TABS.map(function (t) {
-        var target = t[0] === 'bag' ? (NU.list('bag').length ? 'bag' : 'bag-empty') : t[0] === 'saved' ? (NU.list('saved').length ? 'saved' : 'saved-empty') : t[0] === 'account' ? (NU.get('signedOut') ? 'account-empty' : 'account') : 'home';
+        var target = t[0] === 'messages' || t[0] === 'sell' ? t[0] : t[0] === 'saved' ? (NU.list('saved').length ? 'saved' : 'saved-empty') : t[0] === 'account' ? (NU.get('signedOut') ? 'account-empty' : 'account') : 'home';
         return '<a data-go="' + target + '" aria-label="' + t[2] + '"' + (t[0] === r[1] ? ' aria-current="page"' : '') + '>' + t[1] + '</a>';
       }).join('');
     }

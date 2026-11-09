@@ -1,8 +1,22 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>nearU · My account</title>
 <link rel="stylesheet" href="nu.css">
-<style>.g { display: flex; justify-content: flex-end; padding-top: 6px; } .g svg { width: 24px; height: 24px; } .big { margin-bottom: 12px; } .me .av { width: 30px; height: 30px; border-radius: 50%; background: center / cover; } .li { font-size: 15px; }</style></head>
+<style>.g { display: flex; justify-content: flex-end; padding-top: 6px; } .g svg { width: 24px; height: 24px; } .big { margin-bottom: 10px; }
+.pf { display: flex; gap: 12px; align-items: center; padding: 6px 0 12px; } .pf .av { width: 48px; height: 48px; } .pf .sp { flex: 1; } .pf b { font-weight: 500; font-size: 16px; } .pf small { display: block; font-size: 12px; color: var(--muted); } .pf .chev { width: 22px; height: 22px; }
+.tc { background: var(--field); border-radius: 4px; padding: 12px 14px; margin-bottom: 6px; } .ts { display: flex; justify-content: space-between; align-items: center; gap: 8px; } .sc { font-size: 15px; font-weight: 600; } .bg { display: flex; gap: 6px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; font-size: 12px; color: var(--muted); margin-top: 10px; } .stats b { display: block; font-size: 17px; color: var(--ink); font-weight: 600; } .hint { font-size: 11px; color: var(--muted); margin-top: 8px; text-align: center; } .li { font-size: 15px; }</style></head>
 <body><div class="screen " aria-label="My account">
-<div data-render="status"></div><div class="body"><div class="g"><button data-go="settings" aria-label="Settings"><i data-icon="gear"></i></button></div><h1 class="big">my account</h1><div class="li me"><span class="av" style="background-image:url(assets/av-tanya.webp)"></span><span class="sp">Tanya Morenko<small>+1 310 323-3212</small></span></div><a class="li" data-go="orders"><i data-icon="bag"></i><span class="sp">My orders</span><span class="v">14</span></a><a class="li" data-go="details"><i data-icon="user"></i><span class="sp">My Details</span><span class="v"></span></a><a class="li" data-go="address-book"><i data-icon="pin"></i><span class="sp">Address book</span><span class="v"></span></a><a class="li" data-go="payment-methods"><i data-icon="card"></i><span class="sp">Payment Methods</span><span class="v"></span></a><a class="li" data-overlay="sign-out"><i data-icon="out"></i><span class="sp">Sign out</span><span class="v"></span></a></div><nav data-render="tabs:account"></nav>
-</div><script src="data.js"></script><script src="nu.js"></script><script>NU.set("signedOut","");var p=NU.get("photo");document.querySelectorAll(".av").forEach(function(a){if(p)a.style.backgroundImage="url(assets/"+p+".webp)";});</script><script src="proto.js"></script>
+<div data-render="status"></div><div class="body"><div class="g"><button data-go="settings" aria-label="Settings"><i data-icon="gear"></i></button></div><h1 class="big">my account</h1>
+<a class="pf" data-go="details"><span class="av" id="av"></span><span class="sp"><b>Tanya Morenko</b><small>Westwood, Los Angeles · UCLA</small></span><i data-icon="chev" class="chev"></i></a>
+<div class="tc"><div class="ts"><span class="sc" id="sc"></span><span class="bg"><span class="vbadge"><i data-icon="check"></i>.edu</span><span class="vbadge" id="vs"></span></span></div>
+<div class="stats"><span><b id="tr"></b>trades</span><span><b id="ra"></b>ratings</span><span><b id="ls"></b>listings</span></div><p class="hint" id="hn"></p></div>
+<a class="li" data-go="my-listings"><i data-icon="list"></i><span class="sp">My listings</span><span class="v" id="lc"></span></a>
+<a class="li" data-go="messages"><i data-icon="chat"></i><span class="sp">Messages</span></a>
+<a class="li" data-go="payment-methods"><i data-icon="card"></i><span class="sp">Payment methods</span></a>
+<a class="li" data-overlay="sign-out"><i data-icon="out"></i><span class="sp">Sign out</span></a></div><nav data-render="tabs:account"></nav>
+</div><script src="data.js"></script><script src="nu.js"></script><script>NU.set("signedOut","");var m=NU.me(),ph=NU.get("photo");document.getElementById("av").style.backgroundImage="url(assets/"+(ph||"av-tanya")+".webp)";
+document.getElementById("sc").textContent=m.ratings?"★ "+m.score.toFixed(1):"New member";document.getElementById("tr").textContent=m.trades;document.getElementById("ra").textContent=m.ratings;
+var mine=[];try{mine=JSON.parse(NU.get("mine"))||[];}catch(e){}document.getElementById("ls").textContent=mine.length;document.getElementById("lc").textContent=mine.length||"";
+var vs=document.getElementById("vs");if(m.verified)vs.innerHTML=NU.icon("shield")+"Verified seller";else{vs.className="vbadge off";vs.innerHTML=NU.icon("shield")+"Seller";}
+document.getElementById("hn").textContent=m.verified?"Buyers see your score and verified seller tag on every listing.":"Finish your first trade to get rated and unlock the verified seller tag.";</script><script src="proto.js"></script>
 </body></html>
